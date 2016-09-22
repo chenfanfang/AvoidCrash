@@ -22,7 +22,10 @@
 
 + (instancetype)avoidCrashDictionaryWithObjects:(const id  _Nonnull __unsafe_unretained *)objects forKeys:(const id<NSCopying>  _Nonnull __unsafe_unretained *)keys count:(NSUInteger)cnt {
     
+    //用来标记key 或者 value 为nil 的的下标
+    
     NSMutableArray *errorIndexArrM = nil;
+    
     for (NSUInteger index = 0; index < cnt; index++) {
         if (!(objects[index] && keys[index])) {
             if (errorIndexArrM == nil) {
@@ -33,26 +36,18 @@
         }
     }
     
+    //创建字典的数据正常
     if (errorIndexArrM == nil) {
         return [self avoidCrashDictionaryWithObjects:objects forKeys:keys count:cnt];
     }
     
+    //创建字典的数据不正常
     else {
-        //错误信息函数调用栈主要信息的获取
-        NSArray *callStackSymbolsArr = [NSThread callStackSymbols];
         
-        NSString *mainCallStackSymbolMsg = [AvoidCrash getMainCallStackSymbolMessageWithCallStackSymbolStr:callStackSymbolsArr[1]];
+        [self dealWithInstanceDictionaryErrorMessageWithErrorIndexArr:errorIndexArrM];
         
-        NSString *instanceDictionaryErrorMessage = [self getInstanceDictionaryErrorMessageWithMainCallStackSymbolMsg:mainCallStackSymbolMsg errorIndexArr:errorIndexArrM];
         
-        NSLog(@"%@",instanceDictionaryErrorMessage);
-        
-        NSDictionary *userInfo = @{
-                                   AvoidCrash_Key_ErrorMainMessage : instanceDictionaryErrorMessage,
-                                   AvoidCrash_Key_CallStackSymbolsArr : callStackSymbolsArr
-                                   };
-        [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:userInfo];
-        
+        //处理错误的数据，然后重新初始化一个字典
         NSUInteger count = cnt - errorIndexArrM.count;
         id  _Nonnull __unsafe_unretained tempObjects[count];
         id  _Nonnull __unsafe_unretained tempkeys[count];
@@ -72,22 +67,40 @@
 }
 
 
-+ (NSString *)getInstanceDictionaryErrorMessageWithMainCallStackSymbolMsg:(NSString *)mainCallStackSymbolMsg errorIndexArr:(NSArray *)errorIndexArr {
-    NSMutableString *instanceDictionaryErrorMessage = [NSMutableString stringWithFormat:@"\n\n%@\n\n%@\nInstance a dictionary error:\nYou attempt to instance dictionary with nil objectValue or nil key .\nThis framework default is to remove nil key-values and instance a dictionary.\nError Place:%@\nnil key-value index in array:",AvoidCrashSeparator,AvoidCrashEnglishTitle,mainCallStackSymbolMsg];
++ (void)dealWithInstanceDictionaryErrorMessageWithErrorIndexArr:(NSArray *)errorIndexArr {
     
+    //函数调用栈数据
+    NSArray *callStackSymbolsArr = [NSThread callStackSymbols];
+    
+    //获取在哪个类的哪个方法中实例化的数组  字符串格式 -[类名 方法名]  或者 +[类名 方法名]
+    NSString *mainCallStackSymbolMsg = [AvoidCrash getMainCallStackSymbolMessageWithCallStackSymbolStr:callStackSymbolsArr[2]];
+    
+    
+    NSString *errorInfo = [NSString stringWithFormat:@"Instance a dictionary error:"];
+    NSString *errorReason = @"You attempt to instance dictionary with nil objectValue or nil key .";
+    NSMutableString *errorDetail = [NSMutableString stringWithFormat:@"nil key-value index in array:"];
     for (NSNumber *indexNumber in errorIndexArr) {
-        [instanceDictionaryErrorMessage appendFormat:@"(%@)",indexNumber];
+        [errorDetail appendFormat:@"(%@)",indexNumber];
     }
     
-    [instanceDictionaryErrorMessage appendFormat:@"\n%@\n创建一个字典出错:\n你要创建的字典的key或者value里面包含nil.\n这个框架默认的做法是移除所有为nil的key和value,然后实例化一个字典。\n错误的地方:%@\nnil的key或者value在字典中的位置:",AvoidCrashChineseTitle, mainCallStackSymbolMsg];
+    NSString *errorPlace = [NSString stringWithFormat:@"Error Place:%@",mainCallStackSymbolMsg];
+    NSString *defaultToDo = @"This framework default is to remove nil key-values and instance a dictionary.";
     
-    for (NSNumber *indexNumber in errorIndexArr) {
-        [instanceDictionaryErrorMessage appendFormat:@"(%@)",indexNumber];
-    }
+    NSString *logErrorMessage = [NSString stringWithFormat:@"\n\n%@\n\n%@\n%@\n%@\n%@\n%@\n\n%@\n\n",AvoidCrashSeparatorWithFlag, errorInfo, errorReason, errorDetail, errorPlace, defaultToDo, AvoidCrashSeparator];
+    NSLog(@"%@", logErrorMessage);
     
-    [instanceDictionaryErrorMessage appendFormat:@"\n\n%@\n\n",AvoidCrashSeparator];
+    NSDictionary *errorInfoDic = @{
+                                   key_errorInfo        : errorInfo,
+                                   key_errorReason      : errorReason,
+                                   key_errorDetail      : errorDetail,
+                                   key_errorPlace       : errorPlace,
+                                   key_defaultToDo      : defaultToDo,
+                                   key_callStackSymbols : callStackSymbolsArr
+                                   };
     
-    return instanceDictionaryErrorMessage;
+    //将错误信息放在字典里，用通知的形式发送出去
+    [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:errorInfoDic];
+    
 }
 
 @end

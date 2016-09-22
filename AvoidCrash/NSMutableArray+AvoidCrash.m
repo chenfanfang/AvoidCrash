@@ -39,38 +39,51 @@
 #pragma mark - get object from array
 
 - (id)avoidCrashObjectAtIndex:(NSUInteger)index {
+    
+    //数组没有越界
     if (index < self.count) {
         return [self avoidCrashObjectAtIndex:index];
     }
     
+    //数组越界
     else {
-        //错误信息函数调用栈主要信息的获取
-        NSArray *callStackSymbolsArr = [NSThread callStackSymbols];
-        
-        NSString *mainCallStackSymbolMsg = [AvoidCrash getMainCallStackSymbolMessageWithCallStackSymbolStr:callStackSymbolsArr[1]];
-        
-        NSString *instanceArrayErrorMessage = [self getObjectAtIndexErrorWithMainCallStackSymbolMsg:mainCallStackSymbolMsg arrayCount:self.count index:index];
-        NSLog(@"%@",instanceArrayErrorMessage);
-        
-        NSDictionary *userInfo = @{
-                                   AvoidCrash_Key_ErrorMainMessage : instanceArrayErrorMessage,
-                                   AvoidCrash_Key_CallStackSymbolsArr : callStackSymbolsArr
-                                   };
-        [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:userInfo];
+        [self dealWithObjectAtIndexErrorWithArrayCount:self.count index:index];
         
         return nil;
     }
 }
 
 
-- (NSString *)getObjectAtIndexErrorWithMainCallStackSymbolMsg:(NSString *)mainCallStackSymbolMsg arrayCount:(NSUInteger)arrayCount index:(NSUInteger)index {
+- (void)dealWithObjectAtIndexErrorWithArrayCount:(NSUInteger)arrayCount index:(NSUInteger)index {
     
-    NSMutableString *instanceArrayErrorMessage = [NSMutableString stringWithFormat:@"\n\n%@\n\n%@\nGet object from array error:\nIndex (%zd) beyond bounds [0...%zd]..\nThis framework default is to return nil.\nError Place:%@:",AvoidCrashSeparator,AvoidCrashEnglishTitle, index, arrayCount, mainCallStackSymbolMsg];
+    //函数调用栈数据
+    NSArray *callStackSymbolsArr = [NSThread callStackSymbols];
     
-    [instanceArrayErrorMessage appendFormat:@"\n%@\n从数组中获取元素出错:\n下标(%zd)越界[0...%zd].\n这个框架默认的做法是返回一个nil。\n错误的地方:%@",AvoidCrashChineseTitle, index, arrayCount, mainCallStackSymbolMsg];
-    [instanceArrayErrorMessage appendFormat:@"\n\n%@\n\n",AvoidCrashSeparator];
+    //获取在哪个类的哪个方法中实例化的数组  字符串格式 -[类名 方法名]  或者 +[类名 方法名]
+    NSString *mainCallStackSymbolMsg = [AvoidCrash getMainCallStackSymbolMessageWithCallStackSymbolStr:callStackSymbolsArr[2]];
     
-    return instanceArrayErrorMessage;
+    
+    NSString *errorInfo = @"Get object from array error";
+    NSString *errorReason = [NSString stringWithFormat:@"Index (%zd) beyond bounds [0...%zd].", index, arrayCount];
+    
+    NSString *errorPlace = [NSString stringWithFormat:@"Error Place:%@",mainCallStackSymbolMsg];
+    NSString *defaultToDo = @"This framework default is to return nil.";
+    
+    NSString *logErrorMessage = [NSString stringWithFormat:@"\n\n%@\n\n%@\n%@\n%@\n%@\n\n%@\n\n",AvoidCrashSeparatorWithFlag, errorInfo, errorReason, errorPlace, defaultToDo, AvoidCrashSeparator];
+    
+    NSLog(@"%@", logErrorMessage);
+    
+    NSDictionary *errorInfoDic = @{
+                                   key_errorInfo        : errorInfo,
+                                   key_errorReason      : errorReason,
+                                   key_errorPlace       : errorPlace,
+                                   key_defaultToDo      : defaultToDo,
+                                   key_callStackSymbols : callStackSymbolsArr
+                                   };
+    
+    //将错误信息放在字典里，用通知的形式发送出去
+    [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:errorInfoDic];
+    
 }
 
 
@@ -81,42 +94,21 @@
 
 
 - (void)avoidCrashSetObject:(id)obj atIndexedSubscript:(NSUInteger)idx {
+
+    
     if (obj == nil) {
-        //错误信息函数调用栈主要信息的获取
-        NSArray *callStackSymbolsArr = [NSThread callStackSymbols];
-        
-        NSString *mainCallStackSymbolMsg = [AvoidCrash getMainCallStackSymbolMessageWithCallStackSymbolStr:callStackSymbolsArr[1]];
-        
-        NSString *instanceArrayErrorMessage = [self getSetObjectAtIndexObjectNilErrorWithMainCallStackSymbolMsg:mainCallStackSymbolMsg];
-        NSLog(@"%@",instanceArrayErrorMessage);
-        
-        NSDictionary *userInfo = @{
-                                   AvoidCrash_Key_ErrorMainMessage : instanceArrayErrorMessage,
-                                   AvoidCrash_Key_CallStackSymbolsArr : callStackSymbolsArr
-                                   };
-        [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:userInfo];
+        [self dealWithSetObjectAtIndexObjectNilError];
     }
     
     else {
-        
+        //数组没有越界
         if (idx < self.count) {
             [self avoidCrashSetObject:obj atIndexedSubscript:idx];
         }
         
+        //数组越界
         else {
-            //错误信息函数调用栈主要信息的获取
-            NSArray *callStackSymbolsArr = [NSThread callStackSymbols];
-            
-            NSString *mainCallStackSymbolMsg = [AvoidCrash getMainCallStackSymbolMessageWithCallStackSymbolStr:callStackSymbolsArr[1]];
-            
-            NSString *instanceArrayErrorMessage = [self getSetObjectAtIndexBeyondBoundsErrorWithMainCallStackSymbolMsg:mainCallStackSymbolMsg arrayCount:self.count index:idx];
-            NSLog(@"%@",instanceArrayErrorMessage);
-            
-            NSDictionary *userInfo = @{
-                                       AvoidCrash_Key_ErrorMainMessage : instanceArrayErrorMessage,
-                                       AvoidCrash_Key_CallStackSymbolsArr : callStackSymbolsArr
-                                       };
-            [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:userInfo];
+            [self dealWithSetObjectAtIndexBeyondBoundsErrorWithArrayCount:self.count index:idx];
         }
     }
     
@@ -124,25 +116,68 @@
 }
 
 
-- (NSString *)getSetObjectAtIndexBeyondBoundsErrorWithMainCallStackSymbolMsg:(NSString *)mainCallStackSymbolMsg arrayCount:(NSUInteger)arrayCount index:(NSUInteger)index {
+- (void)dealWithSetObjectAtIndexBeyondBoundsErrorWithArrayCount:(NSUInteger)arrayCount index:(NSUInteger)index {
     
-    NSMutableString *instanceArrayErrorMessage = [NSMutableString stringWithFormat:@"\n\n%@\n\n%@\nNsmutableArray set object error:\nIndex (%zd) beyond bounds [0...%zd]..\nThis framework default is to ignore this operation to avoid crash.\nError Place:%@:",AvoidCrashSeparator,AvoidCrashEnglishTitle, index, arrayCount, mainCallStackSymbolMsg];
     
-    [instanceArrayErrorMessage appendFormat:@"\n%@\n可变数组赋值出错:\n下标(%zd)越界[0...%zd].\n这个框架默认不做赋值处理来防止崩溃。\n错误的地方:%@",AvoidCrashChineseTitle, index, arrayCount, mainCallStackSymbolMsg];
-    [instanceArrayErrorMessage appendFormat:@"\n\n%@\n\n",AvoidCrashSeparator];
+    //函数调用栈数据
+    NSArray *callStackSymbolsArr = [NSThread callStackSymbols];
     
-    return instanceArrayErrorMessage;
+    //获取在哪个类的哪个方法中实例化的数组  字符串格式 -[类名 方法名]  或者 +[类名 方法名]
+    NSString *mainCallStackSymbolMsg = [AvoidCrash getMainCallStackSymbolMessageWithCallStackSymbolStr:callStackSymbolsArr[2]];
+    
+    
+    NSString *errorInfo = @"NSMutableArray set object error:";
+    NSString *errorReason = [NSString stringWithFormat:@"Index (%zd) beyond bounds [0...%zd].", index, arrayCount];
+    
+    NSString *errorPlace = [NSString stringWithFormat:@"Error Place:%@",mainCallStackSymbolMsg];
+    NSString *defaultToDo = @"This framework default is to ignore this operation to avoid crash.";
+    
+    NSString *logErrorMessage = [NSString stringWithFormat:@"\n\n%@\n\n%@\n%@\n%@\n%@\n\n%@\n\n",AvoidCrashSeparatorWithFlag, errorInfo, errorReason, errorPlace, defaultToDo, AvoidCrashSeparator];
+    
+    NSLog(@"%@", logErrorMessage);
+    
+    NSDictionary *errorInfoDic = @{
+                                   key_errorInfo        : errorInfo,
+                                   key_errorReason      : errorReason,
+                                   key_errorPlace       : errorPlace,
+                                   key_defaultToDo      : defaultToDo,
+                                   key_callStackSymbols : callStackSymbolsArr
+                                   };
+    
+    //将错误信息放在字典里，用通知的形式发送出去
+    [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:errorInfoDic];
 }
 
 
-- (NSString *)getSetObjectAtIndexObjectNilErrorWithMainCallStackSymbolMsg:(NSString *)mainCallStackSymbolMsg {
+- (void)dealWithSetObjectAtIndexObjectNilError {
     
-    NSMutableString *instanceArrayErrorMessage = [NSMutableString stringWithFormat:@"\n\n%@\n\n%@\nNSMutableArray set object error:\n[__NSArrayM setObject:atIndex:]: object cannot be nil\nThis framework default is to ignore this operation to avoid crash.\nError Place:%@:",AvoidCrashSeparator,AvoidCrashEnglishTitle,mainCallStackSymbolMsg];
+    //函数调用栈数据
+    NSArray *callStackSymbolsArr = [NSThread callStackSymbols];
     
-    [instanceArrayErrorMessage appendFormat:@"\n%@\n可变数组赋值出错:\n赋值的object不能为nil.\n这个框架默认不做赋值处理来防止崩溃。\n错误的地方:%@",AvoidCrashChineseTitle,mainCallStackSymbolMsg];
-    [instanceArrayErrorMessage appendFormat:@"\n\n%@\n\n",AvoidCrashSeparator];
+    //获取在哪个类的哪个方法中实例化的数组  字符串格式 -[类名 方法名]  或者 +[类名 方法名]
+    NSString *mainCallStackSymbolMsg = [AvoidCrash getMainCallStackSymbolMessageWithCallStackSymbolStr:callStackSymbolsArr[2]];
     
-    return instanceArrayErrorMessage;
+    
+    NSString *errorInfo = @"NSMutableArray set object error:";
+    NSString *errorReason = @"[__NSArrayM setObject:atIndex:]: object cannot be nil";
+    NSString *errorPlace = [NSString stringWithFormat:@"Error Place:%@",mainCallStackSymbolMsg];
+    NSString *defaultToDo = @"This framework default is to ignore this operation to avoid crash.";
+    
+    NSString *logErrorMessage = [NSString stringWithFormat:@"\n\n%@\n\n%@\n%@\n%@\n%@\n\n%@\n\n",AvoidCrashSeparatorWithFlag, errorInfo, errorReason, errorPlace, defaultToDo, AvoidCrashSeparator];
+    
+    NSLog(@"%@", logErrorMessage);
+    
+    NSDictionary *errorInfoDic = @{
+                                   key_errorInfo        : errorInfo,
+                                   key_errorReason      : errorReason,
+                                   key_errorPlace       : errorPlace,
+                                   key_defaultToDo      : defaultToDo,
+                                   key_callStackSymbols : callStackSymbolsArr
+                                   };
+    
+    //将错误信息放在字典里，用通知的形式发送出去
+    [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:errorInfoDic];
+    
 }
 
 //=================================================================
@@ -151,36 +186,51 @@
 #pragma mark - removeObjectAtIndex:
 
 - (void)avoidCrashRemoveObjectAtIndex:(NSUInteger)index {
+    
+    //数组没有越界
     if (index < self.count) {
         [self avoidCrashRemoveObjectAtIndex:index];
     }
     
+    //数组越界
     else {
-        //错误信息函数调用栈主要信息的获取
-        NSArray *callStackSymbolsArr = [NSThread callStackSymbols];
         
-        NSString *mainCallStackSymbolMsg = [AvoidCrash getMainCallStackSymbolMessageWithCallStackSymbolStr:callStackSymbolsArr[1]];
-        
-        NSString *instanceArrayErrorMessage = [self getRemoveObjectAtIndexErrorWithMainCallStackSymbolMsg:mainCallStackSymbolMsg arrayCount:self.count index:index];
-        NSLog(@"%@",instanceArrayErrorMessage);
-        
-        NSDictionary *userInfo = @{
-                                   AvoidCrash_Key_ErrorMainMessage : instanceArrayErrorMessage,
-                                   AvoidCrash_Key_CallStackSymbolsArr : callStackSymbolsArr
-                                   };
-        [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:userInfo];
+        [self dealWithRemoveObjectAtIndexErrorWithArrayCount:self.count index:index];
     }
 }
 
 
-- (NSString *)getRemoveObjectAtIndexErrorWithMainCallStackSymbolMsg:(NSString *)mainCallStackSymbolMsg arrayCount:(NSUInteger)arrayCount index:(NSUInteger)index {
+- (void)dealWithRemoveObjectAtIndexErrorWithArrayCount:(NSUInteger)arrayCount index:(NSUInteger)index {
     
-    NSMutableString *instanceArrayErrorMessage = [NSMutableString stringWithFormat:@"\n\n%@\n\n%@\nNSMutableArray remove object error:\n-[__NSArrayM removeObjectAtIndex:]: index %zd beyond bounds [0 .. %zd].\nThis framework default is to ignore this operation to avoid crash.\nError Place:%@:",AvoidCrashSeparator,AvoidCrashEnglishTitle, index, arrayCount, mainCallStackSymbolMsg];
     
-    [instanceArrayErrorMessage appendFormat:@"\n%@\n可变数组移除元素出错:\n-[__NSArrayM removeObjectAtIndex:]: index %zd beyond bounds [0 .. %zd].\n这个框架默认不做赋值处理来防止崩溃。\n错误的地方:%@",AvoidCrashChineseTitle, index, arrayCount, mainCallStackSymbolMsg];
-    [instanceArrayErrorMessage appendFormat:@"\n\n%@\n\n",AvoidCrashSeparator];
+    //函数调用栈数据
+    NSArray *callStackSymbolsArr = [NSThread callStackSymbols];
     
-    return instanceArrayErrorMessage;
+    //获取在哪个类的哪个方法中实例化的数组  字符串格式 -[类名 方法名]  或者 +[类名 方法名]
+    NSString *mainCallStackSymbolMsg = [AvoidCrash getMainCallStackSymbolMessageWithCallStackSymbolStr:callStackSymbolsArr[2]];
+    
+    
+    NSString *errorInfo = @"NSMutableArray remove object error:";
+    NSString *errorReason = @"-[__NSArrayM removeObjectAtIndex:]: index %zd beyond bounds [0 .. %zd].";
+    
+    NSString *errorPlace = [NSString stringWithFormat:@"Error Place:%@",mainCallStackSymbolMsg];
+    NSString *defaultToDo = @"This framework default is to ignore this operation to avoid crash.";
+    
+    NSString *logErrorMessage = [NSString stringWithFormat:@"\n\n%@\n\n%@\n%@\n%@\n%@\n\n%@\n\n",AvoidCrashSeparatorWithFlag, errorInfo, errorReason, errorPlace, defaultToDo, AvoidCrashSeparator];
+    
+    NSLog(@"%@", logErrorMessage);
+    
+    NSDictionary *errorInfoDic = @{
+                                   key_errorInfo        : errorInfo,
+                                   key_errorReason      : errorReason,
+                                   key_errorPlace       : errorPlace,
+                                   key_defaultToDo      : defaultToDo,
+                                   key_callStackSymbols : callStackSymbolsArr
+                                   };
+    
+    //将错误信息放在字典里，用通知的形式发送出去
+    [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:errorInfoDic];
+    
 }
 
 

@@ -11,12 +11,21 @@
 
 @implementation AvoidCrash
 
+
+/**
+ *  获取函数调用栈精简话的主要信息<根据正则表达式匹配出来>
+ *
+ *  @param callStackSymbolStr 函数调用栈的信息
+ *
+ *  @return 函数调用栈精简话的主要信息
+ */
+
 + (NSString *)getMainCallStackSymbolMessageWithCallStackSymbolStr:(NSString *)callStackSymbolStr {
-    //mainCallStackSymbolMsg的格式为   +[ViewController touchesBegan:withEvent:]
+    //mainCallStackSymbolMsg的格式为   +[类名 方法名]  或者 -[类名 方法名]
     __block NSString *mainCallStackSymbolMsg = nil;
     
+    //匹配出来的格式为 +[类名 方法名]  或者 -[类名 方法名]
     NSString *regularExpStr = @"[-\\+]\\[.+\\]";
-    
     
     NSRegularExpression *regularExp = [[NSRegularExpression alloc] initWithPattern:regularExpStr options:NSRegularExpressionCaseInsensitive error:nil];
     
@@ -28,5 +37,7 @@
     }];
     return mainCallStackSymbolMsg;
 }
+
+
 
 @end

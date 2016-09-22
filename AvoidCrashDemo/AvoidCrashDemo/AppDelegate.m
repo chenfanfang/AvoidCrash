@@ -8,6 +8,10 @@
 
 #import "AppDelegate.h"
 
+#import "AvoidCrash.h"
+
+#define AvoidCrashLog
+
 @interface AppDelegate ()
 
 @end
@@ -17,7 +21,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dealwithCrashMessage:) name:AvoidCrashNotification object:nil];
+
     return YES;
+}
+
+- (void)dealwithCrashMessage:(NSNotification *)note {
+    NSLog(@"%@",note.userInfo);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -3,7 +3,7 @@ s.name         = "AvoidCrash"
 s.platform = :ios, "7.0"
 s.version      = "1.0.0"
 s.ios.deployment_target = '7.0'
-s.summary      = "A kind of dropdown menu"
+s.summary      = "This framework can avoid Foundation framework potential crash danger"
 s.homepage     = "https://github.com/chenfanfang/AvoidCrash"
 s.license      = "MIT"
 s.author             = { "陈蕃坊" => "493336001@qq.com" }
