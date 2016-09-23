@@ -12,12 +12,7 @@
 
 @implementation NSMutableArray (AvoidCrash)
 
-+ (void)load {
-    
-#ifdef AVOIDCRASH
-    
-    if (YES == AVOIDCRASH) {
-        
++ (void)avoidCrashExchangeMethod {
     Class arrayMClass = NSClassFromString(@"__NSArrayM");
     
     //get object from array method exchange
@@ -34,10 +29,6 @@
     Method removeObjectAtIndex = class_getInstanceMethod(arrayMClass, @selector(removeObjectAtIndex:));
     Method avoidCrashRemoveObjectAtIndex = class_getInstanceMethod(arrayMClass, @selector(avoidCrashRemoveObjectAtIndex:));
     method_exchangeImplementations(removeObjectAtIndex, avoidCrashRemoveObjectAtIndex);
-        
-    }
-#endif
-    
 }
 
 

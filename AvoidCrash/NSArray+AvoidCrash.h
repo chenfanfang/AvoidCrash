@@ -10,4 +10,6 @@
 
 @interface NSArray (AvoidCrash)
 
++ (void)avoidCrashExchangeMethod;
+
 @end

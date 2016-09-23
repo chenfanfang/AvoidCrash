@@ -8,6 +8,14 @@
 
 #import "AvoidCrash.h"
 
+//category
+#import "NSArray+AvoidCrash.h"
+#import "NSMutableArray+AvoidCrash.h"
+
+#import "NSDictionary+AvoidCrash.h"
+#import "NSMutableDictionary+AvoidCrash.h"
+
+
 
 #define AvoidCrashSeparator         @"================================================================"
 #define AvoidCrashSeparatorWithFlag @"========================AvoidCrash Log=========================="
@@ -22,6 +30,21 @@
 @implementation AvoidCrash
 
 
++ (void)becomeEffective {
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        [NSArray avoidCrashExchangeMethod];
+        [NSMutableArray avoidCrashExchangeMethod];
+        
+        [NSDictionary avoidCrashExchangeMethod];
+        [NSMutableDictionary avoidCrashExchangeMethod];
+        
+    });
+}
+
+
 /**
  *  获取函数调用栈精简话的主要信息<根据正则表达式匹配出来>
  *
@@ -31,6 +54,7 @@
  */
 
 + (NSString *)getMainCallStackSymbolMessageWithCallStackSymbolStr:(NSString *)callStackSymbolStr {
+    
     //mainCallStackSymbolMsg的格式为   +[类名 方法名]  或者 -[类名 方法名]
     __block NSString *mainCallStackSymbolMsg = nil;
     
@@ -59,7 +83,7 @@
     
     if (mainCallStackSymbolMsg == nil) {
         
-        @throw exception;
+        mainCallStackSymbolMsg = @"崩溃方法定位失败,请您查看函数调用栈来排查错误原因";
         
     }
     

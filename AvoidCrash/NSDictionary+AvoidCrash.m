@@ -12,20 +12,12 @@
 
 @implementation NSDictionary (AvoidCrash)
 
-+ (void)load {
++ (void)avoidCrashExchangeMethod {
     
-#ifdef AVOIDCRASH
-    
-    if (YES == AVOIDCRASH) {
-        
     Method dictionaryWithObjects = class_getClassMethod(self, @selector(dictionaryWithObjects:forKeys:count:));
     Method avoidCrashDictionaryWithObjects = class_getClassMethod(self, @selector(avoidCrashDictionaryWithObjects:forKeys:count:));
     
     method_exchangeImplementations(dictionaryWithObjects, avoidCrashDictionaryWithObjects);
-    }
-    
-#endif
-    
 }
 
 + (instancetype)avoidCrashDictionaryWithObjects:(const id  _Nonnull __unsafe_unretained *)objects forKeys:(const id<NSCopying>  _Nonnull __unsafe_unretained *)keys count:(NSUInteger)cnt {

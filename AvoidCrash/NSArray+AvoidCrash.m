@@ -12,27 +12,18 @@
 
 @implementation NSArray (AvoidCrash)
 
-+ (void)load {
++ (void)avoidCrashExchangeMethod {
+    //instance array method exchange
+    Method arrayWithObjects = class_getClassMethod(self, @selector(arrayWithObjects:count:));
+    Method avoidCrashArrayWithObjects = class_getClassMethod(self, @selector(AvoidCrashArrayWithObjects:count:));
+    method_exchangeImplementations(arrayWithObjects, avoidCrashArrayWithObjects);
     
+    Class arrayIClass = NSClassFromString(@"__NSArrayI");
     
-#ifdef AVOIDCRASH
-    
-    if (YES == AVOIDCRASH) {
-        
-        //instance array method exchange
-        Method arrayWithObjects = class_getClassMethod(self, @selector(arrayWithObjects:count:));
-        Method avoidCrashArrayWithObjects = class_getClassMethod(self, @selector(AvoidCrashArrayWithObjects:count:));
-        method_exchangeImplementations(arrayWithObjects, avoidCrashArrayWithObjects);
-        
-        Class arrayIClass = NSClassFromString(@"__NSArrayI");
-        
-        //get object from array method exchange
-        Method objectAtIndex = class_getInstanceMethod(arrayIClass, @selector(objectAtIndex:));
-        Method avoidCrashObjectAtIndex = class_getInstanceMethod(arrayIClass, @selector(avoidCrashObjectAtIndex:));
-        method_exchangeImplementations(objectAtIndex, avoidCrashObjectAtIndex);
-    }
-    
-#endif
+    //get object from array method exchange
+    Method objectAtIndex = class_getInstanceMethod(arrayIClass, @selector(objectAtIndex:));
+    Method avoidCrashObjectAtIndex = class_getInstanceMethod(arrayIClass, @selector(avoidCrashObjectAtIndex:));
+    method_exchangeImplementations(objectAtIndex, avoidCrashObjectAtIndex);
 }
 
 

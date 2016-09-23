@@ -12,12 +12,8 @@
 
 @implementation NSMutableDictionary (AvoidCrash)
 
-+ (void)load {
++ (void)avoidCrashExchangeMethod {
     
-#ifdef AVOIDCRASH
-    
-    if (YES == AVOIDCRASH) {
-        
     Class dictionaryM = NSClassFromString(@"__NSDictionaryM");
     
     
@@ -30,11 +26,6 @@
     Method removeObjectForKey = class_getInstanceMethod(dictionaryM, @selector(removeObjectForKey:));
     Method avoidCrashRemoveObjectForKey = class_getInstanceMethod(dictionaryM, @selector(avoidCrashRemoveObjectForKey:));
     method_exchangeImplementations(removeObjectForKey, avoidCrashRemoveObjectForKey);
-        
-    }
-    
-#endif
-        
 }
 
 
