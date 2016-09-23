@@ -13,26 +13,17 @@
 
 #define AvoidCrashNotification @"AvoidCrashNotification"
 
-
-#define key_errorInfo        @"errorInfo"
-#define key_errorReason      @"errorReason"
-#define key_errorDetail      @"errorDetail"
-#define key_errorPlace       @"errorPlace"
-#define key_defaultToDo      @"defaultToDo"
-#define key_callStackSymbols @"callStackSymbols"
-
-
-
 //user can ignore below define
-#define AvoidCrashSeparator         @"================================================================"
-#define AvoidCrashSeparatorWithFlag @"========================AvoidCrash Log=========================="
-#define AvoidCrashEnglishTitle      @"---------------------------English------------------------------"
-#define AvoidCrashChineseTitle      @"----------------------------中文---------------------------------"
+
+#define AvoidCrashDefaultReturnNil  @"This framework default is to return nil."
+#define AvoidCrashDefaultIgnore     @"This framework default is to ignore this operation to avoid crash."
 
 @interface AvoidCrash : NSObject
 
 //user can ignore below code
 + (NSString *)getMainCallStackSymbolMessageWithCallStackSymbolStr:(NSString *)callStackSymbolStr;
+
++ (void)noteErrorWithException:(NSException *)exception defaultToDo:(NSString *)defaultToDo;
 
 
 @end

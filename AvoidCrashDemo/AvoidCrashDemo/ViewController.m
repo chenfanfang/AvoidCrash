@@ -16,12 +16,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
 
-    NSMutableArray *array = @[@"cff", @"333"].mutableCopy;
     
-    [array removeObjectAtIndex:4];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     
+    NSString *nilStr = nil;
     
+    NSMutableDictionary *dic = @{
+                                 @"name" : @"cff"
+                                 }.mutableCopy;
+    
+    dic[nilStr] = @"333";
 }
 
 

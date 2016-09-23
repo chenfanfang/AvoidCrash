@@ -13,6 +13,11 @@
 @implementation NSMutableDictionary (AvoidCrash)
 
 + (void)load {
+    
+#ifdef AVOIDCRASH
+    
+    if (YES == AVOIDCRASH) {
+        
     Class dictionaryM = NSClassFromString(@"__NSDictionaryM");
     
     
@@ -25,6 +30,11 @@
     Method removeObjectForKey = class_getInstanceMethod(dictionaryM, @selector(removeObjectForKey:));
     Method avoidCrashRemoveObjectForKey = class_getInstanceMethod(dictionaryM, @selector(avoidCrashRemoveObjectForKey:));
     method_exchangeImplementations(removeObjectForKey, avoidCrashRemoveObjectForKey);
+        
+    }
+    
+#endif
+        
 }
 
 
@@ -35,48 +45,16 @@
 
 - (void)avoidCrashSetObject:(id)anObject forKey:(id<NSCopying>)aKey {
     
-    if (aKey == nil) {
-        
-        [self dealWithSetObjectError];
-    }
-    
-    else {
+    @try {
         [self avoidCrashSetObject:anObject forKey:aKey];
     }
-    
+    @catch (NSException *exception) {
+        [AvoidCrash noteErrorWithException:exception defaultToDo:AvoidCrashDefaultIgnore];
+    }
+    @finally {
+        
+    }
 }
-
-
-- (void)dealWithSetObjectError {
-    
-    //函数调用栈数据
-    NSArray *callStackSymbolsArr = [NSThread callStackSymbols];
-    
-    //获取在哪个类的哪个方法中实例化的数组  字符串格式 -[类名 方法名]  或者 +[类名 方法名]
-    NSString *mainCallStackSymbolMsg = [AvoidCrash getMainCallStackSymbolMessageWithCallStackSymbolStr:callStackSymbolsArr[2]];
-    
-    
-    NSString *errorInfo = @"NSMutableDictionary set object for key error:";
-    NSString *errorReason = @"dictionary setObjectForKey: key cannot be nil";
-    NSString *errorPlace = [NSString stringWithFormat:@"Error Place:%@",mainCallStackSymbolMsg];
-    NSString *defaultToDo = @"This framework default is to ignore this operation to avoid crash.";
-    
-    NSString *logErrorMessage = [NSString stringWithFormat:@"\n\n%@\n\n%@\n%@\n%@\n%@\n\n%@\n\n",AvoidCrashSeparatorWithFlag, errorInfo, errorReason, errorPlace, defaultToDo, AvoidCrashSeparator];
-    
-    NSLog(@"%@", logErrorMessage);
-    
-    NSDictionary *errorInfoDic = @{
-                                   key_errorInfo        : errorInfo,
-                                   key_errorReason      : errorReason,
-                                   key_errorPlace       : errorPlace,
-                                   key_defaultToDo      : defaultToDo,
-                                   key_callStackSymbols : callStackSymbolsArr
-                                   };
-    
-    //将错误信息放在字典里，用通知的形式发送出去
-    [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:errorInfoDic];
-}
-
 
 //=================================================================
 //                       removeObjectForKey:
@@ -85,45 +63,15 @@
 
 - (void)avoidCrashRemoveObjectForKey:(id)aKey {
     
-    if (aKey == nil) {
-        
-        [self dealWithRemoveObjectForKeyError];
-    }
-    
-    else {
+    @try {
         [self avoidCrashRemoveObjectForKey:aKey];
     }
-}
-
-
-- (void)dealWithRemoveObjectForKeyError {
-    
-    //函数调用栈数据
-    NSArray *callStackSymbolsArr = [NSThread callStackSymbols];
-    
-    //获取在哪个类的哪个方法中实例化的数组  字符串格式 -[类名 方法名]  或者 +[类名 方法名]
-    NSString *mainCallStackSymbolMsg = [AvoidCrash getMainCallStackSymbolMessageWithCallStackSymbolStr:callStackSymbolsArr[2]];
-    
-    
-    NSString *errorInfo = @"NSMutableDictionary remove object for key error:";
-    NSString *errorReason = @"NSMutableDictionary removeObjectForKey: key cannot be nil";
-    NSString *errorPlace = [NSString stringWithFormat:@"Error Place:%@",mainCallStackSymbolMsg];
-    NSString *defaultToDo = @"This framework default is to ignore this operation to avoid crash.";
-    
-    NSString *logErrorMessage = [NSString stringWithFormat:@"\n\n%@\n\n%@\n%@\n%@\n%@\n\n%@\n\n",AvoidCrashSeparatorWithFlag, errorInfo, errorReason, errorPlace, defaultToDo, AvoidCrashSeparator];
-    
-    NSLog(@"%@", logErrorMessage);
-    
-    NSDictionary *errorInfoDic = @{
-                                   key_errorInfo        : errorInfo,
-                                   key_errorReason      : errorReason,
-                                   key_errorPlace       : errorPlace,
-                                   key_defaultToDo      : defaultToDo,
-                                   key_callStackSymbols : callStackSymbolsArr
-                                   };
-    
-    //将错误信息放在字典里，用通知的形式发送出去
-    [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:errorInfoDic];
+    @catch (NSException *exception) {
+        [AvoidCrash noteErrorWithException:exception defaultToDo:AvoidCrashDefaultIgnore];
+    }
+    @finally {
+        
+    }
 }
 
 @end
