@@ -20,6 +20,7 @@
     method_exchangeImplementations(dictionaryWithObjects, avoidCrashDictionaryWithObjects);
 }
 
+
 + (instancetype)avoidCrashDictionaryWithObjects:(const id  _Nonnull __unsafe_unretained *)objects forKeys:(const id<NSCopying>  _Nonnull __unsafe_unretained *)keys count:(NSUInteger)cnt {
     
     id instance = nil;

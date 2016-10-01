@@ -34,6 +34,7 @@
 //=================================================================
 #pragma mark - set方法
 
+
 - (void)avoidCrashSetObject:(id)anObject forKey:(id<NSCopying>)aKey {
     
     @try {
@@ -64,5 +65,7 @@
         
     }
 }
+
+
 
 @end

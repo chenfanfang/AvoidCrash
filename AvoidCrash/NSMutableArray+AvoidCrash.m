@@ -37,6 +37,7 @@
 //=================================================================
 #pragma mark - get object from array
 
+
 - (id)avoidCrashObjectAtIndex:(NSUInteger)index {
     
     id object = nil;

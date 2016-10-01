@@ -25,6 +25,7 @@
 #define key_errorPlace       @"errorPlace"
 #define key_defaultToDo      @"defaultToDo"
 #define key_callStackSymbols @"callStackSymbols"
+#define key_exception        @"exception"
 
 
 @implementation AvoidCrash
@@ -46,11 +47,11 @@
 
 
 /**
- *  获取函数调用栈精简话的主要信息<根据正则表达式匹配出来>
+ *  获取堆栈主要崩溃精简化的信息<根据正则表达式匹配出来>
  *
- *  @param callStackSymbolStr 函数调用栈的信息
+ *  @param callStackSymbolStr 堆栈主要崩溃信息
  *
- *  @return 函数调用栈精简话的主要信息
+ *  @return 堆栈主要崩溃精简化的信息
  */
 
 + (NSString *)getMainCallStackSymbolMessageWithCallStackSymbolStr:(NSString *)callStackSymbolStr {
@@ -75,7 +76,7 @@
 
 + (void)noteErrorWithException:(NSException *)exception defaultToDo:(NSString *)defaultToDo {
 
-    //函数调用栈数据
+    //堆栈数据
     NSArray *callStackSymbolsArr = [NSThread callStackSymbols];
     
     //获取在哪个类的哪个方法中实例化的数组  字符串格式 -[类名 方法名]  或者 +[类名 方法名]
@@ -100,6 +101,7 @@
                                    key_errorReason      : errorReason,
                                    key_errorPlace       : errorPlace,
                                    key_defaultToDo      : defaultToDo,
+                                   key_exception        : exception,
                                    key_callStackSymbols : callStackSymbolsArr
                                    };
     

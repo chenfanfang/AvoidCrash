@@ -17,19 +17,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
-    
-}
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    
     NSString *nilStr = nil;
     
-    NSMutableDictionary *dic = @{
-                                 @"name" : @"cff"
-                                 }.mutableCopy;
+    NSArray *array = @[@"chenfanfang", @"AvoidCrash", nilStr];
     
-    dic[nilStr] = @"333";
 }
 
 
