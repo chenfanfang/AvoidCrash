@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self NSMutableString_Test];
+    [self NSMutableString_TestDeleteCharactersInRange];
 }
 
 
@@ -198,7 +198,7 @@
 }
 
 
-- (void)NSMutableString_Test{
+- (void)NSMutableString_TestDeleteCharactersInRange{
     NSMutableString *strM = [NSMutableString stringWithFormat:@"chenfanfang"];
     NSRange range = NSMakeRange(0, 1000);
     [strM deleteCharactersInRange:range];
