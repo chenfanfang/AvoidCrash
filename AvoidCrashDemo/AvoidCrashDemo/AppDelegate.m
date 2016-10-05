@@ -31,7 +31,7 @@
     
     //注意:所有的信息都在userInfo中
     //你可以在这里收集相应的崩溃信息进行相应的处理(比如传到自己服务器)
-    NSLog(@"\n\n在AppDelegate中 方法:dealwithCrashMessage打印\n\n\n\n\n%@",note.userInfo);
+    NSLog(@"\n\n在AppDelegate中 方法:dealwithCrashMessage打印\n\n\n\n\n%@\n\n\n\n",note.userInfo);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

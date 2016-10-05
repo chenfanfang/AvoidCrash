@@ -18,9 +18,7 @@
     
     
     //setObject:forKey:
-    Method setObject = class_getInstanceMethod(dictionaryM, @selector(setObject:forKey:));
-    Method avoidCrashSetObject = class_getInstanceMethod(dictionaryM, @selector(avoidCrashSetObject:forKey:));
-    method_exchangeImplementations(setObject, avoidCrashSetObject);
+    [AvoidCrash exchangeInstanceMethod:dictionaryM method1Sel:@selector(setObject:forKey:) method2Sel:@selector(avoidCrashSetObject:forKey:)];
     
     //removeObjectForKey:
     Method removeObjectForKey = class_getInstanceMethod(dictionaryM, @selector(removeObjectForKey:));
@@ -32,7 +30,7 @@
 //=================================================================
 //                       setObject:forKey:
 //=================================================================
-#pragma mark - set方法
+#pragma mark - setObject:forKey:
 
 
 - (void)avoidCrashSetObject:(id)anObject forKey:(id<NSCopying>)aKey {

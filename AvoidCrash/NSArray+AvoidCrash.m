@@ -14,16 +14,13 @@
 
 + (void)avoidCrashExchangeMethod {
     //instance array method exchange
-    Method arrayWithObjects = class_getClassMethod(self, @selector(arrayWithObjects:count:));
-    Method avoidCrashArrayWithObjects = class_getClassMethod(self, @selector(AvoidCrashArrayWithObjects:count:));
-    method_exchangeImplementations(arrayWithObjects, avoidCrashArrayWithObjects);
+    [AvoidCrash exchangeClassMethod:[self class] method1Sel:@selector(arrayWithObjects:count:) method2Sel:@selector(AvoidCrashArrayWithObjects:count:)];
+    
     
     Class arrayIClass = NSClassFromString(@"__NSArrayI");
     
     //get object from array method exchange
-    Method objectAtIndex = class_getInstanceMethod(arrayIClass, @selector(objectAtIndex:));
-    Method avoidCrashObjectAtIndex = class_getInstanceMethod(arrayIClass, @selector(avoidCrashObjectAtIndex:));
-    method_exchangeImplementations(objectAtIndex, avoidCrashObjectAtIndex);
+    [AvoidCrash exchangeInstanceMethod:arrayIClass method1Sel:@selector(objectAtIndex:) method2Sel:@selector(avoidCrashObjectAtIndex:)];
 }
 
 

@@ -101,8 +101,8 @@ pod  AvoidCrash
 ===
 ---
  - NSArray
-  -  `1. NSArray的快速创建方式 NSArray *array = @[@"chenfanfang", @"AvoidCrash"];  //这种创建方式其实调用的是2中的方法`
-  -  `2. +(instancetype)arrayWithObjects:(const id  _Nonnull __unsafe_unretained *)objects count:(NSUInteger)cnt`
+   -  `1. NSArray的快速创建方式 NSArray *array = @[@"chenfanfang", @"AvoidCrash"];  //这种创建方式其实调用的是2中的方法`
+   -  `2. +(instancetype)arrayWithObjects:(const id  _Nonnull __unsafe_unretained *)objects count:(NSUInteger)cnt`
   - `3. - (id)objectAtIndex:(NSUInteger)index`
 ---
 
@@ -110,15 +110,32 @@ pod  AvoidCrash
   - `1. - (id)objectAtIndex:(NSUInteger)index`
   - `2. - (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx`
   - `3. - (void)removeObjectAtIndex:(NSUInteger)index`
+  - `4. - (void)insertObject:(id)anObject atIndex:(NSUInteger)index`
 ---
 
 - NSDictionary
- - `1. NSDictionary的快速创建方式 NSDictionary *dict = @{@"frameWork" : @"AvoidCrash"}; //这种创建方式其实调用的是2中的方法`
- - `2. +(instancetype)dictionaryWithObjects:(const id  _Nonnull __unsafe_unretained *)objects forKeys:(const id<NSCopying>  _Nonnull __unsafe_unretained *)keys count:(NSUInteger)cnt`
+  - `1. NSDictionary的快速创建方式 NSDictionary *dict = @{@"frameWork" : @"AvoidCrash"}; //这种创建方式其实调用的是2中的方法`
+  - `2. +(instancetype)dictionaryWithObjects:(const id  _Nonnull __unsafe_unretained *)objects forKeys:(const id<NSCopying>  _Nonnull __unsafe_unretained *)keys count:(NSUInteger)cnt`
 
+---
 - NSMutableDictionary
- - `1. - (void)setObject:(id)anObject forKey:(id<NSCopying>)aKey`
- - `2. - (void)removeObjectForKey:(id)aKey`
+  - `1. - (void)setObject:(id)anObject forKey:(id<NSCopying>)aKey`
+  - `2. - (void)removeObjectForKey:(id)aKey`
+  
+  
+  
+---
+- NSString
+	- `1. - (unichar)characterAtIndex:(NSUInteger)index`
+	- `2. - (NSString *)substringFromIndex:(NSUInteger)from`
+	- `3. - (NSString *)substringToIndex:(NSUInteger)to {`
+	- `4. - (NSString *)substringWithRange:(NSRange)range {`
+	- `5. - (NSString *)stringByReplacingOccurrencesOfString:(NSString *)target withString:(NSString *)replacement`
+	- `6. - (NSString *)stringByReplacingOccurrencesOfString:(NSString *)target withString:(NSString *)replacement options:(NSStringCompareOptions)options range:(NSRange)searchRange`
+	- `7. - (NSString *)stringByReplacingCharactersInRange:(NSRange)range withString:(NSString *)replacement`
+
+
+  
 
 ---
 

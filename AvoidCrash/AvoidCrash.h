@@ -43,6 +43,11 @@
 
 
 //user can ignore below method <用户可以忽略以下方法>
+
++ (void)exchangeClassMethod:(Class)anClass method1Sel:(SEL)method1Sel method2Sel:(SEL)method2Sel;
+
++ (void)exchangeInstanceMethod:(Class)anClass method1Sel:(SEL)method1Sel method2Sel:(SEL)method2Sel;
+
 + (NSString *)getMainCallStackSymbolMessageWithCallStackSymbolStr:(NSString *)callStackSymbolStr;
 
 + (void)noteErrorWithException:(NSException *)exception defaultToDo:(NSString *)defaultToDo;

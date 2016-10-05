@@ -15,6 +15,8 @@
 #import "NSDictionary+AvoidCrash.h"
 #import "NSMutableDictionary+AvoidCrash.h"
 
+#import "NSString+AvoidCrash.h"
+
 
 
 #define AvoidCrashSeparator         @"================================================================"
@@ -42,8 +44,23 @@
         [NSDictionary avoidCrashExchangeMethod];
         [NSMutableDictionary avoidCrashExchangeMethod];
         
+        [NSString avoidCrashExchangeMethod];
+        
     });
 }
+
++ (void)exchangeClassMethod:(Class)anClass method1Sel:(SEL)method1Sel method2Sel:(SEL)method2Sel {
+    Method method1 = class_getClassMethod(anClass, method1Sel);
+    Method method2 = class_getClassMethod(anClass, method2Sel);
+    method_exchangeImplementations(method1, method2);
+}
+
++ (void)exchangeInstanceMethod:(Class)anClass method1Sel:(SEL)method1Sel method2Sel:(SEL)method2Sel {
+    Method method1 = class_getInstanceMethod(anClass, method1Sel);
+    Method method2 = class_getInstanceMethod(anClass, method2Sel);
+    method_exchangeImplementations(method1, method2);
+}
+
 
 
 /**
@@ -70,6 +87,9 @@
             *stop = YES;
         }
     }];
+    
+    
+    
     return mainCallStackSymbolMsg;
 }
 
@@ -90,6 +110,9 @@
     
     NSString *errorName = exception.name;
     NSString *errorReason = exception.reason;
+    //errorReason 可能为 -[__NSCFConstantString avoidCrashCharacterAtIndex:]: Range or index out of bounds
+    //将avoidCrash去掉
+    errorReason = [errorReason stringByReplacingOccurrencesOfString:@"avoidCrash" withString:@""];
     
     NSString *errorPlace = [NSString stringWithFormat:@"Error Place:%@",mainCallStackSymbolMsg];
     

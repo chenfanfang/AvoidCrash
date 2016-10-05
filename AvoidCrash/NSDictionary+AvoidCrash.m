@@ -14,10 +14,7 @@
 
 + (void)avoidCrashExchangeMethod {
     
-    Method dictionaryWithObjects = class_getClassMethod(self, @selector(dictionaryWithObjects:forKeys:count:));
-    Method avoidCrashDictionaryWithObjects = class_getClassMethod(self, @selector(avoidCrashDictionaryWithObjects:forKeys:count:));
-    
-    method_exchangeImplementations(dictionaryWithObjects, avoidCrashDictionaryWithObjects);
+    [AvoidCrash exchangeClassMethod:self method1Sel:@selector(dictionaryWithObjects:forKeys:count:) method2Sel:@selector(avoidCrashDictionaryWithObjects:forKeys:count:)];
 }
 
 

@@ -16,19 +16,17 @@
     Class arrayMClass = NSClassFromString(@"__NSArrayM");
     
     //get object from array method exchange
-    Method objectAtIndex = class_getInstanceMethod(arrayMClass, @selector(objectAtIndex:));
-    Method avoidCrashObjectAtIndex = class_getInstanceMethod(arrayMClass, @selector(avoidCrashObjectAtIndex:));
-    method_exchangeImplementations(objectAtIndex, avoidCrashObjectAtIndex);
+    [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(objectAtIndex:) method2Sel:@selector(avoidCrashObjectAtIndex:)];
     
     //array set object at index
-    Method setObject = class_getInstanceMethod(arrayMClass, @selector(setObject:atIndex:));
-    Method avoidCrashSetObject = class_getInstanceMethod(arrayMClass, @selector(avoidCrashSetObject:atIndexedSubscript:));
-    method_exchangeImplementations(setObject, avoidCrashSetObject);
+    [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(setObject:atIndex:) method2Sel:@selector(avoidCrashSetObject:atIndexedSubscript:)];
+    
     
     //removeObjectAtIndex:
-    Method removeObjectAtIndex = class_getInstanceMethod(arrayMClass, @selector(removeObjectAtIndex:));
-    Method avoidCrashRemoveObjectAtIndex = class_getInstanceMethod(arrayMClass, @selector(avoidCrashRemoveObjectAtIndex:));
-    method_exchangeImplementations(removeObjectAtIndex, avoidCrashRemoveObjectAtIndex);
+    [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(removeObjectAtIndex:) method2Sel:@selector(avoidCrashRemoveObjectAtIndex:)];
+    
+    //insertObject:atIndex:
+    [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(insertObject:atIndex:) method2Sel:@selector(avoidCrashInsertObject:atIndex:)];
 }
 
 
@@ -81,6 +79,23 @@
 - (void)avoidCrashRemoveObjectAtIndex:(NSUInteger)index {
     @try {
         [self avoidCrashRemoveObjectAtIndex:index];
+    }
+    @catch (NSException *exception) {
+        [AvoidCrash noteErrorWithException:exception defaultToDo:AvoidCrashDefaultIgnore];
+    }
+    @finally {
+        
+    }
+}
+
+
+//=================================================================
+//                    insertObject:atIndex:
+//=================================================================
+#pragma mark - set方法
+- (void)avoidCrashInsertObject:(id)anObject atIndex:(NSUInteger)index {
+    @try {
+        [self avoidCrashInsertObject:anObject atIndex:index];
     }
     @catch (NSException *exception) {
         [AvoidCrash noteErrorWithException:exception defaultToDo:AvoidCrashDefaultIgnore];
