@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self NSString_Test_stringByReplacingCharactersInRangeWithString];
+    [self NSMutableString_Test];
 }
 
 
@@ -181,14 +181,28 @@
 }
 
 
-////=================================================================
-////                       NSMutableString_Test
-////=================================================================
-//#pragma mark - NSMutableString_Test
-//
-//- (void)NSMutableString_Test {
-//    NSMutableString
-//}
+//=================================================================
+//                       NSMutableString_Test
+//=================================================================
+#pragma mark - NSMutableString_Test
+
+- (void)NSMutableString_Test_ReplaceCharactersInRange {
+    NSMutableString *strM = [NSMutableString stringWithFormat:@"chenfanfang"];
+    NSRange range = NSMakeRange(0, 1000);
+    [strM replaceCharactersInRange:range withString:@"--"];
+}
+
+- (void)NSMutableString_Test_InsertStringAtIndex{
+    NSMutableString *strM = [NSMutableString stringWithFormat:@"chenfanfang"];
+    [strM insertString:@"cool" atIndex:1000];
+}
+
+
+- (void)NSMutableString_Test{
+    NSMutableString *strM = [NSMutableString stringWithFormat:@"chenfanfang"];
+    NSRange range = NSMakeRange(0, 1000);
+    [strM deleteCharactersInRange:range];
+}
 
 @end
 

@@ -21,6 +21,7 @@
 		043C64231D93A60C00A0B0E9 /* NSMutableArray+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C641D1D93A60C00A0B0E9 /* NSMutableArray+AvoidCrash.m */; };
 		043C64241D93A60C00A0B0E9 /* NSMutableDictionary+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C641F1D93A60C00A0B0E9 /* NSMutableDictionary+AvoidCrash.m */; };
 		04C3DFD31DA4EED200E18858 /* NSString+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C3DFD21DA4EED200E18858 /* NSString+AvoidCrash.m */; };
+		04FEB8FF1DA55E6B00B5647E /* NSMutableString+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB8FE1DA55E6B00B5647E /* NSMutableString+AvoidCrash.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,8 @@
 		043C641F1D93A60C00A0B0E9 /* NSMutableDictionary+AvoidCrash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+AvoidCrash.m"; sourceTree = "<group>"; };
 		04C3DFD11DA4EED200E18858 /* NSString+AvoidCrash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+AvoidCrash.h"; sourceTree = "<group>"; };
 		04C3DFD21DA4EED200E18858 /* NSString+AvoidCrash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+AvoidCrash.m"; sourceTree = "<group>"; };
+		04FEB8FD1DA55E6B00B5647E /* NSMutableString+AvoidCrash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableString+AvoidCrash.h"; sourceTree = "<group>"; };
+		04FEB8FE1DA55E6B00B5647E /* NSMutableString+AvoidCrash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableString+AvoidCrash.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +177,8 @@
 				043C641F1D93A60C00A0B0E9 /* NSMutableDictionary+AvoidCrash.m */,
 				04C3DFD11DA4EED200E18858 /* NSString+AvoidCrash.h */,
 				04C3DFD21DA4EED200E18858 /* NSString+AvoidCrash.m */,
+				04FEB8FD1DA55E6B00B5647E /* NSMutableString+AvoidCrash.h */,
+				04FEB8FE1DA55E6B00B5647E /* NSMutableString+AvoidCrash.m */,
 			);
 			name = AvoidCrash;
 			path = ../../AvoidCrash;
@@ -315,6 +320,7 @@
 				043C63E71D938EE100A0B0E9 /* AppDelegate.m in Sources */,
 				043C63E41D938EE100A0B0E9 /* main.m in Sources */,
 				04C3DFD31DA4EED200E18858 /* NSString+AvoidCrash.m in Sources */,
+				04FEB8FF1DA55E6B00B5647E /* NSMutableString+AvoidCrash.m in Sources */,
 				043C64231D93A60C00A0B0E9 /* NSMutableArray+AvoidCrash.m in Sources */,
 				043C64241D93A60C00A0B0E9 /* NSMutableDictionary+AvoidCrash.m in Sources */,
 				043C64201D93A60C00A0B0E9 /* AvoidCrash.m in Sources */,

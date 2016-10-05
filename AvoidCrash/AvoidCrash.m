@@ -16,6 +16,7 @@
 #import "NSMutableDictionary+AvoidCrash.h"
 
 #import "NSString+AvoidCrash.h"
+#import "NSMutableString+AvoidCrash.h"
 
 
 
@@ -45,6 +46,7 @@
         [NSMutableDictionary avoidCrashExchangeMethod];
         
         [NSString avoidCrashExchangeMethod];
+        [NSMutableString avoidCrashExchangeMethod];
         
     });
 }
