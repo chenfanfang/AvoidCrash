@@ -17,7 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self NSMutableString_TestDeleteCharactersInRange];
+    
+    [self NSArray_Test_InstanceArray];
 }
 
 
