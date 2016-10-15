@@ -146,8 +146,36 @@ pod  AvoidCrash
 	- `4. - (void)deleteCharactersInRange:(NSRange)range`
 
   
+---
+- KVC
+  -  `1.- (void)setValue:(id)value forKey:(NSString *)key`
+  -  `2.- (void)setValue:(id)value forKeyPath:(NSString *)keyPath`
+  -  `3.- (void)setValue:(id)value forUndefinedKey:(NSString *)key //这个方法一般用来重写，不会主动调用`
+  -  `4.- (void)setValuesForKeysWithDictionary:(NSDictionary<NSString *,id> *)keyedValues`
 
 ---
+- NSAttributedString
+ *  `1.- (instancetype)initWithString:(NSString *)str`
+ *  `2.- (instancetype)initWithAttributedString:(NSAttributedString *)attrStr`
+ *  `3.- (instancetype)initWithString:(NSString *)str attributes:(NSDictionary<NSString *,id> *)attrs`
+
+---
+- NSMutableAttributedString
+ *  `1.- (instancetype)initWithString:(NSString *)str`
+ *  `2.- (instancetype)initWithString:(NSString *)str attributes:(NSDictionary<NSString *,id> *)attrs`
+
+
+更新
+===
+#### 2016-10-15
+- 修复上一个版本部分方法不能拦截崩溃的BUG，具体修复哪些可以查看issues和简书上的留言。
+- 优化崩溃代码的定位，定位崩溃代码更加准确。
+- 增加对KVC赋值防止崩溃的处理。
+- 增加对NSAttributedString防止崩溃的处理
+- 增加对NSMutableAttributedString防止崩溃的处理
+
+
+
 
 期待
 ===
@@ -156,36 +184,6 @@ pod  AvoidCrash
 * 毕竟一个人的能力有限，时间有限，希望有能力的你可以加入到这个项目中来，一起完善AvoidCrash。请Pull Requests我。
 
 
+
+
 ##[About me -- 简书](http://www.jianshu.com/users/80fadb71940d/latest_articles)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

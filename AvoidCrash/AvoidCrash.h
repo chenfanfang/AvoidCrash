@@ -26,7 +26,7 @@
 
 
 //user can ignore below define
-#define AvoidCrashDefaultReturnNil  @"This framework default is to return nil."
+#define AvoidCrashDefaultReturnNil  @"This framework default is to return nil to avoid crash."
 #define AvoidCrashDefaultIgnore     @"This framework default is to ignore this operation to avoid crash."
 
 

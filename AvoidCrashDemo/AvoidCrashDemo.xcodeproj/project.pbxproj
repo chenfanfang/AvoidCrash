@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040330221DACD96E00AE5A41 /* NSObject+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 040330211DACD96E00AE5A41 /* NSObject+AvoidCrash.m */; };
 		043C63E41D938EE100A0B0E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C63E31D938EE100A0B0E9 /* main.m */; };
 		043C63E71D938EE100A0B0E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C63E61D938EE100A0B0E9 /* AppDelegate.m */; };
 		043C63EA1D938EE100A0B0E9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C63E91D938EE100A0B0E9 /* ViewController.m */; };
@@ -21,6 +22,8 @@
 		043C64231D93A60C00A0B0E9 /* NSMutableArray+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C641D1D93A60C00A0B0E9 /* NSMutableArray+AvoidCrash.m */; };
 		043C64241D93A60C00A0B0E9 /* NSMutableDictionary+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C641F1D93A60C00A0B0E9 /* NSMutableDictionary+AvoidCrash.m */; };
 		04C3DFD31DA4EED200E18858 /* NSString+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C3DFD21DA4EED200E18858 /* NSString+AvoidCrash.m */; };
+		04FB61D91DB2361400C079F2 /* NSAttributedString+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB61D81DB2361400C079F2 /* NSAttributedString+AvoidCrash.m */; };
+		04FB61DC1DB25FE500C079F2 /* NSMutableAttributedString+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB61DB1DB25FE500C079F2 /* NSMutableAttributedString+AvoidCrash.m */; };
 		04FEB8FF1DA55E6B00B5647E /* NSMutableString+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB8FE1DA55E6B00B5647E /* NSMutableString+AvoidCrash.m */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		040330201DACD96E00AE5A41 /* NSObject+AvoidCrash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+AvoidCrash.h"; sourceTree = "<group>"; };
+		040330211DACD96E00AE5A41 /* NSObject+AvoidCrash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+AvoidCrash.m"; sourceTree = "<group>"; };
 		043C63DF1D938EE100A0B0E9 /* AvoidCrashDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AvoidCrashDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		043C63E31D938EE100A0B0E9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		043C63E51D938EE100A0B0E9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -70,6 +75,10 @@
 		043C641F1D93A60C00A0B0E9 /* NSMutableDictionary+AvoidCrash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+AvoidCrash.m"; sourceTree = "<group>"; };
 		04C3DFD11DA4EED200E18858 /* NSString+AvoidCrash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+AvoidCrash.h"; sourceTree = "<group>"; };
 		04C3DFD21DA4EED200E18858 /* NSString+AvoidCrash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+AvoidCrash.m"; sourceTree = "<group>"; };
+		04FB61D71DB2361400C079F2 /* NSAttributedString+AvoidCrash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+AvoidCrash.h"; sourceTree = "<group>"; };
+		04FB61D81DB2361400C079F2 /* NSAttributedString+AvoidCrash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+AvoidCrash.m"; sourceTree = "<group>"; };
+		04FB61DA1DB25FE500C079F2 /* NSMutableAttributedString+AvoidCrash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+AvoidCrash.h"; sourceTree = "<group>"; };
+		04FB61DB1DB25FE500C079F2 /* NSMutableAttributedString+AvoidCrash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+AvoidCrash.m"; sourceTree = "<group>"; };
 		04FEB8FD1DA55E6B00B5647E /* NSMutableString+AvoidCrash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableString+AvoidCrash.h"; sourceTree = "<group>"; };
 		04FEB8FE1DA55E6B00B5647E /* NSMutableString+AvoidCrash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableString+AvoidCrash.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -167,6 +176,8 @@
 			children = (
 				043C64161D93A60C00A0B0E9 /* AvoidCrash.h */,
 				043C64171D93A60C00A0B0E9 /* AvoidCrash.m */,
+				040330201DACD96E00AE5A41 /* NSObject+AvoidCrash.h */,
+				040330211DACD96E00AE5A41 /* NSObject+AvoidCrash.m */,
 				043C64181D93A60C00A0B0E9 /* NSArray+AvoidCrash.h */,
 				043C64191D93A60C00A0B0E9 /* NSArray+AvoidCrash.m */,
 				043C641C1D93A60C00A0B0E9 /* NSMutableArray+AvoidCrash.h */,
@@ -179,6 +190,10 @@
 				04C3DFD21DA4EED200E18858 /* NSString+AvoidCrash.m */,
 				04FEB8FD1DA55E6B00B5647E /* NSMutableString+AvoidCrash.h */,
 				04FEB8FE1DA55E6B00B5647E /* NSMutableString+AvoidCrash.m */,
+				04FB61D71DB2361400C079F2 /* NSAttributedString+AvoidCrash.h */,
+				04FB61D81DB2361400C079F2 /* NSAttributedString+AvoidCrash.m */,
+				04FB61DA1DB25FE500C079F2 /* NSMutableAttributedString+AvoidCrash.h */,
+				04FB61DB1DB25FE500C079F2 /* NSMutableAttributedString+AvoidCrash.m */,
 			);
 			name = AvoidCrash;
 			path = ../../AvoidCrash;
@@ -319,9 +334,12 @@
 				043C63EA1D938EE100A0B0E9 /* ViewController.m in Sources */,
 				043C63E71D938EE100A0B0E9 /* AppDelegate.m in Sources */,
 				043C63E41D938EE100A0B0E9 /* main.m in Sources */,
+				040330221DACD96E00AE5A41 /* NSObject+AvoidCrash.m in Sources */,
 				04C3DFD31DA4EED200E18858 /* NSString+AvoidCrash.m in Sources */,
 				04FEB8FF1DA55E6B00B5647E /* NSMutableString+AvoidCrash.m in Sources */,
 				043C64231D93A60C00A0B0E9 /* NSMutableArray+AvoidCrash.m in Sources */,
+				04FB61D91DB2361400C079F2 /* NSAttributedString+AvoidCrash.m in Sources */,
+				04FB61DC1DB25FE500C079F2 /* NSMutableAttributedString+AvoidCrash.m in Sources */,
 				043C64241D93A60C00A0B0E9 /* NSMutableDictionary+AvoidCrash.m in Sources */,
 				043C64201D93A60C00A0B0E9 /* AvoidCrash.m in Sources */,
 			);

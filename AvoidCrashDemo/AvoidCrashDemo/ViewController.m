@@ -10,6 +10,7 @@
 
 @interface ViewController ()
 
+
 @end
 
 @implementation ViewController
@@ -17,8 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    [self NSArray_Test_InstanceArray];
+    [self NSMutableDictionary_Test_RemoveObjectForKey];
 }
 
 
@@ -35,7 +35,8 @@
 
 - (void)NSArray_Test_ObjectAtIndex {
     NSArray *arr = @[@"chenfanfang"];
-    NSObject *object = arr[3];
+    
+    NSObject *object = arr[100];
     NSLog(@"%@",object);
 }
 
@@ -204,6 +205,143 @@
     NSRange range = NSMakeRange(0, 1000);
     [strM deleteCharactersInRange:range];
 }
+
+//=================================================================
+//                      NSAttributedString_Test
+//=================================================================
+#pragma mark - NSAttributedString_Test
+
+- (void)NSAttributedString_Test_InitWithString {
+    NSString *str = nil;
+    NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:str];
+    NSLog(@"%@",attributeStr);
+}
+
+- (void)NSAttributedString_Test_InitWithAttributedString {
+    NSAttributedString *nilAttributedStr = nil;
+    NSAttributedString *attributedStr = [[NSAttributedString alloc] initWithAttributedString:nilAttributedStr];
+    NSLog(@"%@",attributedStr);
+    
+    
+}
+
+- (void)NSAttributedString_Test_InitWithStringAttributes {
+    NSDictionary *attributes = @{
+                           NSForegroundColorAttributeName : [UIColor redColor]
+                           };
+    NSString *nilStr = nil;
+    NSAttributedString *attributedStr = [[NSAttributedString alloc] initWithString:nilStr attributes:attributes];
+    NSLog(@"%@",attributedStr);
+}
+
+//=================================================================
+//                   NSMutableAttributedString_Test
+//=================================================================
+#pragma mark - NSMutableAttributedString_Test
+
+- (void)NSMutableAttributedString_Test_InitWithString {
+    
+    NSString *nilStr = nil;
+    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:nilStr];
+    NSLog(@"%@",attrStrM);
+}
+
+- (void)NSMutableAttributedString_Test_InitWithStringAttributes {
+
+    NSDictionary *attributes = @{
+                                 NSForegroundColorAttributeName : [UIColor redColor]
+                                 };
+    NSString *nilStr = nil;
+    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:nilStr attributes:attributes];
+    NSLog(@"%@",attrStrM);
+}
+
+
+
+//=================================================================
+//                            KVC
+//=================================================================
+#pragma mark - KVC
+
+
+- (void)KVC_SetValueForKey {
+    //创建一个任意的对象
+    UITableView *anyObject = [UITableView new];
+    [anyObject setValue:self forKey:@"AvoidCrash"];
+    
+}
+
+- (void)KVC_SetValueforKeyPath {
+    UITableView *anyObject = [UITableView new];
+    [anyObject setValue:self forKey:@"AvoidCrash"];
+}
+
+
+- (void)KVC_SetValuesForKeysWithDictionary {
+    //创建一个任意的对象
+    UITableView *anyObject = [UITableView new];
+    NSDictionary *dictionary = @{
+                                 @"name" : @"chenfanfang"
+                                 };
+    
+    [anyObject setValuesForKeysWithDictionary:dictionary];
+}
+
+
+
+
+
+//=================================================================
+//                      执行所有test的方法
+//=================================================================
+#pragma mark - set方法
+
+- (void)executeAllTestMethod {
+    [self NSArray_Test_InstanceArray];
+    [self NSArray_Test_ObjectAtIndex];
+    
+    
+    [self NSMutableArray_Test_ObjectAtIndex];
+    [self NSMutableArray_Test_SetObjectAtIndex];
+    [self NSMutableArray_Test_RemoveObjectAtIndex];
+    [self NSMutableArray_Test_InsertObjectAtIndex];
+    
+    
+    [self NSDictionary_Test_InstanceDictionary];
+    [self NSMutableDictionary_Test_SetObjectForKey];
+    [self NSMutableDictionary_Test_RemoveObjectForKey];
+    
+    
+    [self NSString_Test_CharacterAtIndex];
+    [self NSString_Test_SubstringFromIndex];
+    [self NSString_Test_SubstringToIndex];
+    [self NSString_Test_SubstringWithRange];
+    [self NSString_Test_StringByReplacingOccurrencesOfString];
+    [self NSString_Test_StringByReplacingOccurrencesOfStringRange];
+    [self NSString_Test_stringByReplacingCharactersInRangeWithString];
+    
+    
+    [self NSMutableString_Test_ReplaceCharactersInRange];
+    [self NSMutableString_Test_InsertStringAtIndex];
+    [self NSMutableString_TestDeleteCharactersInRange];
+    
+    
+    [self NSAttributedString_Test_InitWithString];
+    [self NSAttributedString_Test_InitWithAttributedString];
+    [self NSAttributedString_Test_InitWithStringAttributes];
+    
+    
+    [self NSMutableAttributedString_Test_InitWithString];
+    [self NSMutableAttributedString_Test_InitWithStringAttributes];
+    
+    
+    [self KVC_SetValueForKey];
+    [self KVC_SetValueforKeyPath];
+    [self KVC_SetValuesForKeysWithDictionary];
+}
+
+
+
 
 @end
 

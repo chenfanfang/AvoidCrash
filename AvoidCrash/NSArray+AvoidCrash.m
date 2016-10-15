@@ -12,15 +12,23 @@
 
 @implementation NSArray (AvoidCrash)
 
+
 + (void)avoidCrashExchangeMethod {
+    
+    //class method
+    
     //instance array method exchange
     [AvoidCrash exchangeClassMethod:[self class] method1Sel:@selector(arrayWithObjects:count:) method2Sel:@selector(AvoidCrashArrayWithObjects:count:)];
     
     
-    Class arrayIClass = NSClassFromString(@"__NSArrayI");
     
-    //get object from array method exchange
-    [AvoidCrash exchangeInstanceMethod:arrayIClass method1Sel:@selector(objectAtIndex:) method2Sel:@selector(avoidCrashObjectAtIndex:)];
+    //instance method
+    
+    Class __NSArray = NSClassFromString(@"NSArray");
+    
+    //objectAtIndexedSubscript:
+    //这个方法的交换，也附带了防止objectAtIndex: 的崩溃
+    [AvoidCrash exchangeInstanceMethod:__NSArray method1Sel:@selector(objectAtIndexedSubscript:) method2Sel:@selector(avoidCrashObjectAtIndexedSubscript:)];
 }
 
 
@@ -62,26 +70,25 @@
 
 
 //=================================================================
-//                   get object from array
+//                     objectAtIndexedSubscript:
 //=================================================================
-#pragma mark - get object from array
-
-- (id)avoidCrashObjectAtIndex:(NSUInteger)index {
-    
+#pragma mark - objectAtIndexedSubscript:
+- (id)avoidCrashObjectAtIndexedSubscript:(NSUInteger)idx {
     id object = nil;
     
     @try {
-        object = [self avoidCrashObjectAtIndex:index];
+        object = [self avoidCrashObjectAtIndexedSubscript:idx];
     }
     @catch (NSException *exception) {
-        
-        NSString *defaultToDo = @"This framework default is to return nil.";
+        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
         [AvoidCrash noteErrorWithException:exception defaultToDo:defaultToDo];
     }
     @finally {
         return object;
     }
+
 }
+
 
 
 

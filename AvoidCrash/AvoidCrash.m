@@ -9,6 +9,8 @@
 #import "AvoidCrash.h"
 
 //category
+#import "NSObject+AvoidCrash.h"
+
 #import "NSArray+AvoidCrash.h"
 #import "NSMutableArray+AvoidCrash.h"
 
@@ -17,6 +19,9 @@
 
 #import "NSString+AvoidCrash.h"
 #import "NSMutableString+AvoidCrash.h"
+
+#import "NSAttributedString+AvoidCrash.h"
+#import "NSMutableAttributedString+AvoidCrash.h"
 
 
 
@@ -41,6 +46,8 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         
+        [NSObject avoidCrashExchangeMethod];
+        
         [NSArray avoidCrashExchangeMethod];
         [NSMutableArray avoidCrashExchangeMethod];
         
@@ -50,6 +57,8 @@
         [NSString avoidCrashExchangeMethod];
         [NSMutableString avoidCrashExchangeMethod];
         
+        [NSAttributedString avoidCrashExchangeMethod];
+        [NSMutableAttributedString avoidCrashExchangeMethod];
     });
 }
 
@@ -78,6 +87,8 @@
     Method method1 = class_getInstanceMethod(anClass, method1Sel);
     Method method2 = class_getInstanceMethod(anClass, method2Sel);
     method_exchangeImplementations(method1, method2);
+    
+    
 }
 
 
@@ -90,7 +101,7 @@
  *  @return 堆栈主要崩溃精简化的信息
  */
 
-+ (NSString *)getMainCallStackSymbolMessageWithCallStackSymbolStr:(NSString *)callStackSymbolStr {
++ (NSString *)getMainCallStackSymbolMessageWithCallStackSymbols:(NSArray<NSString *> *)callStackSymbols {
     
     //mainCallStackSymbolMsg的格式为   +[类名 方法名]  或者 -[类名 方法名]
     __block NSString *mainCallStackSymbolMsg = nil;
@@ -98,16 +109,36 @@
     //匹配出来的格式为 +[类名 方法名]  或者 -[类名 方法名]
     NSString *regularExpStr = @"[-\\+]\\[.+\\]";
     
+    
     NSRegularExpression *regularExp = [[NSRegularExpression alloc] initWithPattern:regularExpStr options:NSRegularExpressionCaseInsensitive error:nil];
     
-    [regularExp enumerateMatchesInString:callStackSymbolStr options:NSMatchingReportProgress range:NSMakeRange(0, callStackSymbolStr.length) usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
-        if (result) {
-            mainCallStackSymbolMsg = [callStackSymbolStr substringWithRange:result.range];
-            *stop = YES;
+    
+    for (int index = 2; index < callStackSymbols.count; index++) {
+        NSString *callStackSymbol = callStackSymbols[index];
+        
+        [regularExp enumerateMatchesInString:callStackSymbol options:NSMatchingReportProgress range:NSMakeRange(0, callStackSymbol.length) usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
+            if (result) {
+                NSString* tempCallStackSymbolMsg = [callStackSymbol substringWithRange:result.range];
+                
+                //get className
+                NSString *className = [tempCallStackSymbolMsg componentsSeparatedByString:@" "].firstObject;
+                className = [className componentsSeparatedByString:@"["].lastObject;
+                
+                NSBundle *bundle = [NSBundle bundleForClass:NSClassFromString(className)];
+                
+                //filter category and system class
+                if (![className hasSuffix:@")"] && bundle == [NSBundle mainBundle]) {
+                    mainCallStackSymbolMsg = tempCallStackSymbolMsg;
+                    
+                }
+                *stop = YES;
+            }
+        }];
+        
+        if (mainCallStackSymbolMsg.length) {
+            break;
         }
-    }];
-    
-    
+    }
     
     return mainCallStackSymbolMsg;
 }
@@ -125,7 +156,7 @@
     NSArray *callStackSymbolsArr = [NSThread callStackSymbols];
     
     //获取在哪个类的哪个方法中实例化的数组  字符串格式 -[类名 方法名]  或者 +[类名 方法名]
-    NSString *mainCallStackSymbolMsg = [AvoidCrash getMainCallStackSymbolMessageWithCallStackSymbolStr:callStackSymbolsArr[2]];
+    NSString *mainCallStackSymbolMsg = [AvoidCrash getMainCallStackSymbolMessageWithCallStackSymbols:callStackSymbolsArr];
     
     if (mainCallStackSymbolMsg == nil) {
         

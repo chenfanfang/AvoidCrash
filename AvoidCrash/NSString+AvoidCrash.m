@@ -39,6 +39,8 @@
     
 }
 
+//- (instancetype)initWithString:(NSString *)aString
+
 //=================================================================
 //                           characterAtIndex:
 //=================================================================
@@ -179,6 +181,7 @@
 #pragma mark - stringByReplacingCharactersInRange:withString:
 
 - (NSString *)avoidCrashStringByReplacingCharactersInRange:(NSRange)range withString:(NSString *)replacement {
+
     
     NSString *newStr = nil;
     

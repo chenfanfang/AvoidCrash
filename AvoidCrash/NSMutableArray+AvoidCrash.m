@@ -15,11 +15,12 @@
 + (void)avoidCrashExchangeMethod {
     Class arrayMClass = NSClassFromString(@"__NSArrayM");
     
+    
     //get object from array method exchange
-    [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(objectAtIndex:) method2Sel:@selector(avoidCrashObjectAtIndex:)];
+    //由于继承于NSArray，所以 objectAtIndexedSubscript已经在NSArray中处理过了，无需处理
     
     //array set object at index
-    [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(setObject:atIndex:) method2Sel:@selector(avoidCrashSetObject:atIndexedSubscript:)];
+    [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(setObject:atIndexedSubscript:) method2Sel:@selector(avoidCrashSetObject:atIndexedSubscript:)];
     
     
     //removeObjectAtIndex:
@@ -27,28 +28,7 @@
     
     //insertObject:atIndex:
     [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(insertObject:atIndex:) method2Sel:@selector(avoidCrashInsertObject:atIndex:)];
-}
-
-
-//=================================================================
-//                   get object from array
-//=================================================================
-#pragma mark - get object from array
-
-
-- (id)avoidCrashObjectAtIndex:(NSUInteger)index {
     
-    id object = nil;
-    
-    @try {
-        object = [self avoidCrashObjectAtIndex:index];
-    }
-    @catch (NSException *exception) {
-        [AvoidCrash noteErrorWithException:exception defaultToDo:AvoidCrashDefaultReturnNil];
-    }
-    @finally {
-        return object;
-    }
 }
 
 
@@ -56,6 +36,7 @@
 //                    array set object at index
 //=================================================================
 #pragma mark - get object from array
+
 
 - (void)avoidCrashSetObject:(id)obj atIndexedSubscript:(NSUInteger)idx {
     
