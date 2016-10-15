@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self NSMutableDictionary_Test_RemoveObjectForKey];
+    [self NSArray_Test_InstanceArray];
 }
 
 
