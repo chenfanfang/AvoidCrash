@@ -11,4 +11,14 @@ s.social_media_url   = "http://www.jianshu.com/users/80fadb71940d/latest_article
 s.source       = { :git => "https://github.com/chenfanfang/AvoidCrash.git", :tag => s.version }
 s.source_files  = "AvoidCrash"
 s.requires_arc = true
+
+
+non_arc_files = 'NSMutableArray+AvoidCrash.m'
+
+s.subspec 'no-arc' do |sp|
+sp.source_files = non_arc_files
+sp.requires_arc = false
+
+end
+
 end
