@@ -37,6 +37,7 @@
     NSArray *arr = @[@"chenfanfang"];
     
     NSObject *object = arr[100];
+    //由于类簇的原因，目前暂时不能拦截通过objectAtIndex获取数组中的元素而导致的崩溃- (id)objectAtIndex:(NSUInteger)index
     NSLog(@"%@",object);
 }
 
@@ -49,6 +50,7 @@
 - (void)NSMutableArray_Test_ObjectAtIndex {
     NSMutableArray *array = @[@"chenfanfang"].mutableCopy;
     NSObject *object = array[2];
+    //由于类簇的原因，目前暂时不能拦截通过objectAtIndex获取数组中的元素而导致的崩溃- (id)objectAtIndex:(NSUInteger)index
     NSLog(@"%@",object);
 }
 

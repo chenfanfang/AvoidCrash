@@ -113,13 +113,13 @@ pod  AvoidCrash
    -  `2. +(instancetype)arrayWithObjects:(const id  _Nonnull __unsafe_unretained *)objects count:(NSUInteger)cnt`
    
    - `3. 通过下标获取元素 array[100] `
-     - 目前暂时不能拦截通过objectAtIndex获取数组中的元素而导致的崩溃`- (id)objectAtIndex:(NSUInteger)index`
+     - 由于类簇的原因，目前暂时不能拦截通过objectAtIndex获取数组中的元素而导致的崩溃`- (id)objectAtIndex:(NSUInteger)index`
   
 ---
 
 - NSMutableArray 
   - `1. 通过下标获取元素 array[100] `
-     - 目前暂时不能拦截通过objectAtIndex获取数组中的元素而导致的崩溃`- (id)objectAtIndex:(NSUInteger)index`
+     - 由于类簇的原因，目前暂时不能拦截通过objectAtIndex获取数组中的元素而导致的崩溃`- (id)objectAtIndex:(NSUInteger)index`
   - `2. - (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx`
   - `3. - (void)removeObjectAtIndex:(NSUInteger)index`
   - `4. - (void)insertObject:(id)anObject atIndex:(NSUInteger)index`
