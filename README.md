@@ -1,3 +1,6 @@
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/chenfanfang/AvoidCrash) [![pod](https://img.shields.io/badge/pod-1.6.1-orange.svg)](https://github.com/chenfanfang/AvoidCrash) [![pod](https://img.shields.io/badge/platform-iOS-ff69b4.svg)](https://github.com/chenfanfang/AvoidCrash) [![pod](https://img.shields.io/badge/about%20me-chenfanfang-blue.svg)](http://www.jianshu.com/users/80fadb71940d/latest_articles)
+
+
 前言
 ===
 一个已经发布到AppStore上的App，最忌讳的就是崩溃问题。为什么在开发阶段或者测试阶段都不会崩溃，而发布到AppStore上就崩溃了呢？究其根源，最主要的原因就是数据的错乱。特别是 服务器返回数据的错乱，将严重影响到我们的App。
@@ -20,7 +23,7 @@ AvoidCrash简介
 - 你可以获取到原本导致崩溃的主要信息<由于这个框架的存在，并不会崩溃>，进行相应的处理。比如：
   - 你可以将这些崩溃信息发送到自己服务器。
   - 你若集成了第三方崩溃日志收集的SDK,比如你用了腾讯的Bugly,你可以上报自定义异常。
-
+- 或许你会问有JSPatch就可以下发补丁来修复bug,为什么要用AvoidCrash？我只能说，AvoidCrash可以有效防止部分常见崩溃，JSPatch可以快速修复bug.推荐将两者都集成到项目中去。
 
 ---
 下面先来看下防止崩溃的效果吧
@@ -54,6 +57,7 @@ pod  AvoidCrash
 
 ### Manually【手动导入】
 - Drag all source files under floder `AvoidCrash` to your project.【将`AvoidCrash`文件夹中的所有源代码拽入项目中】
+- 对 NSMutableArray+AvoidCrash.m 文件进行 -fno-objc-arc 设置(若使用CocoaPods集成则无需手动配置)，配置过程如下图：
 
 
 ---
@@ -104,12 +108,14 @@ pod  AvoidCrash
    -  `1. NSArray的快速创建方式 NSArray *array = @[@"chenfanfang", @"AvoidCrash"];  //这种创建方式其实调用的是2中的方法`
    -  `2. +(instancetype)arrayWithObjects:(const id  _Nonnull __unsafe_unretained *)objects count:(NSUInteger)cnt`
    
-   - `3. - (id)objectAtIndex:(NSUInteger)index`
+   - `3. 通过下标获取元素 array[100] `
+     - 目前暂时不能拦截通过objectAtIndex获取数组中的元素而导致的崩溃`- (id)objectAtIndex:(NSUInteger)index`
   
 ---
 
 - NSMutableArray 
-  - `1. - (id)objectAtIndex:(NSUInteger)index`
+  - `1. 通过下标获取元素 array[100] `
+     - 目前暂时不能拦截通过objectAtIndex获取数组中的元素而导致的崩溃`- (id)objectAtIndex:(NSUInteger)index`
   - `2. - (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx`
   - `3. - (void)removeObjectAtIndex:(NSUInteger)index`
   - `4. - (void)insertObject:(id)anObject atIndex:(NSUInteger)index`
@@ -174,6 +180,10 @@ pod  AvoidCrash
 - 增加对NSAttributedString防止崩溃的处理
 - 增加对NSMutableAttributedString防止崩溃的处理
 
+更新
+===
+#### 2016-11-29
+- 修复在键盘弹出状态下，按Home键进入后台会导致崩溃的bug。
 
 
 
