@@ -60,6 +60,10 @@ pod  AvoidCrash
 - 对 NSMutableArray+AvoidCrash.m 文件进行 -fno-objc-arc 设置(若使用CocoaPods集成则无需手动配置)，配置过程如下图：
 
 
+![](https://raw.githubusercontent.com/chenfanfang/AvoidCrash/e955af927c5ed57f783a71eaca19cb3f028377d0/AvoidCrashDemo/Screenshot/%E9%85%8D%E7%BD%AEmutableArray.png)
+
+
+
 ---
 ##使用方法
 
