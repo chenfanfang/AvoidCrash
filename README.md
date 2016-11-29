@@ -114,6 +114,7 @@ pod  AvoidCrash
    
    - `3. 通过下标获取元素 array[100] `
      - 由于类簇的原因，目前暂时不能拦截通过objectAtIndex获取数组中的元素而导致的崩溃`- (id)objectAtIndex:(NSUInteger)index`
+   - `4. - (NSArray *)objectsAtIndexes:(NSIndexSet *)indexes`
   
 ---
 
@@ -123,6 +124,7 @@ pod  AvoidCrash
   - `2. - (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx`
   - `3. - (void)removeObjectAtIndex:(NSUInteger)index`
   - `4. - (void)insertObject:(id)anObject atIndex:(NSUInteger)index`
+  - `5. - (NSArray *)objectsAtIndexes:(NSIndexSet *)indexes`
   
 ---
 
@@ -187,6 +189,9 @@ pod  AvoidCrash
 
 #### 2016-11-29
 - 修复在键盘弹出状态下，按Home键进入后台会导致崩溃的bug。
+- 新增防止崩溃（NSArray、NSMutableArray） - (NSArray *)objectsAtIndexes:(NSIndexSet *)indexes
+
+
 
 
 

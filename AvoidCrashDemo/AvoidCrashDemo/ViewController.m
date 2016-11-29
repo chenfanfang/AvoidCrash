@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self NSMutableArray_Test_InsertObjectAtIndex];
+    [self NSArray_Test_objectsAtIndexes];
 }
 
 
@@ -39,6 +39,14 @@
     NSObject *object = arr[100];
     //由于类簇的原因，目前暂时不能拦截通过objectAtIndex获取数组中的元素而导致的崩溃- (id)objectAtIndex:(NSUInteger)index
     NSLog(@"%@",object);
+}
+
+- (void)NSArray_Test_objectsAtIndexes {
+    NSArray *array = @[@"chenfanfang"];
+    
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:100];
+    [array objectsAtIndexes:indexSet];
+    
 }
 
 

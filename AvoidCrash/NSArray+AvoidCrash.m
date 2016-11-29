@@ -27,8 +27,12 @@
     Class __NSArray = NSClassFromString(@"NSArray");
     
     //objectAtIndexedSubscript:
-    //这个方法的交换，也附带了防止objectAtIndex: 的崩溃
+    //防止array[100]这种方式取元素的崩溃
     [AvoidCrash exchangeInstanceMethod:__NSArray method1Sel:@selector(objectAtIndexedSubscript:) method2Sel:@selector(avoidCrashObjectAtIndexedSubscript:)];
+    
+    
+    //objectsAtIndexes:
+    [AvoidCrash exchangeInstanceMethod:__NSArray method1Sel:@selector(objectsAtIndexes:) method2Sel:@selector(avoidCrashObjectsAtIndexes:)];
 }
 
 
@@ -87,6 +91,26 @@
         return object;
     }
 
+}
+
+
+//=================================================================
+//                       objectsAtIndexes:
+//=================================================================
+#pragma mark - objectsAtIndexes:
+
+- (NSArray *)avoidCrashObjectsAtIndexes:(NSIndexSet *)indexes {
+    
+    NSArray *returnArray = nil;
+    @try {
+        returnArray = [self avoidCrashObjectsAtIndexes:indexes];
+    } @catch (NSException *exception) {
+        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
+        [AvoidCrash noteErrorWithException:exception defaultToDo:defaultToDo];
+        
+    } @finally {
+        return returnArray;
+    }
 }
 
 
