@@ -9,6 +9,7 @@ s.license      = "MIT"
 s.author             = { "陈蕃坊" => "493336001@qq.com" }
 s.social_media_url   = "http://www.jianshu.com/users/80fadb71940d/latest_articles"
 s.source       = { :git => "https://github.com/chenfanfang/AvoidCrash.git", :tag => s.version }
+
 s.source_files  = 'AvoidCrash/**/*.{h,m}'
 s.requires_arc = [
                   'AvoidCrash/AvoidCrash.m',
@@ -20,4 +21,8 @@ s.requires_arc = [
                   'AvoidCrash/NSMutableString+AvoidCrash.m',
                   'AvoidCrash/NSAttributedString+AvoidCrash.m',
                   'AvoidCrash/NSMutableAttributedString+AvoidCrash.m']
+
+
 end
+
+
