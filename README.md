@@ -34,12 +34,12 @@ AvoidCrash简介
 
 - 若没有AvoidCrash来防止崩溃，则会直接崩溃，如下图
 
-![崩溃截图.png](https://raw.githubusercontent.com/chenfanfang/AvoidCrash/556cab1b9fa25c8265dd1e8a19c816db20e93c24/AvoidCrashDemo/Screenshot/%E5%B4%A9%E6%BA%83%E6%88%AA%E5%9B%BE.png)
+![崩溃截图.png](https://raw.githubusercontent.com/chenfanfang/AvoidCrash/66b631627443490776f964d5f6cdc0d9215d7b09/AvoidCrashDemo/Screenshot/%E5%B4%A9%E6%BA%83%E6%88%AA%E5%9B%BE.png)
 
 
 - 若有AvoidCrash来防止崩溃，则不会崩溃，并且会将原本会崩溃情况的详细信息打印出来，如下图
 
-![防止崩溃输出日志.png](https://raw.githubusercontent.com/chenfanfang/AvoidCrash/556cab1b9fa25c8265dd1e8a19c816db20e93c24/AvoidCrashDemo/Screenshot/%E9%98%B2%E6%AD%A2%E5%B4%A9%E6%BA%83%E7%9A%84%E8%BE%93%E5%87%BA%E6%97%A5%E5%BF%97.png)
+![防止崩溃输出日志.png](https://raw.githubusercontent.com/chenfanfang/AvoidCrash/66b631627443490776f964d5f6cdc0d9215d7b09/AvoidCrashDemo/Screenshot/%E9%98%B2%E6%AD%A2%E5%B4%A9%E6%BA%83%E7%9A%84%E8%BE%93%E5%87%BA%E6%97%A5%E5%BF%97.png)
 
 
 ---
@@ -87,7 +87,7 @@ pod  AvoidCrash
 
 - 下面通过打断点的形式来看下userInfo中的信息结构，看下包含了哪些信息
 
-![userInfo信息结构.png](https://raw.githubusercontent.com/chenfanfang/AvoidCrash/556cab1b9fa25c8265dd1e8a19c816db20e93c24/AvoidCrashDemo/Screenshot/userInfo%E4%BF%A1%E6%81%AF%E7%BB%93%E6%9E%84.png)
+![userInfo信息结构.png](https://raw.githubusercontent.com/chenfanfang/AvoidCrash/66b631627443490776f964d5f6cdc0d9215d7b09/AvoidCrashDemo/Screenshot/userInfo%E4%BF%A1%E6%81%AF%E7%BB%93%E6%9E%84.png)
 
 - 再看下控制台输出日志来看下userInfo中的包含了哪些信息
 
