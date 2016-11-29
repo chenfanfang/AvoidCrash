@@ -184,8 +184,7 @@ pod  AvoidCrash
 - 增加对NSAttributedString防止崩溃的处理
 - 增加对NSMutableAttributedString防止崩溃的处理
 
-更新
-===
+
 #### 2016-11-29
 - 修复在键盘弹出状态下，按Home键进入后台会导致崩溃的bug。
 
