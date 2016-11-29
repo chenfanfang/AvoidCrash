@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self NSArray_Test_InstanceArray];
+    [self NSMutableArray_Test_InsertObjectAtIndex];
 }
 
 
@@ -294,7 +294,7 @@
 //=================================================================
 //                      执行所有test的方法
 //=================================================================
-#pragma mark - set方法
+#pragma mark - 执行所有test的方法
 
 - (void)executeAllTestMethod {
     [self NSArray_Test_InstanceArray];
