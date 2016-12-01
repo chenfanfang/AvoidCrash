@@ -13,24 +13,31 @@
 @implementation NSMutableArray (AvoidCrash)
 
 + (void)avoidCrashExchangeMethod {
-    Class arrayMClass = NSClassFromString(@"__NSArrayM");
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        Class arrayMClass = NSClassFromString(@"__NSArrayM");
+        
+        
+        //objectAtIndex:
+        [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(objectAtIndex:) method2Sel:@selector(avoidCrashObjectAtIndex:)];
+        
+        //setObject:atIndexedSubscript:
+        [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(setObject:atIndexedSubscript:) method2Sel:@selector(avoidCrashSetObject:atIndexedSubscript:)];
+        
+        
+        //removeObjectAtIndex:
+        [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(removeObjectAtIndex:) method2Sel:@selector(avoidCrashRemoveObjectAtIndex:)];
+        
+        //insertObject:atIndex:
+        [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(insertObject:atIndex:) method2Sel:@selector(avoidCrashInsertObject:atIndex:)];
+        
+        //getObjects:range:
+        [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(getObjects:range:) method2Sel:@selector(avoidCrashGetObjects:range:)];
+    });
     
     
-    //objectAtIndex:
-    [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(objectAtIndex:) method2Sel:@selector(avoidCrashObjectAtIndex:)];
-    
-    //setObject:atIndexedSubscript:
-    [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(setObject:atIndexedSubscript:) method2Sel:@selector(avoidCrashSetObject:atIndexedSubscript:)];
-    
-    
-    //removeObjectAtIndex:
-    [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(removeObjectAtIndex:) method2Sel:@selector(avoidCrashRemoveObjectAtIndex:)];
-    
-    //insertObject:atIndex:
-    [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(insertObject:atIndex:) method2Sel:@selector(avoidCrashInsertObject:atIndex:)];
-    
-    //getObjects:range:
-    [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(getObjects:range:) method2Sel:@selector(avoidCrashGetObjects:range:)];
     
 }
 

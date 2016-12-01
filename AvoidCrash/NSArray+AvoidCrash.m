@@ -15,44 +15,49 @@
 
 + (void)avoidCrashExchangeMethod {
     
-    //=================
-    //   class method
-    //=================
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        //=================
+        //   class method
+        //=================
+        
+        //instance array method exchange
+        [AvoidCrash exchangeClassMethod:[self class] method1Sel:@selector(arrayWithObjects:count:) method2Sel:@selector(AvoidCrashArrayWithObjects:count:)];
+        
+        
+        
+        //====================
+        //   instance method
+        //====================
+        
+        Class __NSArray = NSClassFromString(@"NSArray");
+        Class __NSArrayI = NSClassFromString(@"__NSArrayI");
+        Class __NSSingleObjectArrayI = NSClassFromString(@"__NSSingleObjectArrayI");
+        Class __NSArray0 = NSClassFromString(@"__NSArray0");
+        
+        
+        //objectsAtIndexes:
+        [AvoidCrash exchangeInstanceMethod:__NSArray method1Sel:@selector(objectsAtIndexes:) method2Sel:@selector(avoidCrashObjectsAtIndexes:)];
+        
+        
+        //objectAtIndex:
+        
+        [AvoidCrash exchangeInstanceMethod:__NSArrayI method1Sel:@selector(objectAtIndex:) method2Sel:@selector(__NSArrayIAvoidCrashObjectAtIndex:)];
+        
+        [AvoidCrash exchangeInstanceMethod:__NSSingleObjectArrayI method1Sel:@selector(objectAtIndex:) method2Sel:@selector(__NSSingleObjectArrayIAvoidCrashObjectAtIndex:)];
+        
+        [AvoidCrash exchangeInstanceMethod:__NSArray0 method1Sel:@selector(objectAtIndex:) method2Sel:@selector(__NSArray0AvoidCrashObjectAtIndex:)];
+        
+        
+        //getObjects:range:
+        [AvoidCrash exchangeInstanceMethod:__NSArray method1Sel:@selector(getObjects:range:) method2Sel:@selector(NSArrayAvoidCrashGetObjects:range:)];
+        
+        [AvoidCrash exchangeInstanceMethod:__NSSingleObjectArrayI method1Sel:@selector(getObjects:range:) method2Sel:@selector(__NSSingleObjectArrayIAvoidCrashGetObjects:range:)];
+        
+        [AvoidCrash exchangeInstanceMethod:__NSArrayI method1Sel:@selector(getObjects:range:) method2Sel:@selector(__NSArrayIAvoidCrashGetObjects:range:)];
+    });
     
-    //instance array method exchange
-    [AvoidCrash exchangeClassMethod:[self class] method1Sel:@selector(arrayWithObjects:count:) method2Sel:@selector(AvoidCrashArrayWithObjects:count:)];
     
-    
-    
-    //====================
-    //   instance method
-    //====================
-    
-    Class __NSArray = NSClassFromString(@"NSArray");
-    Class __NSArrayI = NSClassFromString(@"__NSArrayI");
-    Class __NSSingleObjectArrayI = NSClassFromString(@"__NSSingleObjectArrayI");
-    Class __NSArray0 = NSClassFromString(@"__NSArray0");
-    
-    
-    //objectsAtIndexes:
-    [AvoidCrash exchangeInstanceMethod:__NSArray method1Sel:@selector(objectsAtIndexes:) method2Sel:@selector(avoidCrashObjectsAtIndexes:)];
-    
-    
-    //objectAtIndex:
-    
-    [AvoidCrash exchangeInstanceMethod:__NSArrayI method1Sel:@selector(objectAtIndex:) method2Sel:@selector(__NSArrayIAvoidCrashObjectAtIndex:)];
-    
-    [AvoidCrash exchangeInstanceMethod:__NSSingleObjectArrayI method1Sel:@selector(objectAtIndex:) method2Sel:@selector(__NSSingleObjectArrayIAvoidCrashObjectAtIndex:)];
-    
-    [AvoidCrash exchangeInstanceMethod:__NSArray0 method1Sel:@selector(objectAtIndex:) method2Sel:@selector(__NSArray0AvoidCrashObjectAtIndex:)];
-    
-    
-    //getObjects:range:
-    [AvoidCrash exchangeInstanceMethod:__NSArray method1Sel:@selector(getObjects:range:) method2Sel:@selector(NSArrayAvoidCrashGetObjects:range:)];
-    
-    [AvoidCrash exchangeInstanceMethod:__NSSingleObjectArrayI method1Sel:@selector(getObjects:range:) method2Sel:@selector(__NSSingleObjectArrayIAvoidCrashGetObjects:range:)];
-    
-    [AvoidCrash exchangeInstanceMethod:__NSArrayI method1Sel:@selector(getObjects:range:) method2Sel:@selector(__NSArrayIAvoidCrashGetObjects:range:)];
 }
 
 

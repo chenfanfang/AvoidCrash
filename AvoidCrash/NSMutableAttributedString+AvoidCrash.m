@@ -14,13 +14,17 @@
 
 + (void)avoidCrashExchangeMethod {
     
-    Class NSConcreteMutableAttributedString = NSClassFromString(@"NSConcreteMutableAttributedString");
-    
-    //initWithString:
-    [AvoidCrash exchangeInstanceMethod:NSConcreteMutableAttributedString method1Sel:@selector(initWithString:) method2Sel:@selector(avoidCrashInitWithString:)];
-    
-    //initWithString:attributes:
-    [AvoidCrash exchangeInstanceMethod:NSConcreteMutableAttributedString method1Sel:@selector(initWithString:attributes:) method2Sel:@selector(avoidCrashInitWithString:attributes:)];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        Class NSConcreteMutableAttributedString = NSClassFromString(@"NSConcreteMutableAttributedString");
+        
+        //initWithString:
+        [AvoidCrash exchangeInstanceMethod:NSConcreteMutableAttributedString method1Sel:@selector(initWithString:) method2Sel:@selector(avoidCrashInitWithString:)];
+        
+        //initWithString:attributes:
+        [AvoidCrash exchangeInstanceMethod:NSConcreteMutableAttributedString method1Sel:@selector(initWithString:attributes:) method2Sel:@selector(avoidCrashInitWithString:attributes:)];
+    });
 }
 
 //=================================================================

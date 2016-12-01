@@ -14,7 +14,11 @@
 
 + (void)avoidCrashExchangeMethod {
     
-    [AvoidCrash exchangeClassMethod:self method1Sel:@selector(dictionaryWithObjects:forKeys:count:) method2Sel:@selector(avoidCrashDictionaryWithObjects:forKeys:count:)];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        [AvoidCrash exchangeClassMethod:self method1Sel:@selector(dictionaryWithObjects:forKeys:count:) method2Sel:@selector(avoidCrashDictionaryWithObjects:forKeys:count:)];
+    });
 }
 
 

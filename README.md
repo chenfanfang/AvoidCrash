@@ -71,7 +71,14 @@ pod  AvoidCrash
 
 ```
 //这句代码会让AvoidCrash生效，若没有如下代码，则AvoidCrash就不起作用
-[AvoidCrash becomeEffective];
+[AvoidCrash becomeEffective]; 
+   /*
+    *  [AvoidCrash becomeEffective]，是全局生效。若你只需要部分生效，你可以单个进行处理，比如:
+    *  [NSArray avoidCrashExchangeMethod];
+    *  [NSMutableArray avoidCrashExchangeMethod];
+    *  .................
+    *  .................
+    */
 ```
 
 - 若你想要获取崩溃日志的所有详细信息，只需添加通知的监听，监听的通知名为:AvoidCrashNotification
@@ -112,19 +119,22 @@ pod  AvoidCrash
    -  `1. NSArray的快速创建方式 NSArray *array = @[@"chenfanfang", @"AvoidCrash"];  //这种创建方式其实调用的是2中的方法`
    -  `2. +(instancetype)arrayWithObjects:(const id  _Nonnull __unsafe_unretained *)objects count:(NSUInteger)cnt`
    
-   - `3. 通过下标获取元素 array[100] `
-     - 由于类簇的原因，目前暂时不能拦截通过objectAtIndex获取数组中的元素而导致的崩溃`- (id)objectAtIndex:(NSUInteger)index`
+   - `3. 通过下标获取元素 array[100]、[array objectAtIndex:100]`
+     - `- (id)objectAtIndex:(NSUInteger)index`
+     
    - `4. - (NSArray *)objectsAtIndexes:(NSIndexSet *)indexes`
+   - `5. - (void)getObjects:(__unsafe_unretained id  _Nonnull *)objects range:(NSRange)range`
   
 ---
 
 - NSMutableArray 
-  - `1. 通过下标获取元素 array[100] `
-     - 由于类簇的原因，目前暂时不能拦截通过objectAtIndex获取数组中的元素而导致的崩溃`- (id)objectAtIndex:(NSUInteger)index`
+  - `1. 通过下标获取元素 array[100]、[array objectAtIndex:100] `
+      - `- (id)objectAtIndex:(NSUInteger)index`
   - `2. - (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx`
   - `3. - (void)removeObjectAtIndex:(NSUInteger)index`
   - `4. - (void)insertObject:(id)anObject atIndex:(NSUInteger)index`
   - `5. - (NSArray *)objectsAtIndexes:(NSIndexSet *)indexes`
+  - `6. - (void)getObjects:(__unsafe_unretained id  _Nonnull *)objects range:(NSRange)range`
   
 ---
 
@@ -189,10 +199,17 @@ pod  AvoidCrash
 
 #### 2016-11-29
 - 修复在键盘弹出状态下，按Home键进入后台会导致崩溃的bug。
-- 新增防止崩溃（NSArray、NSMutableArray） - (NSArray *)objectsAtIndexes:(NSIndexSet *)indexes
+- 新增防止崩溃（NSArray、NSMutableArray） `- (NSArray *)objectsAtIndexes:(NSIndexSet *)indexes`
 
 
+#### 2016-12-1
+- 处理数组的类簇问题，提高兼容性，不论是由于array[100]方式，还是[array objectAtIndex:100]方式 获取数组中的某个元素操作不当而导致的crash,都能被拦截防止崩溃。
+ - 上一个版本只能防止array[100]导致的崩溃，不能防止[array objectAtIndex:100]导致的崩溃。
 
+- 统一对线程进行处理，监听通知AvoidCrashNotification后，不论是在主线程导致的crash还是在子线程导致的crash，监听通知的方法统一在"主线程"中。
+ - 上一个版本中，在哪个线程导致的crash, 则监听通知的方法就在哪个线程中。
+
+- 新增防止崩溃 （NSArray、NSMutableArray） `- (void)getObjects:(__unsafe_unretained id  _Nonnull *)objects range:(NSRange)range`
 
 
 期待
@@ -205,3 +222,15 @@ pod  AvoidCrash
 
 
 ##[About me -- 简书](http://www.jianshu.com/users/80fadb71940d/latest_articles)
+
+
+
+
+
+
+
+
+
+
+
+

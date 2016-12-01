@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self NSMutableArray_Test_GetObjectsRange];
+    [self executeAllTestMethod];
 }
 
 
@@ -344,6 +344,7 @@
     [self NSMutableArray_Test_SetObjectAtIndex];
     [self NSMutableArray_Test_RemoveObjectAtIndex];
     [self NSMutableArray_Test_InsertObjectAtIndex];
+    [self NSMutableArray_Test_GetObjectsRange];
     
     
     [self NSDictionary_Test_InstanceDictionary];

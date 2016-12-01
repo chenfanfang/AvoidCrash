@@ -8,22 +8,6 @@
 
 #import "AvoidCrash.h"
 
-//category
-#import "NSObject+AvoidCrash.h"
-
-#import "NSArray+AvoidCrash.h"
-#import "NSMutableArray+AvoidCrash.h"
-
-#import "NSDictionary+AvoidCrash.h"
-#import "NSMutableDictionary+AvoidCrash.h"
-
-#import "NSString+AvoidCrash.h"
-#import "NSMutableString+AvoidCrash.h"
-
-#import "NSAttributedString+AvoidCrash.h"
-#import "NSMutableAttributedString+AvoidCrash.h"
-
-
 
 #define AvoidCrashSeparator         @"================================================================"
 #define AvoidCrashSeparatorWithFlag @"========================AvoidCrash Log=========================="

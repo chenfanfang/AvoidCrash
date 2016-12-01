@@ -14,16 +14,20 @@
 
 + (void)avoidCrashExchangeMethod {
     
-    Class NSConcreteAttributedString = NSClassFromString(@"NSConcreteAttributedString");
-    
-    //initWithString:
-    [AvoidCrash exchangeInstanceMethod:NSConcreteAttributedString method1Sel:@selector(initWithString:) method2Sel:@selector(avoidCrashInitWithString:)];
-    
-    //initWithAttributedString
-    [AvoidCrash exchangeInstanceMethod:NSConcreteAttributedString method1Sel:@selector(initWithAttributedString:) method2Sel:@selector(avoidCrashInitWithAttributedString:)];
-    
-    //initWithString:attributes:
-    [AvoidCrash exchangeInstanceMethod:NSConcreteAttributedString method1Sel:@selector(initWithString:attributes:) method2Sel:@selector(avoidCrashInitWithString:attributes:)];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        Class NSConcreteAttributedString = NSClassFromString(@"NSConcreteAttributedString");
+        
+        //initWithString:
+        [AvoidCrash exchangeInstanceMethod:NSConcreteAttributedString method1Sel:@selector(initWithString:) method2Sel:@selector(avoidCrashInitWithString:)];
+        
+        //initWithAttributedString
+        [AvoidCrash exchangeInstanceMethod:NSConcreteAttributedString method1Sel:@selector(initWithAttributedString:) method2Sel:@selector(avoidCrashInitWithAttributedString:)];
+        
+        //initWithString:attributes:
+        [AvoidCrash exchangeInstanceMethod:NSConcreteAttributedString method1Sel:@selector(initWithString:attributes:) method2Sel:@selector(avoidCrashInitWithString:attributes:)];
+    });
 
 }
 

@@ -9,6 +9,21 @@
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 
+//category
+#import "NSObject+AvoidCrash.h"
+
+#import "NSArray+AvoidCrash.h"
+#import "NSMutableArray+AvoidCrash.h"
+
+#import "NSDictionary+AvoidCrash.h"
+#import "NSMutableDictionary+AvoidCrash.h"
+
+#import "NSString+AvoidCrash.h"
+#import "NSMutableString+AvoidCrash.h"
+
+#import "NSAttributedString+AvoidCrash.h"
+#import "NSMutableAttributedString+AvoidCrash.h"
+
 
 /**
  *  if you want to get the reason that can cause crash, you can add observer notification in AppDelegate.
@@ -39,6 +54,12 @@
  *  become effective . You can call becomeEffective method in AppDelegate didFinishLaunchingWithOptions
  *  
  *  开始生效.你可以在AppDelegate的didFinishLaunchingWithOptions方法中调用becomeEffective方法
+ *
+ *  这是全局生效，若你只需要部分生效，你可以单个进行处理，比如:
+ *  [NSArray avoidCrashExchangeMethod];
+ *  [NSMutableArray avoidCrashExchangeMethod];
+ *  .................
+ *  .................
  */
 + (void)becomeEffective;
 

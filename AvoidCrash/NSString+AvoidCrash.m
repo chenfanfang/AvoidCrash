@@ -14,32 +14,34 @@
 
 + (void)avoidCrashExchangeMethod {
     
-    Class stringClass = NSClassFromString(@"__NSCFConstantString");
-    
-    //characterAtIndex
-    [AvoidCrash exchangeInstanceMethod:stringClass method1Sel:@selector(characterAtIndex:) method2Sel:@selector(avoidCrashCharacterAtIndex:)];
-    
-    //substringFromIndex
-    [AvoidCrash exchangeInstanceMethod:stringClass method1Sel:@selector(substringFromIndex:) method2Sel:@selector(avoidCrashSubstringFromIndex:)];
-    
-    //substringToIndex
-    [AvoidCrash exchangeInstanceMethod:stringClass method1Sel:@selector(substringToIndex:) method2Sel:@selector(avoidCrashSubstringToIndex:)];
-    
-    //substringWithRange:
-    [AvoidCrash exchangeInstanceMethod:stringClass method1Sel:@selector(substringWithRange:) method2Sel:@selector(avoidCrashSubstringWithRange:)];
-    
-    //stringByReplacingOccurrencesOfString:
-    [AvoidCrash exchangeInstanceMethod:stringClass method1Sel:@selector(stringByReplacingOccurrencesOfString:withString:) method2Sel:@selector(avoidCrashStringByReplacingOccurrencesOfString:withString:)];
-    
-    //stringByReplacingOccurrencesOfString:withString:options:range:
-    [AvoidCrash exchangeInstanceMethod:stringClass method1Sel:@selector(stringByReplacingOccurrencesOfString:withString:options:range:) method2Sel:@selector(avoidCrashStringByReplacingOccurrencesOfString:withString:options:range:)];
-    
-    //stringByReplacingCharactersInRange:withString:
-    [AvoidCrash exchangeInstanceMethod:stringClass method1Sel:@selector(stringByReplacingCharactersInRange:withString:) method2Sel:@selector(avoidCrashStringByReplacingCharactersInRange:withString:)];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Class stringClass = NSClassFromString(@"__NSCFConstantString");
+        
+        //characterAtIndex
+        [AvoidCrash exchangeInstanceMethod:stringClass method1Sel:@selector(characterAtIndex:) method2Sel:@selector(avoidCrashCharacterAtIndex:)];
+        
+        //substringFromIndex
+        [AvoidCrash exchangeInstanceMethod:stringClass method1Sel:@selector(substringFromIndex:) method2Sel:@selector(avoidCrashSubstringFromIndex:)];
+        
+        //substringToIndex
+        [AvoidCrash exchangeInstanceMethod:stringClass method1Sel:@selector(substringToIndex:) method2Sel:@selector(avoidCrashSubstringToIndex:)];
+        
+        //substringWithRange:
+        [AvoidCrash exchangeInstanceMethod:stringClass method1Sel:@selector(substringWithRange:) method2Sel:@selector(avoidCrashSubstringWithRange:)];
+        
+        //stringByReplacingOccurrencesOfString:
+        [AvoidCrash exchangeInstanceMethod:stringClass method1Sel:@selector(stringByReplacingOccurrencesOfString:withString:) method2Sel:@selector(avoidCrashStringByReplacingOccurrencesOfString:withString:)];
+        
+        //stringByReplacingOccurrencesOfString:withString:options:range:
+        [AvoidCrash exchangeInstanceMethod:stringClass method1Sel:@selector(stringByReplacingOccurrencesOfString:withString:options:range:) method2Sel:@selector(avoidCrashStringByReplacingOccurrencesOfString:withString:options:range:)];
+        
+        //stringByReplacingCharactersInRange:withString:
+        [AvoidCrash exchangeInstanceMethod:stringClass method1Sel:@selector(stringByReplacingCharactersInRange:withString:) method2Sel:@selector(avoidCrashStringByReplacingCharactersInRange:withString:)];
+    });
     
 }
 
-//- (instancetype)initWithString:(NSString *)aString
 
 //=================================================================
 //                           characterAtIndex:
