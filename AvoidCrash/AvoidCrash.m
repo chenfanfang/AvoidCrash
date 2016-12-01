@@ -202,7 +202,11 @@
                                    };
     
     //将错误信息放在字典里，用通知的形式发送出去
-    [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:errorInfoDic];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:errorInfoDic];
+    });
+    
+    
 }
 
 
