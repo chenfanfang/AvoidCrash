@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self executeAllTestMethod];
+    [self NSMutableArray_Test_GetObjectsRange];
 }
 
 
