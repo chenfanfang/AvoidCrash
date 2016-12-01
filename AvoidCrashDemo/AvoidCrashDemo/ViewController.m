@@ -18,7 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self NSArray_Test_objectsAtIndexes];
+
+    [self executeAllTestMethod];
+    
 }
 
 
@@ -37,8 +39,9 @@
     NSArray *arr = @[@"chenfanfang"];
     
     NSObject *object = arr[100];
-    //由于类簇的原因，目前暂时不能拦截通过objectAtIndex获取数组中的元素而导致的崩溃- (id)objectAtIndex:(NSUInteger)index
-    NSLog(@"%@",object);
+    NSObject *object2 = [arr objectAtIndex:100];
+    
+    NSLog(@"object = %@    object2 = %@",object, object2);
 }
 
 - (void)NSArray_Test_objectsAtIndexes {
@@ -58,8 +61,8 @@
 - (void)NSMutableArray_Test_ObjectAtIndex {
     NSMutableArray *array = @[@"chenfanfang"].mutableCopy;
     NSObject *object = array[2];
-    //由于类簇的原因，目前暂时不能拦截通过objectAtIndex获取数组中的元素而导致的崩溃- (id)objectAtIndex:(NSUInteger)index
-    NSLog(@"%@",object);
+    NSObject *object2 = [array objectAtIndex:20];
+    NSLog(@"object = %@   object2 = %@",object, object2);
 }
 
 - (void)NSMutableArray_Test_SetObjectAtIndex {
@@ -309,6 +312,7 @@
 - (void)executeAllTestMethod {
     [self NSArray_Test_InstanceArray];
     [self NSArray_Test_ObjectAtIndex];
+    [self NSArray_Test_objectsAtIndexes];
     
     
     [self NSMutableArray_Test_ObjectAtIndex];

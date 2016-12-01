@@ -16,10 +16,10 @@
     Class arrayMClass = NSClassFromString(@"__NSArrayM");
     
     
-    //get object from array method exchange
-    //由于继承于NSArray，所以 objectAtIndexedSubscript已经在NSArray中处理过了，无需处理
+    //objectAtIndex:
+    [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(objectAtIndex:) method2Sel:@selector(avoidCrashObjectAtIndex:)];
     
-    //array set object at index
+    //setObject:atIndexedSubscript:
     [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(setObject:atIndexedSubscript:) method2Sel:@selector(avoidCrashSetObject:atIndexedSubscript:)];
     
     
@@ -86,6 +86,20 @@
     }
 }
 
+- (id)avoidCrashObjectAtIndex:(NSUInteger)index {
+    id object = nil;
+    
+    @try {
+        object = [self avoidCrashObjectAtIndex:index];
+    }
+    @catch (NSException *exception) {
+        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
+        [AvoidCrash noteErrorWithException:exception defaultToDo:defaultToDo];
+    }
+    @finally {
+        return object;
+    }
+}
 
 
 @end

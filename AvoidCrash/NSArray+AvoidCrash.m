@@ -15,24 +15,36 @@
 
 + (void)avoidCrashExchangeMethod {
     
-    //class method
+    //=================
+    //   class method
+    //=================
     
     //instance array method exchange
     [AvoidCrash exchangeClassMethod:[self class] method1Sel:@selector(arrayWithObjects:count:) method2Sel:@selector(AvoidCrashArrayWithObjects:count:)];
     
     
     
-    //instance method
+    //====================
+    //   instance method
+    //====================
     
     Class __NSArray = NSClassFromString(@"NSArray");
-    
-    //objectAtIndexedSubscript:
-    //防止array[100]这种方式取元素的崩溃
-    [AvoidCrash exchangeInstanceMethod:__NSArray method1Sel:@selector(objectAtIndexedSubscript:) method2Sel:@selector(avoidCrashObjectAtIndexedSubscript:)];
+    Class __NSArrayI = NSClassFromString(@"__NSArrayI");
+    Class __NSSingleObjectArrayI = NSClassFromString(@"__NSSingleObjectArrayI");
+    Class __NSArray0 = NSClassFromString(@"__NSArray0");
     
     
     //objectsAtIndexes:
     [AvoidCrash exchangeInstanceMethod:__NSArray method1Sel:@selector(objectsAtIndexes:) method2Sel:@selector(avoidCrashObjectsAtIndexes:)];
+    
+    
+    //objectAtIndex:
+    
+    [AvoidCrash exchangeInstanceMethod:__NSArrayI method1Sel:@selector(objectAtIndex:) method2Sel:@selector(__NSArrayIAvoidCrashObjectAtIndex:)];
+    
+    [AvoidCrash exchangeInstanceMethod:__NSSingleObjectArrayI method1Sel:@selector(objectAtIndex:) method2Sel:@selector(__NSSingleObjectArrayIAvoidCrashObjectAtIndex:)];
+    
+    [AvoidCrash exchangeInstanceMethod:__NSArray0 method1Sel:@selector(objectAtIndex:) method2Sel:@selector(__NSArray0AvoidCrashObjectAtIndex:)];
 }
 
 
@@ -114,6 +126,60 @@
 }
 
 
+//=================================================================
+//                         objectAtIndex:
+//=================================================================
+#pragma mark - objectAtIndex:
+
+//__NSArrayI  objectAtIndex:
+- (id)__NSArrayIAvoidCrashObjectAtIndex:(NSUInteger)index {
+    id object = nil;
+    
+    @try {
+        object = [self __NSArrayIAvoidCrashObjectAtIndex:index];
+    }
+    @catch (NSException *exception) {
+        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
+        [AvoidCrash noteErrorWithException:exception defaultToDo:defaultToDo];
+    }
+    @finally {
+        return object;
+    }
+}
+
+
+
+//__NSSingleObjectArrayI objectAtIndex:
+- (id)__NSSingleObjectArrayIAvoidCrashObjectAtIndex:(NSUInteger)index {
+    id object = nil;
+    
+    @try {
+        object = [self __NSSingleObjectArrayIAvoidCrashObjectAtIndex:index];
+    }
+    @catch (NSException *exception) {
+        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
+        [AvoidCrash noteErrorWithException:exception defaultToDo:defaultToDo];
+    }
+    @finally {
+        return object;
+    }
+}
+
+//__NSArray0 objectAtIndex:
+- (id)__NSArray0AvoidCrashObjectAtIndex:(NSUInteger)index {
+    id object = nil;
+    
+    @try {
+        object = [self __NSArray0AvoidCrashObjectAtIndex:index];
+    }
+    @catch (NSException *exception) {
+        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
+        [AvoidCrash noteErrorWithException:exception defaultToDo:defaultToDo];
+    }
+    @finally {
+        return object;
+    }
+}
 
 
 @end
