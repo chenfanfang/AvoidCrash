@@ -45,6 +45,14 @@
     [AvoidCrash exchangeInstanceMethod:__NSSingleObjectArrayI method1Sel:@selector(objectAtIndex:) method2Sel:@selector(__NSSingleObjectArrayIAvoidCrashObjectAtIndex:)];
     
     [AvoidCrash exchangeInstanceMethod:__NSArray0 method1Sel:@selector(objectAtIndex:) method2Sel:@selector(__NSArray0AvoidCrashObjectAtIndex:)];
+    
+    
+    //getObjects:range:
+    [AvoidCrash exchangeInstanceMethod:__NSArray method1Sel:@selector(getObjects:range:) method2Sel:@selector(NSArrayAvoidCrashGetObjects:range:)];
+    
+    [AvoidCrash exchangeInstanceMethod:__NSSingleObjectArrayI method1Sel:@selector(getObjects:range:) method2Sel:@selector(__NSSingleObjectArrayIAvoidCrashGetObjects:range:)];
+    
+    [AvoidCrash exchangeInstanceMethod:__NSArrayI method1Sel:@selector(getObjects:range:) method2Sel:@selector(__NSArrayIAvoidCrashGetObjects:range:)];
 }
 
 
@@ -180,6 +188,61 @@
         return object;
     }
 }
+
+
+//=================================================================
+//                           getObjects:range:
+//=================================================================
+#pragma mark - getObjects:range:
+
+//NSArray getObjects:range:
+- (void)NSArrayAvoidCrashGetObjects:(__unsafe_unretained id  _Nonnull *)objects range:(NSRange)range {
+    
+    @try {
+        [self NSArrayAvoidCrashGetObjects:objects range:range];
+    } @catch (NSException *exception) {
+        
+        NSString *defaultToDo = AvoidCrashDefaultIgnore;
+        [AvoidCrash noteErrorWithException:exception defaultToDo:defaultToDo];
+        
+    } @finally {
+        
+    }
+}
+
+
+//__NSSingleObjectArrayI  getObjects:range:
+- (void)__NSSingleObjectArrayIAvoidCrashGetObjects:(__unsafe_unretained id  _Nonnull *)objects range:(NSRange)range {
+    
+    @try {
+        [self __NSSingleObjectArrayIAvoidCrashGetObjects:objects range:range];
+    } @catch (NSException *exception) {
+        
+        NSString *defaultToDo = AvoidCrashDefaultIgnore;
+        [AvoidCrash noteErrorWithException:exception defaultToDo:defaultToDo];
+        
+    } @finally {
+        
+    }
+}
+
+
+//__NSArrayI  getObjects:range:
+- (void)__NSArrayIAvoidCrashGetObjects:(__unsafe_unretained id  _Nonnull *)objects range:(NSRange)range {
+    
+    @try {
+        [self __NSArrayIAvoidCrashGetObjects:objects range:range];
+    } @catch (NSException *exception) {
+        
+        NSString *defaultToDo = AvoidCrashDefaultIgnore;
+        [AvoidCrash noteErrorWithException:exception defaultToDo:defaultToDo];
+        
+    } @finally {
+        
+    }
+}
+
+
 
 
 @end

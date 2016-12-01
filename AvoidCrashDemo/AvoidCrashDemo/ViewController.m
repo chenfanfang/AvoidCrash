@@ -18,9 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
-    [self executeAllTestMethod];
-    
+    [self NSMutableArray_Test_GetObjectsRange];
 }
 
 
@@ -36,12 +34,12 @@
 }
 
 - (void)NSArray_Test_ObjectAtIndex {
-    NSArray *arr = @[@"chenfanfang"];
+    NSArray *arr = @[@"chenfanfang", @"iOSDeveloper"];
     
     NSObject *object = arr[100];
-    NSObject *object2 = [arr objectAtIndex:100];
+    //NSObject *object = [arr objectAtIndex:100];
     
-    NSLog(@"object = %@    object2 = %@",object, object2);
+    NSLog(@"object = %@",object);
 }
 
 - (void)NSArray_Test_objectsAtIndexes {
@@ -49,6 +47,22 @@
     
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:100];
     [array objectsAtIndexes:indexSet];
+    
+}
+
+- (void)NSArray_Test_getObjectsRange {
+    
+    NSArray *array = @[@"1", @"2", @"3"];//__NSArrayI
+    
+    //NSArray *array = @[@"1"];//__NSSingleObjectArrayI
+    
+    //NSArray *array = @[];//NSArray
+    
+    NSRange range = NSMakeRange(0, 11);
+    __unsafe_unretained id cArray[range.length];
+    
+    
+    [array getObjects:cArray range:range];
     
 }
 
@@ -61,8 +75,8 @@
 - (void)NSMutableArray_Test_ObjectAtIndex {
     NSMutableArray *array = @[@"chenfanfang"].mutableCopy;
     NSObject *object = array[2];
-    NSObject *object2 = [array objectAtIndex:20];
-    NSLog(@"object = %@   object2 = %@",object, object2);
+    //NSObject *object = [array objectAtIndex:20];
+    NSLog(@"object = %@",object);
 }
 
 - (void)NSMutableArray_Test_SetObjectAtIndex {
@@ -91,6 +105,16 @@
     
     //NSString *nilStr = nil;
     //[array addObject:nilStr]; //其本质是调用insertObject:
+}
+
+- (void)NSMutableArray_Test_GetObjectsRange {
+    NSMutableArray *array = @[@"chenfanfang", @"iOSDeveloper"].mutableCopy;
+    
+    NSRange range = NSMakeRange(0, 11);
+    __unsafe_unretained id cArray[range.length];
+    
+    
+    [array getObjects:cArray range:range];
 }
 
 //=================================================================
@@ -313,6 +337,7 @@
     [self NSArray_Test_InstanceArray];
     [self NSArray_Test_ObjectAtIndex];
     [self NSArray_Test_objectsAtIndexes];
+    [self NSArray_Test_getObjectsRange];
     
     
     [self NSMutableArray_Test_ObjectAtIndex];

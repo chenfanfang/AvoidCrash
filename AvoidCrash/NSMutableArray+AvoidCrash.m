@@ -29,6 +29,9 @@
     //insertObject:atIndex:
     [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(insertObject:atIndex:) method2Sel:@selector(avoidCrashInsertObject:atIndex:)];
     
+    //getObjects:range:
+    [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(getObjects:range:) method2Sel:@selector(avoidCrashGetObjects:range:)];
+    
 }
 
 
@@ -86,6 +89,12 @@
     }
 }
 
+
+//=================================================================
+//                           objectAtIndex:
+//=================================================================
+#pragma mark - objectAtIndex:
+
 - (id)avoidCrashObjectAtIndex:(NSUInteger)index {
     id object = nil;
     
@@ -100,6 +109,28 @@
         return object;
     }
 }
+
+
+//=================================================================
+//                         getObjects:range:
+//=================================================================
+#pragma mark - getObjects:range:
+
+- (void)avoidCrashGetObjects:(__unsafe_unretained id  _Nonnull *)objects range:(NSRange)range {
+    
+    @try {
+        [self avoidCrashGetObjects:objects range:range];
+    } @catch (NSException *exception) {
+        
+        NSString *defaultToDo = AvoidCrashDefaultIgnore;
+        [AvoidCrash noteErrorWithException:exception defaultToDo:defaultToDo];
+        
+    } @finally {
+        
+    }
+}
+
+
 
 
 @end
