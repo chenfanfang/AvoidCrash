@@ -1,4 +1,4 @@
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/chenfanfang/AvoidCrash) [![pod](https://img.shields.io/badge/pod-1.6.2-brightgreen.svg)](https://github.com/chenfanfang/AvoidCrash) [![pod](https://img.shields.io/badge/platform-iOS-ff69b4.svg)](https://github.com/chenfanfang/AvoidCrash) [![pod](https://img.shields.io/badge/about%20me-chenfanfang-blue.svg)](http://www.jianshu.com/users/80fadb71940d/latest_articles)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/chenfanfang/AvoidCrash) [![pod](https://img.shields.io/badge/pod-1.6.7-orange.svg)](https://github.com/chenfanfang/AvoidCrash) [![platform](https://img.shields.io/badge/platform-iOS-ff69b4.svg)](https://github.com/chenfanfang/AvoidCrash) [![aboutme](https://img.shields.io/badge/about%20me-chenfanfang-blue.svg)](http://www.jianshu.com/users/80fadb71940d/latest_articles)
 
 
 前言
