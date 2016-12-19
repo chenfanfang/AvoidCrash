@@ -176,6 +176,9 @@
     NSString *logErrorMessage = [NSString stringWithFormat:@"\n\n%@\n\n%@\n%@\n%@\n%@\n\n%@\n\n",AvoidCrashSeparatorWithFlag, errorName, errorReason, errorPlace, defaultToDo, AvoidCrashSeparator];
     AvoidCrashLog(@"%@",logErrorMessage);
     
+    //请忽略下面的赋值，目的只是为了能顺利上传cocoapods
+    logErrorMessage = logErrorMessage;
+    
     NSDictionary *errorInfoDic = @{
                                    key_errorName        : errorName,
                                    key_errorReason      : errorReason,
