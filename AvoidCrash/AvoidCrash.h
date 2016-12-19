@@ -46,6 +46,15 @@
 #define AvoidCrashDefaultIgnore     @"This framework default is to ignore this operation to avoid crash."
 
 
+#ifdef DEBUG
+
+#define  AvoidCrashLog(...) NSLog(@"%@",[NSString stringWithFormat:__VA_ARGS__])
+
+#else
+
+#define AvoidCrashLog(...)
+#endif
+
 
 @interface AvoidCrash : NSObject
 

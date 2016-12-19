@@ -174,7 +174,7 @@
     NSString *errorPlace = [NSString stringWithFormat:@"Error Place:%@",mainCallStackSymbolMsg];
     
     NSString *logErrorMessage = [NSString stringWithFormat:@"\n\n%@\n\n%@\n%@\n%@\n%@\n\n%@\n\n",AvoidCrashSeparatorWithFlag, errorName, errorReason, errorPlace, defaultToDo, AvoidCrashSeparator];
-    NSLog(@"%@", logErrorMessage);
+    AvoidCrashLog(@"%@",logErrorMessage);
     
     NSDictionary *errorInfoDic = @{
                                    key_errorName        : errorName,
