@@ -211,6 +211,17 @@ pod  AvoidCrash
 
 - 新增防止崩溃 （NSArray、NSMutableArray） `- (void)getObjects:(__unsafe_unretained id  _Nonnull *)objects range:(NSRange)range`
 
+#### 2016-12-19
+- Release环境下取消控制台的输出。
+
+
+提示
+===
+- 1、由于@try @catch的原因，如果防止了你项目中将要crash的代码，有些方法将导致些许的内存泄漏。若你的代码不会导致crash，当然就不存在内存泄漏的问题,crash和些许内存泄漏的选择当然取决于你自己。目前发现的内存泄漏的方法如下图所示，没有显示在下图中的方法，不论是否会导致crash，都不会有内存泄漏。
+  
+  ![](https://raw.githubusercontent.com/chenfanfang/AvoidCrash/fdad9c8808559c0b20c8672b2cb6e901d4e4f006/AvoidCrashDemo/Screenshot/Leaks.png)
+  
+- 2、有朋友提出，AvoidCraah和[RegexKitLite](https://github.com/wezm/RegexKitLite)有冲突，毕竟代码不在同一个时代上的（RegexKitLite最后一次提交时在2011年）。同时也说明AvoidCrash的健壮性不够，大家若有什么意见可以提出。
 
 期待
 ===
