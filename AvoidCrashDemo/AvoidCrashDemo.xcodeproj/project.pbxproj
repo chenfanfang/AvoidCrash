@@ -25,6 +25,7 @@
 		04FB61D91DB2361400C079F2 /* NSAttributedString+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB61D81DB2361400C079F2 /* NSAttributedString+AvoidCrash.m */; };
 		04FB61DC1DB25FE500C079F2 /* NSMutableAttributedString+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB61DB1DB25FE500C079F2 /* NSMutableAttributedString+AvoidCrash.m */; };
 		04FEB8FF1DA55E6B00B5647E /* NSMutableString+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB8FE1DA55E6B00B5647E /* NSMutableString+AvoidCrash.m */; };
+		E531DAA21E0CF40A00D832E2 /* StubClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E531DAA11E0CF40A00D832E2 /* StubClass.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,8 @@
 		04FB61DB1DB25FE500C079F2 /* NSMutableAttributedString+AvoidCrash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+AvoidCrash.m"; sourceTree = "<group>"; };
 		04FEB8FD1DA55E6B00B5647E /* NSMutableString+AvoidCrash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableString+AvoidCrash.h"; sourceTree = "<group>"; };
 		04FEB8FE1DA55E6B00B5647E /* NSMutableString+AvoidCrash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableString+AvoidCrash.m"; sourceTree = "<group>"; };
+		E531DAA01E0CF40A00D832E2 /* StubClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StubClass.h; sourceTree = "<group>"; };
+		E531DAA11E0CF40A00D832E2 /* StubClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StubClass.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +177,8 @@
 		043C64151D93A60C00A0B0E9 /* AvoidCrash */ = {
 			isa = PBXGroup;
 			children = (
+				E531DAA01E0CF40A00D832E2 /* StubClass.h */,
+				E531DAA11E0CF40A00D832E2 /* StubClass.m */,
 				043C64161D93A60C00A0B0E9 /* AvoidCrash.h */,
 				043C64171D93A60C00A0B0E9 /* AvoidCrash.m */,
 				040330201DACD96E00AE5A41 /* NSObject+AvoidCrash.h */,
@@ -337,6 +342,7 @@
 				040330221DACD96E00AE5A41 /* NSObject+AvoidCrash.m in Sources */,
 				04C3DFD31DA4EED200E18858 /* NSString+AvoidCrash.m in Sources */,
 				04FEB8FF1DA55E6B00B5647E /* NSMutableString+AvoidCrash.m in Sources */,
+				E531DAA21E0CF40A00D832E2 /* StubClass.m in Sources */,
 				043C64231D93A60C00A0B0E9 /* NSMutableArray+AvoidCrash.m in Sources */,
 				04FB61D91DB2361400C079F2 /* NSAttributedString+AvoidCrash.m in Sources */,
 				04FB61DC1DB25FE500C079F2 /* NSMutableAttributedString+AvoidCrash.m in Sources */,
