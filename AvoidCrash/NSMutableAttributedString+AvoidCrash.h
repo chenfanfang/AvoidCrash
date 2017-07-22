@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AvoidCrashProtocol.h"
 
-@interface NSMutableAttributedString (AvoidCrash)
+@interface NSMutableAttributedString (AvoidCrash)<AvoidCrashProtocol>
 
-+ (void)avoidCrashExchangeMethod;
 
 @end
 

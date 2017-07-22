@@ -6,7 +6,7 @@
 //  Copyright © 2016年 chenfanfang. All rights reserved.
 //
 
-#import "StubClass.h"
+#import "AvoidCrashStubProxy.h"
 #import <objc/runtime.h>
 
 void dynamicMethodIMP(id self, SEL _cmd)
@@ -14,13 +14,13 @@ void dynamicMethodIMP(id self, SEL _cmd)
     // implementation ....
 }
 
-@implementation StubClass
+@implementation AvoidCrashStubProxy
 
 
 
 + (BOOL)resolveInstanceMethod:(SEL)sel
 {
-    NSLog(@"sel is %@", NSStringFromSelector(sel));
+    //NSLog(@"sel is %@", NSStringFromSelector(sel));
     class_addMethod([self class],sel,(IMP)dynamicMethodIMP,"v@:");
     
     return [super resolveInstanceMethod:sel];

@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface StubClass : NSObject
+@interface AvoidCrashStubProxy : NSObject
 
 @end

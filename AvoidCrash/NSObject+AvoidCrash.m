@@ -8,9 +8,32 @@
 
 #import "NSObject+AvoidCrash.h"
 #import "AvoidCrash.h"
-#import "StubClass.h"
+#import "AvoidCrashStubProxy.h"
+
+
+#define AvoidCrashSeparatorWithWarningFlag @"======================AvoidCrash  Warning========================"
 
 @implementation NSObject (AvoidCrash)
+
++ (void)addIgnoreSystemMethod:(NSString *)methodName {
+    [NSObject setupIgnoreSystemMethodNameArrM];
+    if (![ignoreSystemMethodNameArrM containsObject:methodName]) {
+        [ignoreSystemMethodNameArrM addObject:methodName];
+    }
+}
+
+
+
++ (void)addIgnoreSystemMethods:(NSArray<NSString *> *)methodNamesArr {
+    [NSObject setupIgnoreSystemMethodNameArrM];
+    for (NSString *methodName in methodNamesArr) {
+        if (![ignoreSystemMethodNameArrM containsObject:methodName]) {
+            [ignoreSystemMethodNameArrM addObject:methodName];
+        }
+    }
+}
+
+
 
 + (void)avoidCrashExchangeMethod {
     
@@ -29,12 +52,11 @@
         [AvoidCrash exchangeInstanceMethod:[self class] method1Sel:@selector(setValuesForKeysWithDictionary:) method2Sel:@selector(avoidCrashSetValuesForKeysWithDictionary:)];
         
         //forwardingTargetForSelector
-        [AvoidCrash exchangeInstanceMethod:[self class] method1Sel:@selector(forwardingTargetForSelector:) method2Sel:@selector(AvoidCrashForwardingTargetForSelector:)];
+        [AvoidCrash exchangeInstanceMethod:[self class] method1Sel:@selector(forwardingTargetForSelector:) method2Sel:@selector(avoidCrashForwardingTargetForSelector:)];
     });
     
     
 }
-
 
 
 //=================================================================
@@ -113,13 +135,51 @@
     }
 }
 
-- (id)AvoidCrashForwardingTargetForSelector:(SEL)aSelector {
-    id proxy = [self AvoidCrashForwardingTargetForSelector:aSelector];
+
+//=================================================================
+//            forwardingTargetForSelector
+//=================================================================
+#pragma mark - forwardingTargetForSelector
+
+static NSMutableArray *ignoreSystemMethodNameArrM = nil;
+
+- (id)avoidCrashForwardingTargetForSelector:(SEL)aSelector {
+    id proxy = [self avoidCrashForwardingTargetForSelector:aSelector];
+    
     if (!proxy) {
-        proxy = [[StubClass alloc] init];
-        AvoidCrashLog(@"%@", [NSThread callStackSymbols]);
+        [NSObject setupIgnoreSystemMethodNameArrM];
+        BOOL isIgnoreMethod = NO;
+        NSString *methodName = NSStringFromSelector(aSelector);
+        for (NSString *systemMethodName in ignoreSystemMethodNameArrM) {
+            if ([methodName isEqualToString:systemMethodName]) {
+                isIgnoreMethod = YES;
+                break;
+            }
+        }
+        
+        if (!isIgnoreMethod) {
+            
+            proxy = [[AvoidCrashStubProxy alloc] init];
+            NSString *name = @"unrecognized selector sent to instance";
+            NSString *reason = [NSString stringWithFormat:@"[%@ %@]:unrecognized selector sent to instance",NSStringFromClass([self class]), methodName];
+            NSException *exception = [NSException exceptionWithName:name reason:reason userInfo:nil];
+            NSString *defaultToDo = @"use stub proxy to avoid crash";
+            [AvoidCrash noteErrorWithException:exception defaultToDo:defaultToDo methodName:methodName];
+        }
     }
     return proxy;
+}
+
++ (void)setupIgnoreSystemMethodNameArrM {
+    if (!ignoreSystemMethodNameArrM) {
+        ignoreSystemMethodNameArrM =
+                  @[
+                       @"_setTextColor:",
+                       @"_setMagnifierLineColor:",
+                       @"applicationShouldFocusWithBundle:onCompletion:"
+                       
+                   ].mutableCopy;
+    }
 }
 
 @end

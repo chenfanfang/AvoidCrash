@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 
+#import "Person.h"
+
 @interface ViewController ()
 
 
@@ -18,7 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self noSelectorCrash];
+
+    [self testNoSelectorCrash];
 }
 
 
@@ -301,20 +304,20 @@
 #pragma mark - KVC
 
 
-- (void)KVC_SetValueForKey {
+- (void)KVC_Test_SetValueForKey {
     //创建一个任意的对象
     UITableView *anyObject = [UITableView new];
     [anyObject setValue:self forKey:@"AvoidCrash"];
     
 }
 
-- (void)KVC_SetValueforKeyPath {
+- (void)KVC_Test_SetValueforKeyPath {
     UITableView *anyObject = [UITableView new];
     [anyObject setValue:self forKey:@"AvoidCrash"];
 }
 
 
-- (void)KVC_SetValuesForKeysWithDictionary {
+- (void)KVC_Test_SetValuesForKeysWithDictionary {
     //创建一个任意的对象
     UITableView *anyObject = [UITableView new];
     NSDictionary *dictionary = @{
@@ -325,13 +328,22 @@
 }
 
 
-
+//=================================================================
+//              unrecognized selector sent to instance
+//=================================================================
+#pragma mark - unrecognized selector sent to instance
 /**
  测试没有selector的crash
  */
-- (void)noSelectorCrash {
-    id wSelf = self;
-    [wSelf performSelector:@selector(testCrash)];
+- (void)testNoSelectorCrash {
+    //测试1
+    id person1 = @"chenfanfang";
+    person1 = [person1 initWithName:@"cff" age:26 height:170 weight:110];
+    
+    //测试2
+//    Person *person2 = [Person new];
+//    [person2 performSelector:@selector(testCrash)];
+    
 }
 
 //=================================================================
@@ -381,10 +393,12 @@
     [self NSMutableAttributedString_Test_InitWithStringAttributes];
     
     
-    [self KVC_SetValueForKey];
-    [self KVC_SetValueforKeyPath];
-    [self KVC_SetValuesForKeysWithDictionary];
-    [self noSelectorCrash];
+    [self KVC_Test_SetValueForKey];
+    [self KVC_Test_SetValueforKeyPath];
+    [self KVC_Test_SetValuesForKeysWithDictionary];
+    
+    
+    [self testNoSelectorCrash];
 }
 
 
