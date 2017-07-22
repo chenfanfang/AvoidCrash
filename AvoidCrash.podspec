@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 s.name         = "AvoidCrash"
 s.platform = :ios, "7.0"
-s.version      = "1.6.7"
+s.version      = "2.0.1"
 s.ios.deployment_target = '7.0'
 s.summary      = "This framework can avoid Foundation framework potential crash danger"
 s.homepage     = "https://github.com/chenfanfang/AvoidCrash"
@@ -13,6 +13,7 @@ s.source       = { :git => "https://github.com/chenfanfang/AvoidCrash.git", :tag
 s.source_files  = 'AvoidCrash/**/*.{h,m}'
 s.requires_arc = [
                   'AvoidCrash/AvoidCrash.m',
+                  'AvoidCrash/AvoidCrashStubProxy.m',
                   'AvoidCrash/NSObject+AvoidCrash.m',
                   'AvoidCrash/NSArray+AvoidCrash.m',
                   'AvoidCrash/NSDictionary+AvoidCrash.m',

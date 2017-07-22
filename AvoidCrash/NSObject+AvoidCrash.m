@@ -10,9 +10,6 @@
 #import "AvoidCrash.h"
 #import "AvoidCrashStubProxy.h"
 
-
-#define AvoidCrashSeparatorWithWarningFlag @"======================AvoidCrash  Warning========================"
-
 @implementation NSObject (AvoidCrash)
 
 + (void)addIgnoreSystemMethod:(NSString *)methodName {

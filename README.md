@@ -23,7 +23,7 @@ AvoidCrash简介
 - 你可以获取到原本导致崩溃的主要信息<由于这个框架的存在，并不会崩溃>，进行相应的处理。比如：
   - 你可以将这些崩溃信息发送到自己服务器。
   - 你若集成了第三方崩溃日志收集的SDK,比如你用了腾讯的Bugly,你可以上报自定义异常。
-- 或许你会问有JSPatch就可以下发补丁来修复bug,为什么要用AvoidCrash？我只能说，AvoidCrash可以有效防止部分常见崩溃，JSPatch可以快速修复bug.推荐将两者都集成到项目中去。
+- 或许你会问就算防止了崩溃，但是所获取到的数据变成nil或者并非是你所需要的数据，这又有什么用？对于防止崩溃，我的理解是，宁愿一个功能不能用，都要让app活着，至少其他功能还能用。
 
 ---
 下面先来看下防止崩溃的效果吧
@@ -115,6 +115,10 @@ pod  AvoidCrash
 目前可以防止崩溃的方法有
 ===
 ---
+- unrecognized selector sent to instance
+ *  `1. 对”unrecognized selector sent to instance”防止崩溃的处理`
+
+
  - NSArray
    -  `1. NSArray的快速创建方式 NSArray *array = @[@"chenfanfang", @"AvoidCrash"];  //这种创建方式其实调用的是2中的方法`
    -  `2. +(instancetype)arrayWithObjects:(const id  _Nonnull __unsafe_unretained *)objects count:(NSUInteger)cnt`
@@ -176,12 +180,14 @@ pod  AvoidCrash
   -  `4.- (void)setValuesForKeysWithDictionary:(NSDictionary<NSString *,id> *)keyedValues`
 
 ---
+
 - NSAttributedString
  *  `1.- (instancetype)initWithString:(NSString *)str`
  *  `2.- (instancetype)initWithAttributedString:(NSAttributedString *)attrStr`
  *  `3.- (instancetype)initWithString:(NSString *)str attributes:(NSDictionary<NSString *,id> *)attrs`
 
 ---
+
 - NSMutableAttributedString
  *  `1.- (instancetype)initWithString:(NSString *)str`
  *  `2.- (instancetype)initWithString:(NSString *)str attributes:(NSDictionary<NSString *,id> *)attrs`
@@ -189,18 +195,12 @@ pod  AvoidCrash
 
 更新
 ===
-#### 2016-10-15
-- 修复上一个版本部分方法不能拦截崩溃的BUG，具体修复哪些可以查看issues和简书上的留言。
-- 优化崩溃代码的定位，定位崩溃代码更加准确。
-- 增加对KVC赋值防止崩溃的处理。
-- 增加对NSAttributedString防止崩溃的处理
-- 增加对NSMutableAttributedString防止崩溃的处理
 
+#### 2017-07-22
+- 	增加对”unrecognized selector sent to instance”防止崩溃的处理
 
-#### 2016-11-29
-- 修复在键盘弹出状态下，按Home键进入后台会导致崩溃的bug。
-- 新增防止崩溃（NSArray、NSMutableArray） `- (NSArray *)objectsAtIndexes:(NSIndexSet *)indexes`
-
+#### 2016-12-19
+- Release环境下取消控制台的输出。
 
 #### 2016-12-1
 - 处理数组的类簇问题，提高兼容性，不论是由于array[100]方式，还是[array objectAtIndex:100]方式 获取数组中的某个元素操作不当而导致的crash,都能被拦截防止崩溃。
@@ -211,8 +211,23 @@ pod  AvoidCrash
 
 - 新增防止崩溃 （NSArray、NSMutableArray） `- (void)getObjects:(__unsafe_unretained id  _Nonnull *)objects range:(NSRange)range`
 
-#### 2016-12-19
-- Release环境下取消控制台的输出。
+
+#### 2016-11-29
+- 修复在键盘弹出状态下，按Home键进入后台会导致崩溃的bug。
+- 新增防止崩溃（NSArray、NSMutableArray） `- (NSArray *)objectsAtIndexes:(NSIndexSet *)indexes`
+
+
+
+
+#### 2016-10-15
+- 修复上一个版本部分方法不能拦截崩溃的BUG，具体修复哪些可以查看issues和简书上的留言。
+- 优化崩溃代码的定位，定位崩溃代码更加准确。
+- 增加对KVC赋值防止崩溃的处理。
+- 增加对NSAttributedString防止崩溃的处理
+- 增加对NSMutableAttributedString防止崩溃的处理
+
+
+
 
 
 提示
@@ -232,7 +247,8 @@ pod  AvoidCrash
 
 
 
-##[About me -- 简书](http://www.jianshu.com/users/80fadb71940d/latest_articles)
+[About me -- 简书](http://www.jianshu.com/users/80fadb71940d/latest_articles)
+===
 
 
 
