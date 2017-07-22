@@ -63,6 +63,7 @@
  *  become effective . You can call becomeEffective method in AppDelegate didFinishLaunchingWithOptions
  *  
  *  开始生效.你可以在AppDelegate的didFinishLaunchingWithOptions方法中调用becomeEffective方法
+ *  默认不开启  对”unrecognized selector sent to instance”防止崩溃的处理
  *
  *  这是全局生效，若你只需要部分生效，你可以单个进行处理，比如:
  *  [NSArray avoidCrashExchangeMethod];
@@ -73,56 +74,35 @@
 + (void)becomeEffective;
 
 
+/** 
+ *  相比于becomeEffective，增加
+ *  对”unrecognized selector sent to instance”防止崩溃的处理
+ *
+ *  ⚠️警告
+ *    对”unrecognized selector sent to instance”防止崩溃的处理 风险性较高
+ *    请思考再三，建议不要对此类崩溃进行处理，因为容易和系统的处理方法冲突或者与第三方
+ *    SDK等库冲突，造成一些奇怪的现象，建议使用 上面的一个方法 becomeEffective
+ *
+ *    若坚持要捕获 unrecognized selector sent to instance的异常，
+ *    请配合下面的两个个方法进行使用，来防止一些冲突
+ *          + (void)addIgnoreMethod:(NSString *)methodName;
+ *          + (void)addIgnoreClassNamePrefix:(NSString *)classNamePrefix;
+ */
++ (void)makeAllEffective;
 
+
+/** 
+ *  添加需要忽略的方法名称
+ *  控制台会给出详细的信息来提示你  哪些方法是否需要忽略
+ */
++ (void)addIgnoreMethod:(NSString *)methodName;
 
 /**
- *  提示:
- *  【大家完全可以忽略addIgnoreSystemMethod方法和所对应的一堆文字描述，有兴趣者可以
- *    耐心看下。】
- *  这个方法的功能是为了配合  防止"unrecognized selector sent to instance"导致
- *  的崩溃时数据的收集更加准确。
- *  
- *  其实苹果系统内部里面也有部分方法会报 "unrecognized selector sent to instance"的错误
- *  但苹果进行了相应的处理，才没导致crash。
- *
- *  由于runtime的切入拦截，AvoidCrash会先一步知道苹果系统内部哪些方法会报"unrecognized 
- *  selector sent to instance"的错误
- *  但对于苹果系统内部会自动处理的东西我们没有必要对其进行相应的处理，并且我们也不清楚苹果系统内部
- *  具体的处理方法，所以AvoidCrash会将非开发人员导致的"unrecognized selector sent to 
- *  instance"的错误还给苹果处理，尽可能保证原生性不被破坏，并且不会在控制台输出相应的崩溃信息。
- *
- *  目前已知的方法名有:(可到NSObject+AvoidCrash.m 中查看)
- *                  @"_setTextColor:"
- *                  @"_setMagnifierLineColor:",
- *                  @"applicationShouldFocusWithBundle:onCompletion:"
- *
- *
- *  疑问1:是否必须调用下面的方法。
- *  答  :非必须
- *
- *  ===========================================================
- *
- *  疑问2:若不调用下面的方法，是否破坏了原生性，上面描述不是说苹果系统内部会处理属于苹果自身原因导致
- *       "unrecognized selector sent to instance" 的崩溃吗？
- *  答  : 对于原生性，可能是有点侵入，但猜测苹果内部的实现方式也是防止崩溃,AvoidCrash只是将崩溃提前
- *        处理掉了，也不会造成什么影响，无伤大雅。
- *
- *  ===========================================================
- *
- *  疑问3:该如何知道需要添加哪些方法名称呢？
- *       具体有哪些方法名称需要在实际的开发中才能发现，AvoidCrash会在控制台输出对应的信息来提示你
- *
- *  ===========================================================
- *
- *  疑问4:addIgnoreSystemMethod: 需要在什么地方调用呢?
- *       在哪里调用了becomeEffective，就在那里调用即可，可以进行多次调用来添加多个方法，当然也
- *       可以调用 + (void)addIgnoreSystemMethods:(NSArray<NSString *> *)methodNamesArr;
+ *  添加需要忽略的方法所在的类名 的前缀
  */
-+ (void)addIgnoreSystemMethod:(NSString *)methodName;
++ (void)addIgnoreClassNamePrefix:(NSString *)classNamePrefix;
 
 
-
-+ (void)addIgnoreSystemMethods:(NSArray<NSString *> *)methodNamesArr;
 
 
 
@@ -138,6 +118,6 @@
 
 + (void)noteErrorWithException:(NSException *)exception defaultToDo:(NSString *)defaultToDo;
 
-+ (void)noteErrorWithException:(NSException *)exception defaultToDo:(NSString *)defaultToDo methodName:(NSString *)methodName;
++ (void)noteErrorWithException:(NSException *)exception defaultToDo:(NSString *)defaultToDo methodName:(NSString *)methodName className:(NSString *)className;
 
 @end

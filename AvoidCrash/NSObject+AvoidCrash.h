@@ -7,13 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AvoidCrashProtocol.h"
 
-@interface NSObject (AvoidCrash)<AvoidCrashProtocol>
 
-+ (void)addIgnoreSystemMethod:(NSString *)methodName;
+@interface NSObject (AvoidCrash)
 
-+ (void)addIgnoreSystemMethods:(NSArray<NSString *> *)methodNamesArr;
+
++ (void)avoidCrashExchangeMethodIfDealWithNoneSel:(BOOL)ifDealWithNoneSel;
+
++ (void)addIgnoreMethod:(NSString *)methodName;
+//+ (void)addIgnoreMethodDict:(NSDictionary *)methodDict;
++ (void)addIgnoreClassNamePrefix:(NSString *)classNamePrefix;
+
 
 @end
 
