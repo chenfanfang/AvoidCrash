@@ -78,14 +78,18 @@
 /** 
  *  相比于becomeEffective，增加
  *  对”unrecognized selector sent to instance”防止崩溃的处理
+ *  但是:
+ *      不对 UI 开头的类进行处理， 如:UIView
+ *      不对 _字母开头的类进行处理，如:_UIPropertyBasedAppearance、_NSXPCDistantObjectWithError
+ *  建议类名命名规范，不要以UI开头，_字母开头
  *
- *  ⚠️警告
+ *   ⚠️警告
  *    对”unrecognized selector sent to instance”防止崩溃的处理 风险性较高
  *    请思考再三，建议不要对此类崩溃进行处理，因为容易和系统的处理方法冲突或者与第三方
  *    SDK等库冲突，造成一些奇怪的现象，建议使用 上面的一个方法 becomeEffective
  *
  *    若坚持要捕获 unrecognized selector sent to instance的异常，
- *    请配合下面的三个方法进行使用，来防止一些冲突
+ *    请配合下面的三个方法进行使用，来忽略一些方法的处理，以便防止一些冲突
  *          + (void)addIgnoreMethod:(NSString *)methodName;
  *          + (void)addIgnoreClassNamePrefix:(NSString *)classNamePrefix;
  *          + (void)addIgnoreClassNameSuffix:(NSString *)classNameSuffix;

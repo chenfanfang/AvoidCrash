@@ -228,7 +228,7 @@ static NSMutableArray *ignoreClassNameSuffixArrM = nil;
 
 + (void)setupIgnoreClassNamePrefixArrM {
     if (!ignoreClassNamePrefixArrM) {
-        ignoreClassNamePrefixArrM = [NSMutableArray array];
+        ignoreClassNamePrefixArrM = @[@"UI"].mutableCopy;
     }
 }
 
