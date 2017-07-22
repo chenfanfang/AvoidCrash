@@ -7,8 +7,8 @@
 //
 
 #import "NSObject+AvoidCrash.h"
-
 #import "AvoidCrash.h"
+#import "StubClass.h"
 
 @implementation NSObject (AvoidCrash)
 
@@ -27,6 +27,9 @@
         
         //setValuesForKeysWithDictionary:
         [AvoidCrash exchangeInstanceMethod:[self class] method1Sel:@selector(setValuesForKeysWithDictionary:) method2Sel:@selector(avoidCrashSetValuesForKeysWithDictionary:)];
+        
+        //forwardingTargetForSelector
+        [AvoidCrash exchangeInstanceMethod:[self class] method1Sel:@selector(forwardingTargetForSelector:) method2Sel:@selector(AvoidCrashForwardingTargetForSelector:)];
     });
     
     
@@ -110,5 +113,13 @@
     }
 }
 
+- (id)AvoidCrashForwardingTargetForSelector:(SEL)aSelector {
+    id proxy = [self AvoidCrashForwardingTargetForSelector:aSelector];
+    if (!proxy) {
+        proxy = [[StubClass alloc] init];
+        AvoidCrashLog(@"%@", [NSThread callStackSymbols]);
+    }
+    return proxy;
+}
 
 @end

@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self NSMutableArray_Test_GetObjectsRange];
+    [self noSelectorCrash];
 }
 
 
@@ -326,7 +326,13 @@
 
 
 
-
+/**
+ 测试没有selector的crash
+ */
+- (void)noSelectorCrash {
+    id wSelf = self;
+    [wSelf performSelector:@selector(testCrash)];
+}
 
 //=================================================================
 //                      执行所有test的方法
@@ -378,6 +384,7 @@
     [self KVC_SetValueForKey];
     [self KVC_SetValueforKeyPath];
     [self KVC_SetValuesForKeysWithDictionary];
+    [self noSelectorCrash];
 }
 
 
