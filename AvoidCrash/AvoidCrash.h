@@ -63,13 +63,14 @@
  *  become effective . You can call becomeEffective method in AppDelegate didFinishLaunchingWithOptions
  *  
  *  开始生效.你可以在AppDelegate的didFinishLaunchingWithOptions方法中调用becomeEffective方法
- *  默认不开启  对”unrecognized selector sent to instance”防止崩溃的处理
+ *  【默认不开启  对”unrecognized selector sent to instance”防止崩溃的处理】
  *
  *  这是全局生效，若你只需要部分生效，你可以单个进行处理，比如:
  *  [NSArray avoidCrashExchangeMethod];
  *  [NSMutableArray avoidCrashExchangeMethod];
  *  .................
  *  .................
+ *
  */
 + (void)becomeEffective;
 
@@ -84,9 +85,10 @@
  *    SDK等库冲突，造成一些奇怪的现象，建议使用 上面的一个方法 becomeEffective
  *
  *    若坚持要捕获 unrecognized selector sent to instance的异常，
- *    请配合下面的两个个方法进行使用，来防止一些冲突
+ *    请配合下面的三个方法进行使用，来防止一些冲突
  *          + (void)addIgnoreMethod:(NSString *)methodName;
  *          + (void)addIgnoreClassNamePrefix:(NSString *)classNamePrefix;
+ *          + (void)addIgnoreClassNameSuffix:(NSString *)classNameSuffix;
  */
 + (void)makeAllEffective;
 
@@ -98,12 +100,14 @@
 + (void)addIgnoreMethod:(NSString *)methodName;
 
 /**
- *  添加需要忽略的方法所在的类名 的前缀
+ *  添加需要忽略的方法所在的类名 的前缀(也可以是完整的类名)
  */
 + (void)addIgnoreClassNamePrefix:(NSString *)classNamePrefix;
 
-
-
+/**
+ *  添加需要忽略的方法所在的类名 的后缀(也可以是完整的类名)
+ */
++ (void)addIgnoreClassNameSuffix:(NSString *)classNameSuffix;
 
 
 

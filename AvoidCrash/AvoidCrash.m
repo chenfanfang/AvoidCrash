@@ -63,6 +63,10 @@
     [NSObject addIgnoreClassNamePrefix:classNamePrefix];
 }
 
++ (void)addIgnoreClassNameSuffix:(NSString *)classNameSuffix {
+    [NSObject addIgnoreClassNameSuffix:classNameSuffix];
+}
+
 
 /**
  *  类方法的交换
@@ -199,7 +203,7 @@
     
     //unrecognized selector sent to instance
     if (methodName.length) {
-        NSString *warmDesc = [NSString stringWithFormat:@"\n【提醒】\n若这个方法是系统类的方法或者是第三方SDK的与系统或者第三方SDK冲突了,\n请在初始化AvoidCrash的地方调用\n[AvoidCrash addIgnoreMethod:@\"%@\"];\n或者\n[AvoidCrash addIgnoreClassNamePrefix:@\"%@\"]\n当然，可以将%@拆开成前缀\n添加完毕之后，AvoidCrash将自动忽略此方法的崩溃处理,并且交给系统或者第三方SDK处理\n详情见AvoidCrash.h文件中的描述",methodName,className,className];
+        NSString *warmDesc = [NSString stringWithFormat:@"\n【温馨提示】\n若此处异常的捕获导致程序出现异常现象，可能是由于与系统功能或者第三方SDK的功能冲突了\n请在初始化AvoidCrash的地方调用\n[AvoidCrash addIgnoreMethod:@\"%@\"];\n或者:\n[AvoidCrash addIgnoreClassNamePrefix:@\"%@\"]\n或者:\n[AvoidCrash addIgnoreClassNameSuffix:@\"%@\"]\n\n也可以将%@拆开成前缀或者后缀\n添加完毕之后，AvoidCrash将自动忽略此方法的崩溃处理,并且交给系统或者第三方SDK处理\n详情见AvoidCrash.h文件中的描述\n\n若没有产生程序异常现象，请忽略【温馨提示】中的内容，无需进行任何操作",methodName,className,className,className];
         logErrorMessage = [NSString stringWithFormat:@"%@\n\n%@",logErrorMessage,warmDesc];
     }
     logErrorMessage = [NSString stringWithFormat:@"%@\n\n%@\n\n",logErrorMessage,AvoidCrashSeparator];

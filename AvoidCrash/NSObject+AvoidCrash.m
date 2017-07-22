@@ -28,6 +28,13 @@
     }
 }
 
++ (void)addIgnoreClassNameSuffix:(NSString *)classNameSuffix {
+    [NSObject setupIgnoreClassNameSuffixArrM];
+    if ([ignoreClassNameSuffixArrM containsObject:classNameSuffix] == NO) {
+        [ignoreClassNameSuffixArrM addObject:classNameSuffix];
+    }
+}
+
 
 + (void)avoidCrashExchangeMethodIfDealWithNoneSel:(BOOL)ifDealWithNoneSel {
     
@@ -140,7 +147,7 @@
 
 static NSMutableArray *ignoreMethodNameArrM = nil;
 static NSMutableArray *ignoreClassNamePrefixArrM = nil;
-
+static NSMutableArray *ignoreClassNameSuffixArrM = nil;
 
 
 - (id)avoidCrashForwardingTargetForSelector:(SEL)aSelector {
@@ -149,15 +156,11 @@ static NSMutableArray *ignoreClassNamePrefixArrM = nil;
     if (!proxy) {
         [NSObject setupIgnoreClassNamePrefixArrM];
         
-        BOOL isIgnore = NO;
         NSString *methodName = NSStringFromSelector(aSelector);
         NSString *className = NSStringFromClass([self class]);
-        for (NSString *prefix in ignoreClassNamePrefixArrM) {
-            if ([className hasPrefix:prefix]) {
-                isIgnore = YES;
-                break;
-            }
-        }
+        
+        
+        BOOL isIgnore = [NSObject isIgnoreWithClassName:className method:methodName];
         
         if (!isIgnore) {
             
@@ -173,6 +176,48 @@ static NSMutableArray *ignoreClassNamePrefixArrM = nil;
 }
 
 
++ (BOOL)isIgnoreWithClassName:(NSString *)className method:(NSString *)methodName {
+    __block BOOL isIgnore = NO;
+    
+    NSString *classNamePrefix2 = nil;
+    if (className.length >= 2) {
+        classNamePrefix2 = [className substringToIndex:2];
+        NSString *regularExpStr = @"_[A-Z]";
+        NSRegularExpression *regularExp = [[NSRegularExpression alloc] initWithPattern:regularExpStr options:NSRegularExpressionCaseInsensitive error:nil];
+        
+        [regularExp enumerateMatchesInString:classNamePrefix2 options:NSMatchingReportProgress range:NSMakeRange(0, classNamePrefix2.length) usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
+            
+            if (result) {
+                isIgnore = YES;
+            }
+            *stop = YES;
+        }];
+    }
+    
+    if (isIgnore) {
+        return isIgnore;
+    }
+    
+    for (NSString *prefix in ignoreClassNamePrefixArrM) {
+        if ([className hasPrefix:prefix]) {
+            return YES;
+        }
+    }
+    
+    for (NSString *suffix in ignoreClassNameSuffixArrM) {
+        if ([className hasSuffix:suffix]) {
+            return YES;
+        }
+    }
+    
+    for (NSString *method in ignoreMethodNameArrM) {
+        if ([method isEqualToString:methodName]) {
+            return YES;
+        }
+    }
+    return isIgnore;
+}
+
 
 + (void)setupIgnoreMethodNameArrM {
     if (!ignoreMethodNameArrM) {
@@ -183,10 +228,13 @@ static NSMutableArray *ignoreClassNamePrefixArrM = nil;
 
 + (void)setupIgnoreClassNamePrefixArrM {
     if (!ignoreClassNamePrefixArrM) {
-        ignoreClassNamePrefixArrM = @[
-                                        @"_NS",
-                                        @"_UI"
-                                        ].mutableCopy;
+        ignoreClassNamePrefixArrM = [NSMutableArray array];
+    }
+}
+
++ (void)setupIgnoreClassNameSuffixArrM {
+    if (!ignoreClassNameSuffixArrM) {
+        ignoreClassNameSuffixArrM = [NSMutableArray array];
     }
 }
 

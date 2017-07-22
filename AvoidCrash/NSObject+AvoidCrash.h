@@ -11,12 +11,22 @@
 
 @interface NSObject (AvoidCrash)
 
-
+/** 
+ *  ifDealWithNoneSel : 是否开启"unrecognized selector sent to instance"异常的捕获
+ */
 + (void)avoidCrashExchangeMethodIfDealWithNoneSel:(BOOL)ifDealWithNoneSel;
 
+
+
+
+
+//=========================用户请忽略下面方法===============================
+
 + (void)addIgnoreMethod:(NSString *)methodName;
-//+ (void)addIgnoreMethodDict:(NSDictionary *)methodDict;
+
 + (void)addIgnoreClassNamePrefix:(NSString *)classNamePrefix;
+
++ (void)addIgnoreClassNameSuffix:(NSString *)classNameSuffix;
 
 
 @end
@@ -28,5 +38,5 @@
  *  2.- (void)setValue:(id)value forKeyPath:(NSString *)keyPath
  *  3.- (void)setValue:(id)value forUndefinedKey:(NSString *)key //这个方法一般用来重写，不会主动调用
  *  4.- (void)setValuesForKeysWithDictionary:(NSDictionary<NSString *,id> *)keyedValues
- *
+ *  5. unrecognized selector sent to instance
  */

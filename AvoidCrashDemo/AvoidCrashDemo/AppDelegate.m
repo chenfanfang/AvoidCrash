@@ -21,9 +21,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    //启动防止崩溃功能
-//    [AvoidCrash becomeEffective];
+    //启动防止崩溃功能(注意区分becomeEffective和makeAllEffective的区别)
+    //建议在初始化完第三方SDK之后再启动防止崩溃功能
+    //[AvoidCrash becomeEffective];
     [AvoidCrash makeAllEffective];
+    
     
    /*
     *  [AvoidCrash becomeEffective]，是全局生效。若你只需要部分生效，你可以单个进行处理，比如:
