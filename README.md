@@ -6,6 +6,7 @@
 一个已经发布到AppStore上的App，最忌讳的就是崩溃问题。为什么在开发阶段或者测试阶段都不会崩溃，而发布到AppStore上就崩溃了呢？究其根源，最主要的原因就是数据的错乱。特别是 服务器返回数据的错乱，将严重影响到我们的App。
 
 
+
 ---
 Foundation框架存在许多潜在崩溃的危险
 ===
@@ -65,6 +66,8 @@ pod  AvoidCrash
 
 
 ---
+
+
 ##使用方法
 
 - 在AppDelegate的didFinishLaunchingWithOptions方法中添加如下代码，让AvoidCrash生效
@@ -115,6 +118,8 @@ pod  AvoidCrash
 目前可以防止崩溃的方法有
 ===
 ---
+
+
 - unrecognized selector sent to instance
  *  `1. 对”unrecognized selector sent to instance”防止崩溃的处理`
 
@@ -147,6 +152,8 @@ pod  AvoidCrash
   - `2. +(instancetype)dictionaryWithObjects:(const id  _Nonnull __unsafe_unretained *)objects forKeys:(const id<NSCopying>  _Nonnull __unsafe_unretained *)keys count:(NSUInteger)cnt`
 
 ---
+
+
 - NSMutableDictionary
   - `1. - (void)setObject:(id)anObject forKey:(id<NSCopying>)aKey`
   - `2. - (void)removeObjectForKey:(id)aKey`
@@ -154,6 +161,8 @@ pod  AvoidCrash
   
   
 ---
+
+
 - NSString
 	- `1. - (unichar)characterAtIndex:(NSUInteger)index`
 	- `2. - (NSString *)substringFromIndex:(NSUInteger)from`
@@ -165,6 +174,7 @@ pod  AvoidCrash
 
 ---
 
+
 - NSMutableString
 	- `1. 由于NSMutableString是继承于NSString,所以这里和NSString有些同样的方法就不重复写了`
 	- `2. - (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)aString`
@@ -173,6 +183,8 @@ pod  AvoidCrash
 
   
 ---
+
+
 - KVC
   -  `1.- (void)setValue:(id)value forKey:(NSString *)key`
   -  `2.- (void)setValue:(id)value forKeyPath:(NSString *)keyPath`
@@ -187,6 +199,7 @@ pod  AvoidCrash
  *  `3.- (instancetype)initWithString:(NSString *)str attributes:(NSDictionary<NSString *,id> *)attrs`
 
 ---
+
 
 - NSMutableAttributedString
  *  `1.- (instancetype)initWithString:(NSString *)str`
