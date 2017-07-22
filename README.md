@@ -123,7 +123,7 @@ pod  AvoidCrash
 
 
 - unrecognized selector sent to instance
- *  `1. 对”unrecognized selector sent to instance”防止崩溃的处理`
+   -  `1. 对”unrecognized selector sent to instance”防止崩溃的处理`
 
 ---
 
