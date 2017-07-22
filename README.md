@@ -68,7 +68,9 @@ pod  AvoidCrash
 ---
 
 
-##使用方法
+使用方法
+===
+
 
 - 在AppDelegate的didFinishLaunchingWithOptions方法中添加如下代码，让AvoidCrash生效
 
@@ -123,6 +125,7 @@ pod  AvoidCrash
 - unrecognized selector sent to instance
  *  `1. 对”unrecognized selector sent to instance”防止崩溃的处理`
 
+---
 
  - NSArray
    -  `1. NSArray的快速创建方式 NSArray *array = @[@"chenfanfang", @"AvoidCrash"];  //这种创建方式其实调用的是2中的方法`
@@ -194,16 +197,16 @@ pod  AvoidCrash
 ---
 
 - NSAttributedString
- *  `1.- (instancetype)initWithString:(NSString *)str`
- *  `2.- (instancetype)initWithAttributedString:(NSAttributedString *)attrStr`
- *  `3.- (instancetype)initWithString:(NSString *)str attributes:(NSDictionary<NSString *,id> *)attrs`
+  -  `1.- (instancetype)initWithString:(NSString *)str`
+  -  `2.- (instancetype)initWithAttributedString:(NSAttributedString *)attrStr`
+  -  `3.- (instancetype)initWithString:(NSString *)str attributes:(NSDictionary<NSString *,id> *)attrs`
 
 ---
 
 
 - NSMutableAttributedString
- *  `1.- (instancetype)initWithString:(NSString *)str`
- *  `2.- (instancetype)initWithString:(NSString *)str attributes:(NSDictionary<NSString *,id> *)attrs`
+  -  `1.- (instancetype)initWithString:(NSString *)str`
+  -  `2.- (instancetype)initWithString:(NSString *)str attributes:(NSDictionary<NSString *,id> *)attrs`
 
 
 更新
@@ -212,8 +215,13 @@ pod  AvoidCrash
 #### 2017-07-22
 - 	增加对”unrecognized selector sent to instance”防止崩溃的处理
 
+---
+
 #### 2016-12-19
 - Release环境下取消控制台的输出。
+
+
+---
 
 #### 2016-12-1
 - 处理数组的类簇问题，提高兼容性，不论是由于array[100]方式，还是[array objectAtIndex:100]方式 获取数组中的某个元素操作不当而导致的crash,都能被拦截防止崩溃。
@@ -225,10 +233,13 @@ pod  AvoidCrash
 - 新增防止崩溃 （NSArray、NSMutableArray） `- (void)getObjects:(__unsafe_unretained id  _Nonnull *)objects range:(NSRange)range`
 
 
+---
+
 #### 2016-11-29
 - 修复在键盘弹出状态下，按Home键进入后台会导致崩溃的bug。
 - 新增防止崩溃（NSArray、NSMutableArray） `- (NSArray *)objectsAtIndexes:(NSIndexSet *)indexes`
 
+---
 
 
 
@@ -239,7 +250,7 @@ pod  AvoidCrash
 - 增加对NSAttributedString防止崩溃的处理
 - 增加对NSMutableAttributedString防止崩溃的处理
 
-
+---
 
 
 
