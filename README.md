@@ -75,19 +75,20 @@ pod  AvoidCrash
 - 在AppDelegate的didFinishLaunchingWithOptions方法中添加如下代码，让AvoidCrash生效
 
 ```
-//这句代码会让AvoidCrash生效，若没有如下代码，则AvoidCrash就不起作用
+	   //让AvoidCrash生效方法有两个becomeEffective和makeAllEffective，若都不调用，则AvoidCrash就不起作用
        [AvoidCrash becomeEffective]; //【默认不开启  对”unrecognized selector sent to instance”防止崩溃的处理】
        
        //若要开启对对”unrecognized selector sent to instance”防止崩溃的处理】，请使用
        //[AvoidCrash makeAllEffective],使用注意点，请看AvoidCrash.h中的描述
+       //【建议在第三方SDK初始化完毕之后再调用】[AvoidCrash makeAllEffective]
        
-   /*
-    *  [AvoidCrash becomeEffective]和[AvoidCrash makeAllEffective]是全局生效。若你只需要部分生效，你可以单个进行处理，比如:
-    *  [NSArray avoidCrashExchangeMethod];
-    *  [NSMutableArray avoidCrashExchangeMethod];
-    *  .................
-    *  .................
-    */
+     /*
+      [AvoidCrash becomeEffective]和[AvoidCrash makeAllEffective]是全局生效。若你只需要部分生效，你可以单个进行处理，比如:
+      [NSArray avoidCrashExchangeMethod];
+      [NSMutableArray avoidCrashExchangeMethod];
+      .................
+      .................
+      */
 ```
 
 - 若你想要获取崩溃日志的所有详细信息，只需添加通知的监听，监听的通知名为:AvoidCrashNotification
