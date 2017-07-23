@@ -24,7 +24,33 @@
     //启动防止崩溃功能(注意区分becomeEffective和makeAllEffective的区别)
     //建议在初始化完第三方SDK之后再启动防止崩溃功能
     //[AvoidCrash becomeEffective];
+    
+    
     [AvoidCrash makeAllEffective];
+    
+    
+    /*
+    //假设你不想捕获 [_UITraitBasedAppearance _setMagnifierLineColor:]:unrecognized selector sent to instance
+    
+    //方法1
+    [AvoidCrash addIgnoreClassNamePrefix:@"_UITraitBasedAppearance"];
+    //也可以写成前缀模式,或自动忽略所有此前缀类名的类的方法的捕获
+    //[AvoidCrash addIgnoreClassNamePrefix:@"_UI"];
+    
+    
+    //方法2
+    [AvoidCrash addIgnoreClassNameSuffix:@"_UITraitBasedAppearance"];
+    //也可以写成后缀模式,或自动忽略所有此后缀类名的类的方法的捕获
+    //[AvoidCrash addIgnoreClassNameSuffix:@"Appearance"];
+    
+    //方法3
+    //[AvoidCrash addIgnoreMethod:@"_setMagnifierLineColor:"];
+    */
+    
+    
+    
+    
+    
     
     
    /*
