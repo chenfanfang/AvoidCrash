@@ -76,9 +76,13 @@ pod  AvoidCrash
 
 ```
 //这句代码会让AvoidCrash生效，若没有如下代码，则AvoidCrash就不起作用
-[AvoidCrash becomeEffective]; 
+       [AvoidCrash becomeEffective]; //【默认不开启  对”unrecognized selector sent to instance”防止崩溃的处理】
+       
+       //若要开启对对”unrecognized selector sent to instance”防止崩溃的处理】，请使用
+       //[AvoidCrash makeAllEffective],使用注意点，请看AvoidCrash.h中的描述
+       
    /*
-    *  [AvoidCrash becomeEffective]，是全局生效。若你只需要部分生效，你可以单个进行处理，比如:
+    *  [AvoidCrash becomeEffective]和[AvoidCrash makeAllEffective]是全局生效。若你只需要部分生效，你可以单个进行处理，比如:
     *  [NSArray avoidCrashExchangeMethod];
     *  [NSMutableArray avoidCrashExchangeMethod];
     *  .................
@@ -212,7 +216,7 @@ pod  AvoidCrash
 更新
 ===
 
-#### 2017-07-22
+#### 2017-07-23
 - 	增加对”unrecognized selector sent to instance”防止崩溃的处理
 
 ---
