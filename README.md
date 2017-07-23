@@ -75,7 +75,7 @@ pod  AvoidCrash
 - 在AppDelegate的didFinishLaunchingWithOptions方法中添加如下代码，让AvoidCrash生效
 
 ```
-	   //让AvoidCrash生效方法有两个becomeEffective和makeAllEffective，若都不调用，则AvoidCrash就不起作用
+	 //让AvoidCrash生效方法有两个becomeEffective和makeAllEffective，若都不调用，则AvoidCrash就不起作用
        [AvoidCrash becomeEffective]; //【默认不开启  对”unrecognized selector sent to instance”防止崩溃的处理】
        
        //若要开启对对”unrecognized selector sent to instance”防止崩溃的处理】，请使用
