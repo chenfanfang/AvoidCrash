@@ -217,6 +217,10 @@ pod  AvoidCrash
 更新
 ===
 
+#### 2017-07-25
+- 	优化对”unrecognized selector sent to instance”防止崩溃的处理
+
+
 #### 2017-07-23
 - 	增加对”unrecognized selector sent to instance”防止崩溃的处理
 
