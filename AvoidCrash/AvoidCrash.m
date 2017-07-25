@@ -106,7 +106,7 @@
 /**
  *  获取堆栈主要崩溃精简化的信息<根据正则表达式匹配出来>
  *
- *  @param callStackSymbolStr 堆栈主要崩溃信息
+ *  @param callStackSymbols 堆栈主要崩溃信息
  *
  *  @return 堆栈主要崩溃精简化的信息
  */
@@ -162,10 +162,6 @@
  */
 + (void)noteErrorWithException:(NSException *)exception defaultToDo:(NSString *)defaultToDo {
 
-    [self noteErrorWithException:exception defaultToDo:defaultToDo methodName:nil className:nil];
-}
-
-+ (void)noteErrorWithException:(NSException *)exception defaultToDo:(NSString *)defaultToDo methodName:(NSString *)methodName className:(NSString *)className {
     //堆栈数据
     NSArray *callStackSymbolsArr = [NSThread callStackSymbols];
     
@@ -188,11 +184,6 @@
     
     NSString *logErrorMessage = [NSString stringWithFormat:@"\n\n%@\n\n%@\n%@\n%@\n%@",AvoidCrashSeparatorWithFlag, errorName, errorReason, errorPlace, defaultToDo];
     
-    //unrecognized selector sent to instance
-    if (methodName.length) {
-        NSString *warmDesc = [NSString stringWithFormat:@"\n【温馨提示】\n若此处异常的捕获导致程序出现异常现象，可能是由于与系统功能或者第三方SDK的功能冲突了\n请在初始化AvoidCrash的地方调用\n[AvoidCrash addIgnoreMethod:@\"%@\"];\n或者:\n[AvoidCrash addIgnoreClassNamePrefix:@\"%@\"]\n或者:\n[AvoidCrash addIgnoreClassNameSuffix:@\"%@\"]\n\n也可以将%@拆开成前缀或者后缀\n添加完毕之后，AvoidCrash将自动忽略此方法的崩溃处理,并且交给系统或者第三方SDK处理\n详情见AvoidCrash.h文件中的描述\n\n若没有产生程序异常现象，请忽略【温馨提示】中的内容，无需进行任何操作",methodName,className,className,className];
-        logErrorMessage = [NSString stringWithFormat:@"%@\n\n%@",logErrorMessage,warmDesc];
-    }
     logErrorMessage = [NSString stringWithFormat:@"%@\n\n%@\n\n",logErrorMessage,AvoidCrashSeparator];
     AvoidCrashLog(@"%@",logErrorMessage);
     
@@ -214,6 +205,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:errorInfoDic];
     });
 }
+
 
 
 @end

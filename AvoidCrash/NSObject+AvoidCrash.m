@@ -66,7 +66,7 @@
         
     } @catch (NSException *exception) {
         NSString *defaultToDo = AvoidCrashDefaultIgnore;
-        [AvoidCrash noteErrorWithException:exception defaultToDo:defaultToDo methodName:nil className:nil];
+        [AvoidCrash noteErrorWithException:exception defaultToDo:defaultToDo];
         
     } @finally {
         

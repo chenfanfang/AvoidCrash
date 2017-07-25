@@ -21,7 +21,7 @@
     [super viewDidLoad];
     
 
-    [self executeAllTestMethod];
+    [self testNoSelectorCrash];
     
 
 }

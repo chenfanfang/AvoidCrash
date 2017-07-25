@@ -92,6 +92,5 @@
 
 + (void)noteErrorWithException:(NSException *)exception defaultToDo:(NSString *)defaultToDo;
 
-+ (void)noteErrorWithException:(NSException *)exception defaultToDo:(NSString *)defaultToDo methodName:(NSString *)methodName className:(NSString *)className;
 
 @end
