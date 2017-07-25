@@ -1,6 +1,6 @@
 //
 //  NSObject+AvoidCrash.h
-//  AvoidCrashDemo
+//  https://github.com/chenfanfang/AvoidCrash
 //
 //  Created by mac on 16/10/11.
 //  Copyright © 2016年 chenfanfang. All rights reserved.
@@ -17,16 +17,6 @@
 + (void)avoidCrashExchangeMethodIfDealWithNoneSel:(BOOL)ifDealWithNoneSel;
 
 
-
-
-
-//=========================用户请忽略下面方法===============================
-
-+ (void)addIgnoreMethod:(NSString *)methodName;
-
-+ (void)addIgnoreClassNamePrefix:(NSString *)classNamePrefix;
-
-+ (void)addIgnoreClassNameSuffix:(NSString *)classNameSuffix;
 
 
 @end

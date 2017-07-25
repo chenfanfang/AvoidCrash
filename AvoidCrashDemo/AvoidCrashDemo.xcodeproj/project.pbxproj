@@ -25,8 +25,8 @@
 		04FB61D91DB2361400C079F2 /* NSAttributedString+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB61D81DB2361400C079F2 /* NSAttributedString+AvoidCrash.m */; };
 		04FB61DC1DB25FE500C079F2 /* NSMutableAttributedString+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB61DB1DB25FE500C079F2 /* NSMutableAttributedString+AvoidCrash.m */; };
 		04FEB8FF1DA55E6B00B5647E /* NSMutableString+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB8FE1DA55E6B00B5647E /* NSMutableString+AvoidCrash.m */; };
-		E531DAA21E0CF40A00D832E2 /* AvoidCrashStubProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = E531DAA11E0CF40A00D832E2 /* AvoidCrashStubProxy.m */; };
 		F63018CE1F22EFA000F176DF /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = F63018CD1F22EFA000F176DF /* Person.m */; };
+		F6EBB7B51F271CCB00ED3B15 /* AvoidCrashStubProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = F6EBB7B41F271CCB00ED3B15 /* AvoidCrashStubProxy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,11 +83,11 @@
 		04FB61DB1DB25FE500C079F2 /* NSMutableAttributedString+AvoidCrash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+AvoidCrash.m"; sourceTree = "<group>"; };
 		04FEB8FD1DA55E6B00B5647E /* NSMutableString+AvoidCrash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableString+AvoidCrash.h"; sourceTree = "<group>"; };
 		04FEB8FE1DA55E6B00B5647E /* NSMutableString+AvoidCrash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableString+AvoidCrash.m"; sourceTree = "<group>"; };
-		E531DAA01E0CF40A00D832E2 /* AvoidCrashStubProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvoidCrashStubProxy.h; sourceTree = "<group>"; };
-		E531DAA11E0CF40A00D832E2 /* AvoidCrashStubProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvoidCrashStubProxy.m; sourceTree = "<group>"; };
 		F63018CC1F22EFA000F176DF /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		F63018CD1F22EFA000F176DF /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		F63018D21F23153A00F176DF /* AvoidCrashProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvoidCrashProtocol.h; sourceTree = "<group>"; };
+		F6EBB7B31F271CCB00ED3B15 /* AvoidCrashStubProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvoidCrashStubProxy.h; sourceTree = "<group>"; };
+		F6EBB7B41F271CCB00ED3B15 /* AvoidCrashStubProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvoidCrashStubProxy.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,9 +185,9 @@
 			children = (
 				043C64161D93A60C00A0B0E9 /* AvoidCrash.h */,
 				043C64171D93A60C00A0B0E9 /* AvoidCrash.m */,
+				F6EBB7B31F271CCB00ED3B15 /* AvoidCrashStubProxy.h */,
+				F6EBB7B41F271CCB00ED3B15 /* AvoidCrashStubProxy.m */,
 				F63018D21F23153A00F176DF /* AvoidCrashProtocol.h */,
-				E531DAA01E0CF40A00D832E2 /* AvoidCrashStubProxy.h */,
-				E531DAA11E0CF40A00D832E2 /* AvoidCrashStubProxy.m */,
 				040330201DACD96E00AE5A41 /* NSObject+AvoidCrash.h */,
 				040330211DACD96E00AE5A41 /* NSObject+AvoidCrash.m */,
 				043C64181D93A60C00A0B0E9 /* NSArray+AvoidCrash.h */,
@@ -344,12 +344,12 @@
 				043C64221D93A60C00A0B0E9 /* NSDictionary+AvoidCrash.m in Sources */,
 				043C64211D93A60C00A0B0E9 /* NSArray+AvoidCrash.m in Sources */,
 				043C63EA1D938EE100A0B0E9 /* ViewController.m in Sources */,
+				F6EBB7B51F271CCB00ED3B15 /* AvoidCrashStubProxy.m in Sources */,
 				043C63E71D938EE100A0B0E9 /* AppDelegate.m in Sources */,
 				043C63E41D938EE100A0B0E9 /* main.m in Sources */,
 				040330221DACD96E00AE5A41 /* NSObject+AvoidCrash.m in Sources */,
 				04C3DFD31DA4EED200E18858 /* NSString+AvoidCrash.m in Sources */,
 				04FEB8FF1DA55E6B00B5647E /* NSMutableString+AvoidCrash.m in Sources */,
-				E531DAA21E0CF40A00D832E2 /* AvoidCrashStubProxy.m in Sources */,
 				043C64231D93A60C00A0B0E9 /* NSMutableArray+AvoidCrash.m in Sources */,
 				04FB61D91DB2361400C079F2 /* NSAttributedString+AvoidCrash.m in Sources */,
 				04FB61DC1DB25FE500C079F2 /* NSMutableAttributedString+AvoidCrash.m in Sources */,

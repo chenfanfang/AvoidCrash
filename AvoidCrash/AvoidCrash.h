@@ -1,6 +1,6 @@
 //
 //  AvoidCrash.h
-//  AvoidCrash
+//  https://github.com/chenfanfang/AvoidCrash
 //
 //  Created by mac on 16/9/21.
 //  Copyright © 2016年 chenfanfang. All rights reserved.
@@ -60,7 +60,6 @@
 
 
 /**
- *  become effective . You can call becomeEffective method in AppDelegate didFinishLaunchingWithOptions
  *  
  *  开始生效.你可以在AppDelegate的didFinishLaunchingWithOptions方法中调用becomeEffective方法
  *  【默认不开启  对”unrecognized selector sent to instance”防止崩溃的处理】
@@ -78,41 +77,8 @@
 /** 
  *  相比于becomeEffective，增加
  *  对”unrecognized selector sent to instance”防止崩溃的处理
- *  但是:
- *      不对 UI 开头的类进行处理， 如:UIView
- *      不对 _字母开头的类进行处理，如:_UIPropertyBasedAppearance、_NSXPCDistantObjectWithError
- *  建议类名命名规范，不要以UI开头，_字母开头
- *
- *   ⚠️警告
- *    对”unrecognized selector sent to instance”防止崩溃的处理 风险性较高
- *    请思考再三，建议不要对此类崩溃进行处理，因为容易和系统的处理方法冲突或者与第三方
- *    SDK等库冲突，造成一些奇怪的现象，建议使用 上面的一个方法 becomeEffective
- *
- *    若坚持要捕获 unrecognized selector sent to instance的异常，
- *    请配合下面的三个方法进行使用，来忽略一些方法的处理，以便防止一些冲突
- *          + (void)addIgnoreMethod:(NSString *)methodName;
- *          + (void)addIgnoreClassNamePrefix:(NSString *)classNamePrefix;
- *          + (void)addIgnoreClassNameSuffix:(NSString *)classNameSuffix;
  */
 + (void)makeAllEffective;
-
-
-/** 
- *  添加需要忽略的方法名称
- *  控制台会给出详细的信息来提示你  哪些方法是否需要忽略
- */
-+ (void)addIgnoreMethod:(NSString *)methodName;
-
-/**
- *  添加需要忽略的方法所在的类名 的前缀(也可以是完整的类名)
- */
-+ (void)addIgnoreClassNamePrefix:(NSString *)classNamePrefix;
-
-/**
- *  添加需要忽略的方法所在的类名 的后缀(也可以是完整的类名)
- */
-+ (void)addIgnoreClassNameSuffix:(NSString *)classNameSuffix;
-
 
 
 

@@ -1,13 +1,15 @@
 //
-//  StubClass.h
-//  AvoidCrashDemo
+//  AvoidCrashStubProxy.h
+//  https://github.com/chenfanfang/AvoidCrash
 //
-//  Created by 翟现旗 on 2016/12/19.
-//  Copyright © 2016年 chenfanfang. All rights reserved.
+//  Created by chenfanfang on 2017/7/25.
+//  Copyright © 2017年 chenfanfang. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 @interface AvoidCrashStubProxy : NSObject
+
+- (void)proxyMethod;
 
 @end
