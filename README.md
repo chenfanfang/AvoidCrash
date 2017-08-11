@@ -1,4 +1,4 @@
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/chenfanfang/AvoidCrash) [![pod](https://img.shields.io/badge/pod-2.1.2-orange.svg)](https://github.com/chenfanfang/AvoidCrash) [![platform](https://img.shields.io/badge/platform-iOS-ff69b4.svg)](https://github.com/chenfanfang/AvoidCrash) [![aboutme](https://img.shields.io/badge/about%20me-chenfanfang-blue.svg)](http://www.jianshu.com/users/80fadb71940d/latest_articles)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/chenfanfang/AvoidCrash) [![pod](https://img.shields.io/badge/pod-2.3.0--beta-yellow.svg)](https://github.com/chenfanfang/AvoidCrash) [![platform](https://img.shields.io/badge/platform-iOS-ff69b4.svg)](https://github.com/chenfanfang/AvoidCrash) [![aboutme](https://img.shields.io/badge/about%20me-chenfanfang-blue.svg)](http://www.jianshu.com/users/80fadb71940d/latest_articles)
 
 
 前言
@@ -72,15 +72,15 @@ pod  AvoidCrash
 ===
 
 
-- 在AppDelegate的didFinishLaunchingWithOptions方法中添加如下代码，让AvoidCrash生效
 
+- AvoidCrash使用注意点讲解
 ```
        //让AvoidCrash生效方法有两个becomeEffective和makeAllEffective，若都不调用，则AvoidCrash就不起作用
        [AvoidCrash becomeEffective]; //【默认不开启  对”unrecognized selector sent to instance”防止崩溃的处理】
        
        //若要开启对对”unrecognized selector sent to instance”防止崩溃的处理】，请使用
-       //[AvoidCrash makeAllEffective],使用注意点，请看AvoidCrash.h中的描述
-       //【建议在第三方SDK初始化完毕之后再调用】[AvoidCrash makeAllEffective]
+       //[AvoidCrash makeAllEffective],使用注意点，请看AvoidCrash.h中的描述，必须配合[AvoidCrash setupNoneSelClassStringsArr:]的使用
+       //【建议在didFinishLaunchingWithOptions最初始位置调用】[AvoidCrash makeAllEffective]
        
      /*
       [AvoidCrash becomeEffective]和[AvoidCrash makeAllEffective]是全局生效。若你只需要部分生效，你可以单个进行处理，比如:
@@ -89,6 +89,36 @@ pod  AvoidCrash
       .................
       .................
       */
+```
+
+- 在AppDelegate的didFinishLaunchingWithOptions方法中的最初始位置添加如下代码，让AvoidCrash生效
+
+
+```
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    //启动防止崩溃功能(注意区分becomeEffective和makeAllEffective的区别)
+    //具体区别请看 AvoidCrash.h中的描述
+    //建议在didFinishLaunchingWithOptions最初始位置调用 上面的方法
+    
+    [AvoidCrash makeAllEffective];
+    
+    //若出现unrecognized selector sent to instance导致的崩溃并且控制台输出:
+    //-[__NSCFConstantString initWithName:age:height:weight:]: unrecognized selector sent to instance
+    //你可以将@"__NSCFConstantString"添加到如下数组中，当然，你也可以将它的父类添加到下面数组中
+    //比如，对于部分字符串，继承关系如下
+    //__NSCFConstantString --> __NSCFString --> NSMutableString --> NSString
+    //你可以将上面四个类随意一个添加到下面的数组中，建议直接填入 NSString
+    NSArray *noneSelClassStrings = @[
+                                     @"NSString"
+                                     ];
+    [AvoidCrash setupNoneSelClassStringsArr:noneSelClassStrings];
+    
+    
+    //监听通知:AvoidCrashNotification, 获取AvoidCrash捕获的崩溃日志的详细信息
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dealwithCrashMessage:) name:AvoidCrashNotification object:nil];
+    return YES;
+}
 ```
 
 - 若你想要获取崩溃日志的所有详细信息，只需添加通知的监听，监听的通知名为:AvoidCrashNotification
@@ -216,6 +246,8 @@ pod  AvoidCrash
 
 更新
 ===
+#### 2017-08-11
+- 	优化对”unrecognized selector sent to instance”防止崩溃的处理
 
 #### 2017-07-25
 - 	优化对”unrecognized selector sent to instance”防止崩溃的处理
