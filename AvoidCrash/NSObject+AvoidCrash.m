@@ -35,11 +35,7 @@
             [AvoidCrash exchangeInstanceMethod:[self class] method1Sel:@selector(methodSignatureForSelector:) method2Sel:@selector(avoidCrashMethodSignatureForSelector:)];
             [AvoidCrash exchangeInstanceMethod:[self class] method1Sel:@selector(forwardInvocation:) method2Sel:@selector(avoidCrashForwardInvocation:)];
         }
-        
-        
     });
-    
-    
 }
 
 
@@ -48,13 +44,35 @@
 //=================================================================
 #pragma mark - unrecognized selector sent to instance
 
-- (NSMethodSignature *)avoidCrashMethodSignatureForSelector:(SEL)aSelector {
 
+static NSMutableArray *noneSelClassStrings;
+
++ (void)setupNoneSelClassStringsArr:(NSArray<NSString *> *)classStrings {
+    
+    if (noneSelClassStrings) {
+        
+        NSString *warningMsg = [NSString stringWithFormat:@"\n\n%@\n\n[AvoidCrash setupNoneSelClassStringsArr:];\n调用一此即可，多次调用会自动忽略后面的调用\n\n%@\n\n",AvoidCrashSeparatorWithFlag,AvoidCrashSeparator];
+        AvoidCrashLog(@"%@",warningMsg);
+    }
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        noneSelClassStrings = classStrings.mutableCopy;
+    });
+}
+
+- (NSMethodSignature *)avoidCrashMethodSignatureForSelector:(SEL)aSelector {
+    
     NSMethodSignature *ms = [self avoidCrashMethodSignatureForSelector:aSelector];
     
+    
     if (ms == nil) {
-        // 创建一个非nil的方法签名，否则，不会进入forwardInvocation:方法进行消息转发
-        ms = [AvoidCrashStubProxy instanceMethodSignatureForSelector:@selector(proxyMethod)];
+        for (NSString *classStr in noneSelClassStrings) {
+            if ([self isKindOfClass:NSClassFromString(classStr)]) {
+                ms = [AvoidCrashStubProxy instanceMethodSignatureForSelector:@selector(proxyMethod)];
+                break;
+            }
+        }
     }
     return ms;
 }

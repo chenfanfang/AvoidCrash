@@ -24,39 +24,23 @@
 #import "NSAttributedString+AvoidCrash.h"
 #import "NSMutableAttributedString+AvoidCrash.h"
 
-
-/**
- *  if you want to get the reason that can cause crash, you can add observer notification in AppDelegate.
- *  for example: 
- *
- *  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dealwithCrashMessage:) name:AvoidCrashNotification object:nil];
- *  
- *  ===========================================================================
- *  
- *  你如果想要得到导致崩溃的原因，你可以在AppDelegate中监听通知，代码如上。
- *  不管你在哪个线程导致的crash,监听通知的方法都会在主线程中
- *
- */
-#define AvoidCrashNotification @"AvoidCrashNotification"
+//define
+#import "AvoidCrashStubProxy.h"
 
 
 
-//user can ignore below define
-#define AvoidCrashDefaultReturnNil  @"This framework default is to return nil to avoid crash."
-#define AvoidCrashDefaultIgnore     @"This framework default is to ignore this operation to avoid crash."
 
-
-
-#ifdef DEBUG
-
-#define  AvoidCrashLog(...) NSLog(@"%@",[NSString stringWithFormat:__VA_ARGS__])
-
-#else
-
-#define AvoidCrashLog(...)
-#endif
 
 @interface AvoidCrash : NSObject
+
+/**
+ *  你如果想要得到导致崩溃的原因，你可以在AppDelegate中监听通知
+ *  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dealwithCrashMessage:) name:AvoidCrashNotification object:nil];
+ *  具体使用方法，请查看 https://github.com/chenfanfang/AvoidCrash
+ *
+ */
+
+
 
 
 /**
@@ -77,13 +61,25 @@
 /** 
  *  相比于becomeEffective，增加
  *  对”unrecognized selector sent to instance”防止崩溃的处理
+ *
+ *  但是必须配合setupClassStringsArr:使用
  */
 + (void)makeAllEffective;
 
 
 
+/** 
+ *  初始化一个需要防止”unrecognized selector sent to instance”的崩溃的类名数组
+ */
++ (void)setupNoneSelClassStringsArr:(NSArray<NSString *> *)classStrings;
 
-//user can ignore below method <用户可以忽略以下方法>
+
+
+
+
+
+
+//you can ignore below method <您可以忽略以下方法>
 
 
 + (void)exchangeClassMethod:(Class)anClass method1Sel:(SEL)method1Sel method2Sel:(SEL)method2Sel;

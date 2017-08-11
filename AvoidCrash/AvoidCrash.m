@@ -9,8 +9,6 @@
 #import "AvoidCrash.h"
 
 
-#define AvoidCrashSeparator         @"================================================================"
-#define AvoidCrashSeparatorWithFlag @"========================AvoidCrash Log=========================="
 
 
 #define key_errorName        @"errorName"
@@ -53,6 +51,9 @@
     });
 }
 
++ (void)setupNoneSelClassStringsArr:(NSArray<NSString *> *)classStrings {
+    [NSObject setupNoneSelClassStringsArr:classStrings];
+}
 
 
 /**
