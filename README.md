@@ -53,7 +53,7 @@ AvoidCrash简介
 ### From CocoaPods【使用CocoaPods】
 
 ```ruby
-pod  AvoidCrash
+pod 'AvoidCrash', '~> 2.3.0-beta'
 ```
 
 ### Manually【手动导入】
