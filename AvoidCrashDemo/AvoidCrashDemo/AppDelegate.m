@@ -34,7 +34,7 @@
     
     //启动防止崩溃功能(注意区分becomeEffective和makeAllEffective的区别)
     //具体区别请看 AvoidCrash.h中的描述
-    //建议在didFinishLaunchingWithOptions最前面调用 上面的方法
+    //建议在didFinishLaunchingWithOptions最初始位置调用 上面的方法
     
     [AvoidCrash makeAllEffective];
     
