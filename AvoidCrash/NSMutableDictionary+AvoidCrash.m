@@ -19,7 +19,10 @@
         Class dictionaryM = NSClassFromString(@"__NSDictionaryM");
         
         //setObject:forKey:
-        [AvoidCrash exchangeInstanceMethod:dictionaryM method1Sel:@selector(setObject:forKey:) method2Sel:@selector(avoidCrashSetObject:forKey:)];
+        //[AvoidCrash exchangeInstanceMethod:dictionaryM method1Sel:@selector(setObject:forKey:) method2Sel:@selector(avoidCrashSetObject:forKey:)];
+        
+        //setObject:forKeyedSubscript:
+        [AvoidCrash exchangeInstanceMethod:dictionaryM method1Sel:@selector(setObject:forKeyedSubscript:) method2Sel:@selector(avoidCrashSetObject:forKeyedSubscript:)];
         
         
         //removeObjectForKey:
@@ -47,6 +50,23 @@
         
     }
 }
+
+//=================================================================
+//                  setObject:forKeyedSubscript:
+//=================================================================
+#pragma mark - setObject:forKeyedSubscript:
+- (void)avoidCrashSetObject:(id)obj forKeyedSubscript:(id<NSCopying>)key {
+    @try {
+        [self avoidCrashSetObject:obj forKeyedSubscript:key];
+    }
+    @catch (NSException *exception) {
+        [AvoidCrash noteErrorWithException:exception defaultToDo:AvoidCrashDefaultIgnore];
+    }
+    @finally {
+        
+    }
+}
+
 
 //=================================================================
 //                       removeObjectForKey:

@@ -6,7 +6,8 @@
 //  Copyright © 2017年 chenfanfang. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 
 @protocol AvoidCrashProtocol <NSObject>
 

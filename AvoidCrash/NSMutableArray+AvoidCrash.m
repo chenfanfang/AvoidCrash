@@ -23,6 +23,12 @@
         //objectAtIndex:
         [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(objectAtIndex:) method2Sel:@selector(avoidCrashObjectAtIndex:)];
         
+        //objectAtIndexedSubscript
+        if (AvoidCrashIsiOS(11.0)) {
+            [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(objectAtIndexedSubscript:) method2Sel:@selector(avoidCrashObjectAtIndexedSubscript:)];
+        }
+        
+        
         //setObject:atIndexedSubscript:
         [AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(setObject:atIndexedSubscript:) method2Sel:@selector(avoidCrashSetObject:atIndexedSubscript:)];
         
@@ -115,6 +121,26 @@
     @finally {
         return object;
     }
+}
+
+//=================================================================
+//                     objectAtIndexedSubscript:
+//=================================================================
+#pragma mark - objectAtIndexedSubscript:
+- (id)avoidCrashObjectAtIndexedSubscript:(NSUInteger)idx {
+    id object = nil;
+    
+    @try {
+        object = [self avoidCrashObjectAtIndexedSubscript:idx];
+    }
+    @catch (NSException *exception) {
+        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
+        [AvoidCrash noteErrorWithException:exception defaultToDo:defaultToDo];
+    }
+    @finally {
+        return object;
+    }
+    
 }
 
 

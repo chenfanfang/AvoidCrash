@@ -10,7 +10,7 @@
 
 
 #define AvoidCrashNotification @"AvoidCrashNotification"
-
+#define AvoidCrashIsiOS(version) ([[UIDevice currentDevice].systemVersion floatValue] >= version)
 
 
 //user can ignore below define

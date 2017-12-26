@@ -21,7 +21,13 @@
     [super viewDidLoad];
     
 
-    [self testNoSelectorCrash];
+    //[self testNoSelectorCrash];
+    
+    [self executeAllTestMethod];
+    
+    //[self NSArray_Test_ObjectAtIndex];
+    
+    //[self NSMutableDictionary_Test_SetObjectForKey];
     
 
 }
@@ -39,10 +45,10 @@
 }
 
 - (void)NSArray_Test_ObjectAtIndex {
-    NSArray *arr = @[@"chenfanfang", @"iOSDeveloper"];
+    NSArray *arr = @[@"chenfanfang", @"iOS_Dev"];
     
     NSObject *object = arr[100];
-    //NSObject *object = [arr objectAtIndex:100];
+    NSObject *object1 = [arr objectAtIndex:100];
     
     NSLog(@"object = %@",object);
 }
