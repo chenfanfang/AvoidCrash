@@ -4,6 +4,8 @@
 ===
 很多开发小伙伴经常私信问我一些问题:
 > 1、若集成了腾讯Bugly或者友盟等等异常搜集的SDK,AvoidCrash会影响到它们的异常搜集吗？
+
+
 > 2、为什么集成了AvoidCrash还是会报unrecognized selector sent to instance的异常？
 
 关于疑惑的解答，请点击[AvoidCrash疑惑解答](http://www.jianshu.com/p/2b90aa96c0a0)
