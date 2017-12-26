@@ -31,7 +31,7 @@
     }
     @catch (NSException *exception) {
         
-        NSString *defaultToDo = @"This framework default is to remove nil key-values and instance a dictionary.";
+        NSString *defaultToDo = @"AvoidCrash default is to remove nil key-values and instance a dictionary.";
         [AvoidCrash noteErrorWithException:exception defaultToDo:defaultToDo];
         
         //处理错误的数据，然后重新初始化一个字典

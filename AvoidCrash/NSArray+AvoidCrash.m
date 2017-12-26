@@ -81,7 +81,7 @@
     }
     @catch (NSException *exception) {
         
-        NSString *defaultToDo = @"This framework default is to remove nil object and instance a array.";
+        NSString *defaultToDo = @"AvoidCrash default is to remove nil object and instance a array.";
         [AvoidCrash noteErrorWithException:exception defaultToDo:defaultToDo];
         
         //以下是对错误数据的处理，把为nil的数据去掉,然后初始化数组

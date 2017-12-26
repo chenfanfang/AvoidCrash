@@ -38,16 +38,36 @@
     
     [AvoidCrash makeAllEffective];
     
+    
+    //=============================================
+    //   1、unrecognized selector sent to instance
+    //=============================================
+    
     //若出现unrecognized selector sent to instance并且控制台输出:
     //-[__NSCFConstantString initWithName:age:height:weight:]: unrecognized selector sent to instance
     //你可以将@"__NSCFConstantString"添加到如下数组中，当然，你也可以将它的父类添加到下面数组中
     //比如，对于部分字符串，继承关系如下
     //__NSCFConstantString --> __NSCFString --> NSMutableString --> NSString
     //你可以将上面四个类随意一个添加到下面的数组中，建议直接填入 NSString
+    
     NSArray *noneSelClassStrings = @[
                                      @"NSString"
                                      ];
     [AvoidCrash setupNoneSelClassStringsArr:noneSelClassStrings];
+    
+    
+    //=============================================
+    //   2、unrecognized selector sent to instance
+    //=============================================
+    
+    //若需要防止某个前缀的类的unrecognized selector sent to instance
+    //比如AvoidCrashPerson
+    //你可以调用如下方法
+    NSArray *noneSelClassPrefix = @[
+                                    @"AvoidCrash"
+                                    ];
+    [AvoidCrash setupNoneSelClassStringPrefixsArr:noneSelClassPrefix];
+    
     
     
     //监听通知:AvoidCrashNotification, 获取AvoidCrash捕获的崩溃日志的详细信息

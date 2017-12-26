@@ -70,10 +70,18 @@
 
 /** 
  *  初始化一个需要防止”unrecognized selector sent to instance”的崩溃的类名数组
+ *  ⚠️不可将@"NSObject"加入classStrings数组中
+ *  ⚠️不可将UI前缀的字符串加入classStrings数组中
  */
 + (void)setupNoneSelClassStringsArr:(NSArray<NSString *> *)classStrings;
 
 
+/**
+ *  初始化一个需要防止”unrecognized selector sent to instance”的崩溃的类名前缀的数组
+ *  ⚠️不可将UI前缀的字符串(包括@"UI")加入classStringPrefixs数组中
+ *  ⚠️不可将NS前缀的字符串(包括@"NS")加入classStringPrefixs数组中
+ */
++ (void)setupNoneSelClassStringPrefixsArr:(NSArray<NSString *> *)classStringPrefixs;
 
 
 

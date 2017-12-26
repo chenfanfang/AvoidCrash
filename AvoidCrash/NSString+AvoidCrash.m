@@ -56,7 +56,7 @@
     }
     @catch (NSException *exception) {
         
-        NSString *defaultToDo = @"This framework default is to return a without assign unichar.";
+        NSString *defaultToDo = @"AvoidCrash default is to return a without assign unichar.";
         [AvoidCrash noteErrorWithException:exception defaultToDo:defaultToDo];
     }
     @finally {

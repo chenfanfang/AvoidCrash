@@ -46,6 +46,7 @@
 
 
 static NSMutableArray *noneSelClassStrings;
+static NSMutableArray *noneSelClassStringPrefixs;
 
 + (void)setupNoneSelClassStringsArr:(NSArray<NSString *> *)classStrings {
     
@@ -57,7 +58,44 @@ static NSMutableArray *noneSelClassStrings;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        noneSelClassStrings = classStrings.mutableCopy;
+        noneSelClassStrings = [NSMutableArray array];
+        for (NSString *className in classStrings) {
+            if ([className hasPrefix:@"UI"] == NO &&
+                [className isEqualToString:NSStringFromClass([NSObject class])] == NO) {
+                [noneSelClassStrings addObject:className];
+                
+            } else {
+                NSString *warningMsg = [NSString stringWithFormat:@"\n\n%@\n\n[AvoidCrash setupNoneSelClassStringsArr:];\n会忽略UI开头的类和NSObject类(请使用NSObject的子类)\n\n%@\n\n",AvoidCrashSeparatorWithFlag,AvoidCrashSeparator];
+                AvoidCrashLog(@"%@",warningMsg);
+            }
+        }
+    });
+}
+
+/**
+ *  初始化一个需要防止”unrecognized selector sent to instance”的崩溃的类名前缀的数组
+ */
++ (void)setupNoneSelClassStringPrefixsArr:(NSArray<NSString *> *)classStringPrefixs {
+    if (noneSelClassStringPrefixs) {
+        
+        NSString *warningMsg = [NSString stringWithFormat:@"\n\n%@\n\n[AvoidCrash setupNoneSelClassStringPrefixsArr:];\n调用一此即可，多次调用会自动忽略后面的调用\n\n%@\n\n",AvoidCrashSeparatorWithFlag,AvoidCrashSeparator];
+        AvoidCrashLog(@"%@",warningMsg);
+    }
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        noneSelClassStringPrefixs = [NSMutableArray array];
+        for (NSString *classNamePrefix in classStringPrefixs) {
+            if ([classNamePrefix hasPrefix:@"UI"] == NO &&
+                [classNamePrefix hasPrefix:@"NS"] == NO) {
+                [noneSelClassStringPrefixs addObject:classNamePrefix];
+                
+            } else {
+                NSString *warningMsg = [NSString stringWithFormat:@"\n\n%@\n\n[AvoidCrash setupNoneSelClassStringsArr:];\n会忽略UI开头的类和NS开头的类\n若需要对NS开头的类防止”unrecognized selector sent to instance”(比如NSArray),请使用setupNoneSelClassStringsArr:\n\n%@\n\n",AvoidCrashSeparatorWithFlag,AvoidCrashSeparator];
+                AvoidCrashLog(@"%@",warningMsg);
+            }
+        }
     });
 }
 
@@ -65,12 +103,21 @@ static NSMutableArray *noneSelClassStrings;
     
     NSMethodSignature *ms = [self avoidCrashMethodSignatureForSelector:aSelector];
     
-    
+    BOOL flag = NO;
     if (ms == nil) {
         for (NSString *classStr in noneSelClassStrings) {
             if ([self isKindOfClass:NSClassFromString(classStr)]) {
                 ms = [AvoidCrashStubProxy instanceMethodSignatureForSelector:@selector(proxyMethod)];
+                flag = YES;
                 break;
+            }
+        }
+    }
+    if (flag == NO) {
+        NSString *selfClass = NSStringFromClass([self class]);
+        for (NSString *classStrPrefix in noneSelClassStringPrefixs) {
+            if ([selfClass hasPrefix:classStrPrefix]) {
+                ms = [AvoidCrashStubProxy instanceMethodSignatureForSelector:@selector(proxyMethod)];
             }
         }
     }

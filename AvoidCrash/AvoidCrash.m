@@ -55,6 +55,13 @@
     [NSObject setupNoneSelClassStringsArr:classStrings];
 }
 
+/**
+ *  初始化一个需要防止”unrecognized selector sent to instance”的崩溃的类名前缀的数组
+ */
++ (void)setupNoneSelClassStringPrefixsArr:(NSArray<NSString *> *)classStringPrefixs {
+    [NSObject setupNoneSelClassStringPrefixsArr:classStringPrefixs];
+}
+
 
 /**
  *  类方法的交换

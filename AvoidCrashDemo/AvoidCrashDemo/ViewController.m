@@ -9,6 +9,7 @@
 #import "ViewController.h"
 
 #import "Person.h"
+#import "AvoidCrashPerson.h"
 
 @interface ViewController ()
 
@@ -20,16 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
-    //[self testNoSelectorCrash];
-    
     [self executeAllTestMethod];
-    
-    //[self NSArray_Test_ObjectAtIndex];
-    
-    //[self NSMutableDictionary_Test_SetObjectForKey];
-    
-
 }
 
 
@@ -46,15 +38,12 @@
 
 - (void)NSArray_Test_ObjectAtIndex {
     NSArray *arr = @[@"chenfanfang", @"iOS_Dev"];
-    
     NSObject *object = arr[100];
-    NSObject *object1 = [arr objectAtIndex:100];
-    
     NSLog(@"object = %@",object);
 }
 
 - (void)NSArray_Test_objectsAtIndexes {
-    NSArray *array = @[@"chenfanfang"];
+    NSArray *array = @[@"chenfanfang",@"iOS"];
     
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:100];
     [array objectsAtIndexes:indexSet];
@@ -109,11 +98,10 @@
     
     
     //test2    insert nil obj
-    
     //[array insertObject:nil atIndex:0];
     
-    //test3    insert nil obj
     
+    //test3    insert nil obj
     //NSString *nilStr = nil;
     //[array addObject:nilStr]; //其本质是调用insertObject:
 }
@@ -344,14 +332,15 @@
  测试没有selector的crash
  */
 - (void)testNoSelectorCrash {
-    //测试1
+    
     id person1 = @"chenfanfang";
     person1 = [person1 initWithName:@"cff" age:26 height:170 weight:110];
     
-    //测试2
-//    Person *person2 = [Person new];
-//    [person2 performSelector:@selector(testCrash)];
-    
+}
+
+- (void)testNoSelectorCrash2 {
+    id person = [AvoidCrashPerson new];
+    [person objectForKey:@"key"];
 }
 
 //=================================================================
@@ -407,6 +396,7 @@
     
     
     [self testNoSelectorCrash];
+    [self testNoSelectorCrash2];
 }
 
 
