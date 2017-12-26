@@ -1,4 +1,12 @@
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/chenfanfang/AvoidCrash) [![pod](https://img.shields.io/badge/pod-2.3.0--beta-yellow.svg)](https://github.com/chenfanfang/AvoidCrash) [![platform](https://img.shields.io/badge/platform-iOS-ff69b4.svg)](https://github.com/chenfanfang/AvoidCrash) [![aboutme](https://img.shields.io/badge/about%20me-chenfanfang-blue.svg)](http://www.jianshu.com/users/80fadb71940d/latest_articles)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/chenfanfang/AvoidCrash) [![pod](https://img.shields.io/badge/pod-2.5.0-yellow.svg)](https://github.com/chenfanfang/AvoidCrash) [![platform](https://img.shields.io/badge/platform-iOS-ff69b4.svg)](https://github.com/chenfanfang/AvoidCrash) [![aboutme](https://img.shields.io/badge/about%20me-chenfanfang-blue.svg)](http://www.jianshu.com/users/80fadb71940d/latest_articles)
+
+疑惑解答
+===
+很多开发小伙伴经常私信问我一些问题:
+> 1、若集成了腾讯Bugly或者友盟等等异常搜集的SDK,AvoidCrash会影响到它们的异常搜集吗？
+> 2、为什么集成了AvoidCrash还是会报unrecognized selector sent to instance的异常？
+
+关于疑惑的解答，请点击[AvoidCrash疑惑解答](http://www.jianshu.com/p/2b90aa96c0a0)
 
 
 前言
@@ -246,6 +254,9 @@ pod 'AvoidCrash', '~> 2.3.0-beta'
 
 更新
 ===
+#### 2017-08-11 (pod 2.5.0)
+- 	兼容iOS11的处理
+
 #### 2017-08-11
 - 	优化对”unrecognized selector sent to instance”防止崩溃的处理
 
