@@ -39,6 +39,12 @@
     [AvoidCrash makeAllEffective];
     
     
+    //注意:⚠️
+    //setupNoneSelClassStringsArr:和setupNoneSelClassStringPrefixsArr:
+    //可以同时配合使用
+    
+    
+    
     //=============================================
     //   1、unrecognized selector sent to instance
     //=============================================
