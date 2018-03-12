@@ -22,6 +22,8 @@
     [super viewDidLoad];
     
     [self executeAllTestMethod];
+    
+    
 }
 
 
@@ -135,7 +137,8 @@
 //=================================================================
 #pragma mark - NSMutableDictionary_Test
 
-- (void)NSMutableDictionary_Test_SetObjectForKey {
+
+- (void)NSMutableDictionary_Test_SetObjectForKey_1 {
     
     NSMutableDictionary *dict = @{
                                    @"name" : @"chenfanfang"
@@ -145,6 +148,16 @@
     dict[ageKey] = @(25);
     NSLog(@"%@",dict);
 }
+
+- (void)NSMutableDictionary_Test_SetObjectForKey_2 {
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    NSString *ageKey = nil;
+    [dict setObject:@(25) forKey:ageKey];
+    NSLog(@"%@",dict);
+}
+
+
 
 - (void)NSMutableDictionary_Test_RemoveObjectForKey {
     
@@ -363,7 +376,8 @@
     
     
     [self NSDictionary_Test_InstanceDictionary];
-    [self NSMutableDictionary_Test_SetObjectForKey];
+    [self NSMutableDictionary_Test_SetObjectForKey_1];
+    [self NSMutableDictionary_Test_SetObjectForKey_2];
     [self NSMutableDictionary_Test_RemoveObjectForKey];
     
     

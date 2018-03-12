@@ -19,10 +19,13 @@
         Class dictionaryM = NSClassFromString(@"__NSDictionaryM");
         
         //setObject:forKey:
-        //[AvoidCrash exchangeInstanceMethod:dictionaryM method1Sel:@selector(setObject:forKey:) method2Sel:@selector(avoidCrashSetObject:forKey:)];
+        [AvoidCrash exchangeInstanceMethod:dictionaryM method1Sel:@selector(setObject:forKey:) method2Sel:@selector(avoidCrashSetObject:forKey:)];
         
         //setObject:forKeyedSubscript:
-        [AvoidCrash exchangeInstanceMethod:dictionaryM method1Sel:@selector(setObject:forKeyedSubscript:) method2Sel:@selector(avoidCrashSetObject:forKeyedSubscript:)];
+        if (AvoidCrashIsiOS(11.0)) {
+            [AvoidCrash exchangeInstanceMethod:dictionaryM method1Sel:@selector(setObject:forKeyedSubscript:) method2Sel:@selector(avoidCrashSetObject:forKeyedSubscript:)];
+        }
+        
         
         
         //removeObjectForKey:
