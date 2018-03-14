@@ -1,4 +1,4 @@
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/chenfanfang/AvoidCrash) [![pod](https://img.shields.io/badge/pod-2.5.1-yellow.svg)](https://github.com/chenfanfang/AvoidCrash) [![platform](https://img.shields.io/badge/platform-iOS-ff69b4.svg)](https://github.com/chenfanfang/AvoidCrash) [![aboutme](https://img.shields.io/badge/about%20me-chenfanfang-blue.svg)](http://www.jianshu.com/users/80fadb71940d/latest_articles)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/chenfanfang/AvoidCrash) [![pod](https://img.shields.io/badge/pod-2.5.2-yellow.svg)](https://github.com/chenfanfang/AvoidCrash) [![platform](https://img.shields.io/badge/platform-iOS-ff69b4.svg)](https://github.com/chenfanfang/AvoidCrash) [![aboutme](https://img.shields.io/badge/about%20me-chenfanfang-blue.svg)](http://www.jianshu.com/users/80fadb71940d/latest_articles)
 
 疑惑解答
 ===
@@ -63,7 +63,7 @@ AvoidCrash简介
 ### From CocoaPods【使用CocoaPods】
 
 ```ruby
-pod 'AvoidCrash', '~> 2.5.1'
+pod 'AvoidCrash', '~> 2.5.2'
 ```
 
 ### Manually【手动导入】
@@ -256,6 +256,11 @@ pod 'AvoidCrash', '~> 2.5.1'
 
 更新
 ===
+
+#### 2018-03-14 (pod 2.5.2)
+- 	Fix bug #45 #46 #51 (NSMutableDictionary Set nil Object will Crash.)
+
+
 #### 2017-12-26 (pod 2.5.1)
 - 	兼容iOS11的处理
 
