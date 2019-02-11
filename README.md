@@ -1,3 +1,19 @@
+
+由于时间原因，作者已经暂时停止维护AvoidCrash,大家可以根据自己项目所需要进行改造。建议大家只使用
+===
+```
+
+NSArray *noneSelClassStrings = @[
+                          @"NSNull",
+                          @"NSNumber",
+                          @"NSString",
+                          @"NSDictionary",
+                          @"NSArray"
+                          ];
+[AvoidCrash setupNoneSelClassStringsArr:noneSelClassStrings];
+```
+不建议大家使用前缀的方式来处理
+
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/chenfanfang/AvoidCrash) [![pod](https://img.shields.io/badge/pod-2.5.2-yellow.svg)](https://github.com/chenfanfang/AvoidCrash) [![platform](https://img.shields.io/badge/platform-iOS-ff69b4.svg)](https://github.com/chenfanfang/AvoidCrash) [![aboutme](https://img.shields.io/badge/about%20me-chenfanfang-blue.svg)](http://www.jianshu.com/users/80fadb71940d/latest_articles)
 
 疑惑解答
