@@ -1,6 +1,15 @@
+先给大家推荐一部最近很火的书《iOS开发高手课》，相信对大家的进步很有帮助
+
+![iOS开发高手课.png](https://raw.githubusercontent.com/chenfanfang/AvoidCrash/63e17061f19766107c0767b50c6cafbe1e9929b8/AvoidCrashDemo/Screenshot/%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D.JPG)
+
+![iOS开发高手课.png](https://raw.githubusercontent.com/chenfanfang/AvoidCrash/63e17061f19766107c0767b50c6cafbe1e9929b8/AvoidCrashDemo/Screenshot/%E6%B5%B7%E6%8A%A5.JPG)
+
+附上链接地址:http://gk.link/a/102yH
+
+
 
 由于时间原因，作者已经暂时停止维护AvoidCrash,大家可以根据自己项目所需要进行改造。建议大家只使用
-===
+
 ```
 
 NSArray *noneSelClassStrings = @[
