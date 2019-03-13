@@ -2,11 +2,15 @@
 
 ![iOS开发高手课.png](https://raw.githubusercontent.com/chenfanfang/AvoidCrash/63e17061f19766107c0767b50c6cafbe1e9929b8/AvoidCrashDemo/Screenshot/%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D.JPG)
 
+
+大家可扫码进入课程
 ![iOS开发高手课.png](https://raw.githubusercontent.com/chenfanfang/AvoidCrash/63e17061f19766107c0767b50c6cafbe1e9929b8/AvoidCrashDemo/Screenshot/%E6%B5%B7%E6%8A%A5.JPG)
 
-附上链接地址:http://gk.link/a/102yH
+附上课程链接地址:http://gk.link/a/102yH
+===
 
 
+<br /><br /><br /><br /><br /><br />
 
 由于时间原因，作者已经暂时停止维护AvoidCrash,大家可以根据自己项目所需要进行改造。建议大家只使用
 
