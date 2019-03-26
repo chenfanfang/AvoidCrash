@@ -306,7 +306,6 @@
 }
 
 
-
 //=================================================================
 //                            KVC
 //=================================================================
@@ -355,6 +354,16 @@
     id person = [AvoidCrashPerson new];
     [person objectForKey:@"key"];
 }
+
+
+//=================================================================
+//                   UIPasteboard
+//=================================================================
+- (void)UIPasteboard_Test_SetStringWithNil {
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    [pasteboard setString:nil];
+}
+
 
 //=================================================================
 //                      执行所有test的方法
@@ -411,6 +420,8 @@
     
     [self testNoSelectorCrash];
     [self testNoSelectorCrash2];
+    
+    [self UIPasteboard_Test_SetStringWithNil];
 }
 
 
