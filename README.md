@@ -1,13 +1,18 @@
-先给大家推荐一部最近很火的书《iOS开发高手课》，相信对大家的进步很有帮助
+先给大家推荐下MJ的视频教程哈，有兴趣的小伙伴可以了解下，提升下自己的技术。
+![iOS开发高手课.png](https://raw.githubusercontent.com/chenfanfang/AvoidCrash/master/AvoidCrashDemo/Screenshot/%E8%A7%86%E9%A2%91%E8%AF%BE%E7%A8%8B/MJ_%E8%AF%BE%E7%A8%8B.jpeg)
+附上课程的链接
+<a href = "https://m.ke.qq.com/course/385223?saleToken=638162&from=appso">恋上数据结构与算法：链接https://m.ke.qq.com/course/385223?saleToken=638162&from=appso</a>
+<a href = "https://m.ke.qq.com/course/392094?saleToken=961697&from=appso">从入门到精通Swift课程：链接https://m.ke.qq.com/course/392094?saleToken=961697&from=appso</a>
+<a href = "https://m.ke.qq.com/course/336509?saleToken=939081&from=appso">C++和外挂实战：链接https://m.ke.qq.com/course/336509?saleToken=939081&from=appso</a>
 
-![iOS开发高手课.png](https://raw.githubusercontent.com/chenfanfang/AvoidCrash/63e17061f19766107c0767b50c6cafbe1e9929b8/AvoidCrashDemo/Screenshot/%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D.JPG)
 
+下面大家再推荐一部最近很火的书《iOS开发高手课》，相信对大家的进步很有帮助
 
-大家可扫码进入课程
-![iOS开发高手课.png](https://raw.githubusercontent.com/chenfanfang/AvoidCrash/63e17061f19766107c0767b50c6cafbe1e9929b8/AvoidCrashDemo/Screenshot/%E6%B5%B7%E6%8A%A5.JPG)
+![iOS开发高手课.png](https://raw.githubusercontent.com/chenfanfang/AvoidCrash/master/AvoidCrashDemo/Screenshot/%E8%A7%86%E9%A2%91%E8%AF%BE%E7%A8%8B/iOS%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE.jpeg)
 
-附上课程链接地址:http://gk.link/a/102yH
-===
+附上课程链接地址:
+<a href = "http://gk.link/a/102yH">《iOS 开发高手课》：链接http://gk.link/a/102yH</a>
+
 
 
 <br /><br /><br /><br /><br /><br />
