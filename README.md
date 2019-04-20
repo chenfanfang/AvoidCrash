@@ -1,5 +1,5 @@
 先给大家推荐下MJ的视频教程哈，有兴趣的小伙伴可以了解下，提升下自己的技术。
-![iOS开发高手课.png](https://raw.githubusercontent.com/chenfanfang/AvoidCrash/master/AvoidCrashDemo/Screenshot/%E8%A7%86%E9%A2%91%E8%AF%BE%E7%A8%8B/MJ_%E8%AF%BE%E7%A8%8B.jpeg)
+![iOS开发高手课.png](https://raw.githubusercontent.com/chenfanfang/AvoidCrash/master/AvoidCrashDemo/Screenshot/%E8%A7%86%E9%A2%91%E8%AF%BE%E7%A8%8B/MJ_%E8%AF%BE%E7%A8%8B2.jpeg)
 附上课程的链接
 <br />
 <a href = "https://m.ke.qq.com/course/385223?saleToken=638162&from=appso">恋上数据结构与算法：链接https://m.ke.qq.com/course/385223?saleToken=638162&from=appso</a>
