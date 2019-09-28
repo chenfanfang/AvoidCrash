@@ -231,6 +231,12 @@
     NSLog(@"%@",str);
 }
 
+- (void)NSString_Test_stringByAppendingString {
+    NSString *str = @"TEST";
+    NSString *nilString = nil;
+    str = [str stringByAppendingString:nilString];
+    NSLog(@"%@",str);
+}
 
 //=================================================================
 //                       NSMutableString_Test
@@ -305,6 +311,110 @@
     NSLog(@"%@",attrStrM);
 }
 
+- (void)NSMutableAttributedString_Test_AddAttributeValueRange{
+    NSDictionary *attributes = @{
+                                 NSForegroundColorAttributeName : [UIColor redColor]
+                                 };
+     NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:@"TEST" attributes:attributes];
+    NSString *nilAtrrbutedName = nil;
+    [attrStrM addAttribute:nilAtrrbutedName value:[UIFont systemFontOfSize:12.0] range:NSMakeRange(0, [attrStrM.string length])];
+    
+    UIFont *nilFont = nil;
+    [attrStrM addAttribute:NSFontAttributeName value:nilFont range:NSMakeRange(0, [attrStrM.string length])];
+    
+    NSRange outOfRange = NSMakeRange(0, attrStrM.length + 100);
+    [attrStrM addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0] range:outOfRange];
+    
+    [attrStrM addAttribute:nilAtrrbutedName value:nilFont range:outOfRange];
+}
+
+- (void)NSMutableAttributedString_Test_AddAttributesRange{
+    NSDictionary *attributes = @{
+                                 NSForegroundColorAttributeName : [UIColor redColor]
+                                 };
+    NSDictionary *nilAttributes = nil;
+    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:@"TEST" attributes:attributes];
+    
+    [attrStrM addAttributes:nilAttributes range:NSMakeRange(0, [attrStrM.string length])];
+    NSRange outOfRange = NSMakeRange(0, attrStrM.length + 100);
+    
+    [attrStrM addAttributes:attributes range:outOfRange];
+    
+    [attrStrM addAttributes:nilAttributes range:outOfRange];
+}
+ 
+- (void)NSMutableAttributedString_Test_RemoveAttributesRange{
+    NSDictionary *attributes = @{
+                                 NSForegroundColorAttributeName : [UIColor redColor]
+                                 };
+    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:@"TEST" attributes:attributes];
+    NSString *nilAttributedName = nil;
+    [attrStrM removeAttribute:nilAttributedName range:NSMakeRange(0, attrStrM.length)];
+    
+    NSRange outOfRange = NSMakeRange(0, attrStrM.length + 100);
+    [attrStrM removeAttribute:NSForegroundColorAttributeName range:outOfRange];
+    
+    [attrStrM removeAttribute:nilAttributedName range:outOfRange];
+}
+
+- (void)NSMutableAttributedString_Test_ReplaceCharactersInRangeWithAttributedString{
+    NSDictionary *attributes = @{
+                                 NSForegroundColorAttributeName : [UIColor redColor]
+                                 };
+    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:@"TEST" attributes:attributes];
+    NSAttributedString *nilAttributedString = nil;
+    [attrStrM replaceCharactersInRange:NSMakeRange(0, attrStrM.length) withAttributedString:nilAttributedString];
+    
+    NSRange outOfRange = NSMakeRange(0, attrStrM.length);
+    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:@"ABC" attributes:attributes];
+    [attrStrM replaceCharactersInRange:outOfRange withAttributedString:attributedString];
+    
+    [attrStrM replaceCharactersInRange:outOfRange withAttributedString:nilAttributedString];
+}
+
+- (void)NSMutableAttributedString_Test_InsertAttributedStringAtIndex{
+    NSDictionary *attributes = @{
+                                 NSForegroundColorAttributeName : [UIColor redColor]
+                                 };
+    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:@"TEST" attributes:attributes];
+    NSAttributedString *nilAttributedString = nil;
+    [attrStrM insertAttributedString:nilAttributedString atIndex:0];
+    
+    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:@"ABC" attributes:attributes];
+    NSInteger outIndex = attrStrM.length + 100;
+    [attrStrM insertAttributedString:attributedString atIndex:outIndex];
+    
+    [attrStrM insertAttributedString:nilAttributedString atIndex:outIndex];
+}
+
+- (void)NSMutableAttributedString_Test_AppendAttributedString{
+    NSDictionary *attributes = @{
+                                 NSForegroundColorAttributeName : [UIColor redColor]
+                                 };
+    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:@"TEST" attributes:attributes];
+    
+    NSAttributedString *nilAttributedString = nil;
+    [attrStrM appendAttributedString:nilAttributedString];
+}
+
+- (void)NSMutableAttributedString_Test_DeleteCharactersInRange{
+    NSDictionary *attributes = @{
+                                 NSForegroundColorAttributeName : [UIColor redColor]
+                                 };
+    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:@"TEST" attributes:attributes];
+    NSRange outOfRange = NSMakeRange(0, attrStrM.length);
+    
+    [attrStrM deleteCharactersInRange:outOfRange];
+}
+
+- (void)NSMutableAttributedString_Test_SetAttributedString{
+    NSDictionary *attributes = @{
+                                 NSForegroundColorAttributeName : [UIColor redColor]
+                                 };
+    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:@"TEST" attributes:attributes];
+    NSAttributedString *nilAttributedString = nil;
+    [attrStrM setAttributedString:nilAttributedString];
+}
 
 
 //=================================================================
@@ -388,7 +498,7 @@
     [self NSString_Test_StringByReplacingOccurrencesOfString];
     [self NSString_Test_StringByReplacingOccurrencesOfStringRange];
     [self NSString_Test_stringByReplacingCharactersInRangeWithString];
-    
+    [self NSString_Test_stringByAppendingString];
     
     [self NSMutableString_Test_ReplaceCharactersInRange];
     [self NSMutableString_Test_InsertStringAtIndex];
@@ -402,6 +512,14 @@
     
     [self NSMutableAttributedString_Test_InitWithString];
     [self NSMutableAttributedString_Test_InitWithStringAttributes];
+    [self NSMutableAttributedString_Test_AddAttributeValueRange];
+    [self NSMutableAttributedString_Test_AddAttributesRange];
+    [self NSMutableAttributedString_Test_RemoveAttributesRange];
+    [self NSMutableAttributedString_Test_ReplaceCharactersInRangeWithAttributedString];
+    [self NSMutableAttributedString_Test_InsertAttributedStringAtIndex];
+    [self NSMutableAttributedString_Test_AppendAttributedString];
+    [self NSMutableAttributedString_Test_DeleteCharactersInRange];
+    [self NSMutableAttributedString_Test_SetAttributedString];
     
     
     [self KVC_Test_SetValueForKey];
