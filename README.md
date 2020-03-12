@@ -1,14 +1,5 @@
 
 
-给大家推荐一本电子书《iOS开发高手课》
-
-![iOS开发高手课.png](https://raw.githubusercontent.com/chenfanfang/AvoidCrash/master/AvoidCrashDemo/Screenshot/%E8%A7%86%E9%A2%91%E8%AF%BE%E7%A8%8B/iOS%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE.jpeg)
-
-附上课程链接地址:
-<a href = "http://gk.link/a/102yH">《iOS 开发高手课》：链接http://gk.link/a/102yH</a>
-
-
-
 <br /><br /><br /><br /><br /><br />
 
 由于时间原因，作者已经暂时停止维护AvoidCrash,大家可以根据自己项目所需要进行改造。建议大家只使用
