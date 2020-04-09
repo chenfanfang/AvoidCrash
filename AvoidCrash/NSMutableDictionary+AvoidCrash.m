@@ -19,7 +19,14 @@
         Class dictionaryM = NSClassFromString(@"__NSDictionaryM");
         
         //setObject:forKey:
-        [AvoidCrash exchangeInstanceMethod:dictionaryM method1Sel:@selector(setObject:forKey:) method2Sel:@selector(avoidCrashSetObject:forKey:)];
+
+        if (@available(iOS 11.0, *)) {
+        [AvoidCrash exchangeInstanceMethod:dictionaryM method1Sel:@selector(forKeyedSubscript:forKey:) method2Sel:@selector(avoidCrashSetObject:forKey:)];
+        }else{
+             [AvoidCrash exchangeInstanceMethod:dictionaryM method1Sel:@selector(setObject:forKey:) method2Sel:@selector(avoidCrashSetObject:forKey:)];
+        }
+
+
         
         //setObject:forKeyedSubscript:
         if (AvoidCrashIsiOS(11.0)) {
