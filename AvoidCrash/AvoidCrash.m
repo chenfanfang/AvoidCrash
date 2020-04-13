@@ -48,6 +48,8 @@
         
         [NSAttributedString avoidCrashExchangeMethod];
         [NSMutableAttributedString avoidCrashExchangeMethod];
+        
+        [UIPasteboard avoidCrashExchangeMethod];
     });
 }
 

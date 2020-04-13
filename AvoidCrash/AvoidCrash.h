@@ -29,6 +29,8 @@
 #import "NSAttributedString+AvoidCrash.h"
 #import "NSMutableAttributedString+AvoidCrash.h"
 
+#import "UIPasteboard+AvoidCrash.h"
+
 //define
 #import "AvoidCrashStubProxy.h"
 
