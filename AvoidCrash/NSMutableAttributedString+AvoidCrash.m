@@ -24,6 +24,9 @@
         
         //initWithString:attributes:
         [AvoidCrash exchangeInstanceMethod:NSConcreteMutableAttributedString method1Sel:@selector(initWithString:attributes:) method2Sel:@selector(avoidCrashInitWithString:attributes:)];
+        
+        //replaceCharactersInRange:withString:
+        [AvoidCrash exchangeInstanceMethod:NSConcreteMutableAttributedString method1Sel:@selector(replaceCharactersInRange:withString:) method2Sel:@selector(avoidCrashReplaceCharactersInRange:withString:)];
     });
 }
 
@@ -67,6 +70,27 @@
     }
     @finally {
         return object;
+    }
+}
+
+
+//=================================================================
+//               replaceCharactersInRange:withString:
+//=================================================================
+#pragma mark - replaceCharactersInRange:withString:
+
+
+- (void)avoidCrashReplaceCharactersInRange:(NSRange)range withString:(NSString *)aString {
+    
+    @try {
+        [self avoidCrashReplaceCharactersInRange:range withString:aString];
+    } @catch (NSException *exception) {
+        
+        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
+        [AvoidCrash noteErrorWithException:exception defaultToDo:defaultToDo];
+        
+    } @finally {
+        
     }
 }
 
